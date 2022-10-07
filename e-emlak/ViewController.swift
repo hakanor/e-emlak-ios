@@ -76,6 +76,16 @@ class ViewController: UIViewController {
         signOutButton.addTarget(self, action: #selector(signOut), for: UIControl.Event.touchUpInside)
         return signOutButton
     }()
+    
+    private lazy var testButton: UIButton = {
+        let signOutButton = UIButton()
+        signOutButton.translatesAutoresizingMaskIntoConstraints = false
+        signOutButton.backgroundColor = .green
+        signOutButton.setTitle("TEST", for: .normal)
+        signOutButton.setTitleColor(.black, for: .normal)
+        signOutButton.addTarget(self, action: #selector(test), for: UIControl.Event.touchUpInside)
+        return signOutButton
+    }()
 
     // MARK: - User Actions
     @objc func buttonCreateHandle(){
@@ -121,6 +131,11 @@ class ViewController: UIViewController {
         self.label.text = "sign out"
     }
     
+    @objc func test(){
+        let vc = LoginEmailViewController()
+        let vc2 = LoginPasswordViewController()
+        self.navigationController?.pushViewController(vc2, animated: true)
+    }
 // MARK: - Properties
        
 // MARK: - LifeCycle
@@ -128,7 +143,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        [label,emailField,passField,button,buttonLogin,getCurrentButton,signOutButton].forEach(view.addSubview(_:))
+        [label,emailField,passField,button,buttonLogin,getCurrentButton,signOutButton,testButton].forEach(view.addSubview(_:))
         
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -152,6 +167,9 @@ class ViewController: UIViewController {
         
         signOutButton.topAnchor.constraint(equalTo: getCurrentButton.bottomAnchor,constant: 10).isActive = true
         signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        testButton.topAnchor.constraint(equalTo: signOutButton.bottomAnchor,constant: 10).isActive = true
+        testButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
 
