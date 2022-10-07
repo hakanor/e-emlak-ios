@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
+		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
+		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
+		A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */; };
+		A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */; };
+		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
 		A7FD2ABE28EAFC4800E48E4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */; };
 		A7FD2AC328EAFC5300E48E4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */; };
 		A7FD2AC628EAFC5300E48E4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */; };
-		A7FD2ACE28EB082C00E48E4A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2ACD28EB082C00E48E4A /* GoogleService-Info.plist */; };
-		ED8B9F8EE2E4123C6E02F384 /* Pods_e_emlak.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 168C4170C304D16B5B6788AB /* Pods_e_emlak.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		168C4170C304D16B5B6788AB /* Pods_e_emlak.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_e_emlak.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4194E593074CB52A3E890784 /* Pods-e-emlak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-emlak.debug.xcconfig"; path = "Target Support Files/Pods-e-emlak/Pods-e-emlak.debug.xcconfig"; sourceTree = "<group>"; };
-		799B0A15090A3550E9C12E86 /* Pods-e-emlak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-e-emlak.release.xcconfig"; path = "Target Support Files/Pods-e-emlak/Pods-e-emlak.release.xcconfig"; sourceTree = "<group>"; };
+		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -27,7 +29,6 @@
 		A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7FD2AC528EAFC5300E48E4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7FD2AC728EAFC5300E48E4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A7FD2ACD28EB082C00E48E4A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,38 +36,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED8B9F8EE2E4123C6E02F384 /* Pods_e_emlak.framework in Frameworks */,
+				A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */,
+				A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */,
+				A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */,
+				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
+				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11AC6836D62F83FA4B990824 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				168C4170C304D16B5B6788AB /* Pods_e_emlak.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		86504A960E9F3DF98114F439 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4194E593074CB52A3E890784 /* Pods-e-emlak.debug.xcconfig */,
-				799B0A15090A3550E9C12E86 /* Pods-e-emlak.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		A7FD2AAD28EAFC4700E48E4A = {
 			isa = PBXGroup;
 			children = (
 				A7FD2AB828EAFC4800E48E4A /* e-emlak */,
 				A7FD2AB728EAFC4800E48E4A /* Products */,
-				86504A960E9F3DF98114F439 /* Pods */,
-				11AC6836D62F83FA4B990824 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,7 +72,7 @@
 				A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */,
 				A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */,
 				A7FD2AC728EAFC5300E48E4A /* Info.plist */,
-				A7FD2ACD28EB082C00E48E4A /* GoogleService-Info.plist */,
+				A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */,
 			);
 			path = "e-emlak";
 			sourceTree = "<group>";
@@ -99,17 +84,22 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7FD2ACA28EAFC5300E48E4A /* Build configuration list for PBXNativeTarget "e-emlak" */;
 			buildPhases = (
-				07035AD4104F61AECCC66CE1 /* [CP] Check Pods Manifest.lock */,
 				A7FD2AB228EAFC4700E48E4A /* Sources */,
 				A7FD2AB328EAFC4700E48E4A /* Frameworks */,
 				A7FD2AB428EAFC4700E48E4A /* Resources */,
-				14185729CA5D4A9347C1D481 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "e-emlak";
+			packageProductDependencies = (
+				A764CA5528EB1DDD00772AE7 /* FirebaseAuth */,
+				A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */,
+				A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */,
+				A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */,
+				A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */,
+			);
 			productName = "e-emlak";
 			productReference = A7FD2AB628EAFC4800E48E4A /* e-emlak.app */;
 			productType = "com.apple.product-type.application";
@@ -138,6 +128,9 @@
 				Base,
 			);
 			mainGroup = A7FD2AAD28EAFC4700E48E4A;
+			packageReferences = (
+				A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = A7FD2AB728EAFC4800E48E4A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -154,53 +147,11 @@
 			files = (
 				A7FD2AC628EAFC5300E48E4A /* LaunchScreen.storyboard in Resources */,
 				A7FD2AC328EAFC5300E48E4A /* Assets.xcassets in Resources */,
-				A7FD2ACE28EB082C00E48E4A /* GoogleService-Info.plist in Resources */,
+				A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		07035AD4104F61AECCC66CE1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-e-emlak-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		14185729CA5D4A9347C1D481 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-e-emlak/Pods-e-emlak-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-e-emlak/Pods-e-emlak-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-e-emlak/Pods-e-emlak-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A7FD2AB228EAFC4700E48E4A /* Sources */ = {
@@ -343,7 +294,6 @@
 		};
 		A7FD2ACB28EAFC5300E48E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4194E593074CB52A3E890784 /* Pods-e-emlak.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -372,7 +322,6 @@
 		};
 		A7FD2ACC28EAFC5300E48E4A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 799B0A15090A3550E9C12E86 /* Pods-e-emlak.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -421,6 +370,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A764CA5528EB1DDD00772AE7 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A7FD2AAE28EAFC4700E48E4A /* Project object */;
 }
