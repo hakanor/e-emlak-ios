@@ -1,19 +1,19 @@
 //
-//  LoginPasswordViewController.swift
+//  RegisterStep1ViewController.swift
 //  e-emlak
 //
-//  Created by Hakan Or on 7.10.2022.
+//  Created by Hakan Or on 8.10.2022.
 //
 
 import UIKit
 
-class LoginPasswordViewController: UIViewController {
+class RegisterEmailPassViewController: UIViewController {
     
 //    MARK: - Subviews
     private lazy var backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "loginBg")
+        let image = UIImage(named: "registerBg")
         backgroundImage.image = image
         backgroundImage.contentMode = .scaleAspectFill
         backgroundImage.clipsToBounds = true
@@ -35,7 +35,7 @@ class LoginPasswordViewController: UIViewController {
         titleLabel.textColor = themeColors.dark
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "Welcome Back"
+        titleLabel.text = "Create new account"
         return titleLabel
     }()
     
@@ -45,11 +45,35 @@ class LoginPasswordViewController: UIViewController {
         subtitleLabel.textColor = themeColors.grey
         subtitleLabel.numberOfLines = 2
         subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        subtitleLabel.text = "Enter your password"
+        subtitleLabel.text = "Fill these form and jump to next step"
         return subtitleLabel
     }()
     
-    private lazy var textFieldLabel: UILabel = {
+    private lazy var emailLabel: UILabel = {
+        let textFieldLabel = UILabel()
+        textFieldLabel.translatesAutoresizingMaskIntoConstraints = false
+        textFieldLabel.textColor = themeColors.dark
+        textFieldLabel.numberOfLines = 2
+        textFieldLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        textFieldLabel.text = "EMAIL"
+        return textFieldLabel
+    }()
+    
+    private lazy var emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "example@example.com",
+            attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
+        )
+        textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        textField.rightImage(UIImage(systemName: "checkmark.circle"), imageWidth: 36, padding: 0, tintColor: themeColors.success)
+//        textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
+        return textField
+       }()
+    
+    
+    private lazy var passwordLabel: UILabel = {
         let textFieldLabel = UILabel()
         textFieldLabel.translatesAutoresizingMaskIntoConstraints = false
         textFieldLabel.textColor = themeColors.dark
@@ -59,13 +83,10 @@ class LoginPasswordViewController: UIViewController {
         return textFieldLabel
     }()
     
-    private lazy var textField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "example@example.com",
-            attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
-        )
+        textField.isSecureTextEntry = true
         textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         textField.rightImage(UIImage(systemName: "eye.fill"), imageWidth: 36, padding: 0, tintColor: themeColors.grey)
 //        textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
@@ -75,7 +96,7 @@ class LoginPasswordViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .custom)
         button.tintColor = .white
-        button.setTitle("Login", for: .normal)
+        button.setTitle("Next step", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
@@ -85,48 +106,7 @@ class LoginPasswordViewController: UIViewController {
         return button
     }()
     
-    private lazy var orLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.grey
-        label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.text = "or"
-        return label
-    }()
-    
-    private lazy var createAccountButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.tintColor = .white
-        button.setTitle("Create an account", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(themeColors.dark, for: .normal)
-        button.backgroundColor = themeColors.white
-        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
-        button.layer.cornerRadius = 20
-        button.layer.borderWidth = 1
-        button.layer.borderColor = themeColors.grey.cgColor
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    private lazy var termsLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.grey
-        label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.text = "By signing in you agree to our Terms of Service"
-        let text = "By signing in you agree to our"
-        let termsText = "Terms of Service"
-        let stringValue = text + " " + termsText
-        let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: stringValue)
-        attributedString.setColorForText(textForAttribute: text , withColor: themeColors.grey)
-        attributedString.setColorForText(textForAttribute: termsText , withColor: themeColors.primary)
-        attributedString.setColorForText(textForAttribute:  "°", withColor: .systemBlue)
-        label.attributedText = attributedString
-        return label
-    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,15 +118,15 @@ class LoginPasswordViewController: UIViewController {
         backgroundImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        backgroundImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
+        backgroundImage.heightAnchor.constraint(lessThanOrEqualTo: view.heightAnchor, multiplier: 0.85).isActive = true
         
         containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55).isActive = true
+        containerView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, multiplier: 0.35).isActive = true
         containerView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         
-        [titleLabel , subtitleLabel, textFieldLabel, textField, nextButton, orLabel, createAccountButton, termsLabel] .forEach(containerView.addSubview(_:))
+        [titleLabel , subtitleLabel, emailLabel, emailTextField, passwordLabel, passwordTextField, nextButton] .forEach(containerView.addSubview(_:))
  
         titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 40).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
@@ -156,31 +136,31 @@ class LoginPasswordViewController: UIViewController {
         subtitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
         subtitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
         
-        textFieldLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,constant: 24).isActive = true
-        textFieldLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        textFieldLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        emailLabel.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,constant: 24).isActive = true
+        emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        emailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
         
-        textField.topAnchor.constraint(equalTo: textFieldLabel.bottomAnchor,constant: 8).isActive = true
-        textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        textField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor,constant: 8).isActive = true
+        emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
 
-        nextButton.topAnchor.constraint(equalTo: textField.bottomAnchor,constant: 24).isActive = true
+        passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor,constant: 24).isActive = true
+        passwordLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        passwordLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        
+        passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor,constant: 8).isActive = true
+        passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        
+        nextButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor,constant: 24).isActive = true
         nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
         nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
-        
-        orLabel.topAnchor.constraint(equalTo: nextButton.bottomAnchor,constant: 8).isActive = true
-        orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        createAccountButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor,constant: 8).isActive = true
-        createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
-        
-        termsLabel.bottomAnchor.constraint(equalTo: createAccountButton.bottomAnchor,constant: 52).isActive = true
-        termsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
     }
 
     
 }
+
+
 
 

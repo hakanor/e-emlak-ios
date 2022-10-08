@@ -133,8 +133,7 @@ class ViewController: UIViewController {
     
     @objc func test(){
         let vc = LoginEmailViewController()
-        let vc2 = LoginPasswordViewController()
-        self.navigationController?.pushViewController(vc2, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 // MARK: - Properties
        

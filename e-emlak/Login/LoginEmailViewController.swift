@@ -81,6 +81,7 @@ class LoginEmailViewController: UIViewController {
         button.backgroundColor = themeColors.primary
         button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
         button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -127,7 +128,15 @@ class LoginEmailViewController: UIViewController {
         label.attributedText = attributedString
         return label
     }()
+    // MARK: - OBJC Func
     
+    @objc func handleNextButton(){
+        let vc = LoginPasswordViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
