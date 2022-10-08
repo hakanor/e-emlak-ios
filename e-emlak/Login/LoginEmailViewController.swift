@@ -107,6 +107,7 @@ class LoginEmailViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = themeColors.grey.cgColor
+        button.addTarget(self, action: #selector(handleCreateAccountButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -129,12 +130,15 @@ class LoginEmailViewController: UIViewController {
         return label
     }()
     // MARK: - OBJC Func
-    
     @objc func handleNextButton(){
         let vc = LoginPasswordViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc func handleCreateAccountButton(){
+        let vc = RegisterEmailPassViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: - LifeCycle
     override func viewDidLoad() {

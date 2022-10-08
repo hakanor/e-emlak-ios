@@ -10,6 +10,17 @@ import UIKit
 class LoginPasswordViewController: UIViewController {
     
 //    MARK: - Subviews
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "arrow.left")
+        button.tintColor = themeColors.dark
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
@@ -106,6 +117,7 @@ class LoginPasswordViewController: UIViewController {
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = themeColors.grey.cgColor
+        button.addTarget(self, action: #selector(handleCreateAccountButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -128,12 +140,28 @@ class LoginPasswordViewController: UIViewController {
         return label
     }()
     
+    // MARK: - OBJC Func
+    @objc func handleBackButton(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleCreateAccountButton(){
+        let vc = RegisterEmailPassViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        [backgroundImage, containerView] .forEach(view.addSubview(_:))
+        [backgroundImage, containerView, backButton] .forEach(view.addSubview(_:))
+        
+        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
         
         backgroundImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true

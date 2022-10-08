@@ -93,8 +93,8 @@ class ViewController: UIViewController {
         let password = passField.text!
         Auth.auth().createUser(withEmail: email, password: password, completion: { authResult, error in
             if(error != nil){
-                self.label.text = "\(error)"
-                print(error)
+                self.label.text = "\(String(describing: error))"
+                print(error!)
                 return
             }
             self.label.text = "Kayıt olundu"
