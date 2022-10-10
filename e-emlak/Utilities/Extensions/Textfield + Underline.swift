@@ -20,13 +20,10 @@ import UIKit
 extension UITextField {
 
     func setUnderLine() {
-        let border = CALayer()
-        let width = CGFloat(0.5)
-        border.borderColor = UIColor.darkGray.cgColor
-        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width:  self.frame.size.width - 10, height: self.frame.size.height)
-        border.borderWidth = width
-        self.layer.addSublayer(border)
-        self.layer.masksToBounds = true
+        let dividerView = UIView()
+        dividerView.backgroundColor = themeColors.lightGrey
+        self.addSubview(dividerView)
+        dividerView.anchor(top : self.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 5, height: 1)
     }
 
 }

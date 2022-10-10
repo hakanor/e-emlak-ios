@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A73474EB28F0878600D2F755 /* LoginEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginEmailViewController.swift */; };
+		A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginViewController.swift */; };
 		A73474ED28F0879C00D2F755 /* LoginPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EC28F0879C00D2F755 /* LoginPasswordViewController.swift */; };
 		A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EF28F0888400D2F755 /* ThemeColors.swift */; };
 		A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F228F088F400D2F755 /* UIColor + Hex.swift */; };
 		A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F428F0916A00D2F755 /* Textfield + Image.swift */; };
 		A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F828F097F100D2F755 /* Textfield + Underline.swift */; };
 		A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474FA28F0BF8F00D2F755 /* AttributedColor + String.swift */; };
-		A73474FE28F17BF100D2F755 /* RegisterEmailPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474FD28F17BF100D2F755 /* RegisterEmailPassViewController.swift */; };
+		A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474FD28F17BF100D2F755 /* RegisterViewController.swift */; };
 		A734750028F185EE00D2F755 /* RegisterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474FF28F185ED00D2F755 /* RegisterInfoViewController.swift */; };
+		A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734750928F37CD100D2F755 /* MainTabViewController.swift */; };
+		A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734750B28F37D1E00D2F755 /* FeedViewController.swift */; };
+		A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */; };
+		A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734750F28F37D7200D2F755 /* ProfileViewController.swift */; };
+		A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751128F37D8300D2F755 /* MyFeedViewController.swift */; };
+		A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751328F3803D00D2F755 /* UIView + Anchor.swift */; };
+		A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751528F4260500D2F755 /* String + isValidEmail.swift */; };
 		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
@@ -30,15 +37,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A73474EA28F0878600D2F755 /* LoginEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEmailViewController.swift; sourceTree = "<group>"; };
+		A73474EA28F0878600D2F755 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A73474EC28F0879C00D2F755 /* LoginPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPasswordViewController.swift; sourceTree = "<group>"; };
 		A73474EF28F0888400D2F755 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A73474F228F088F400D2F755 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
 		A73474F428F0916A00D2F755 /* Textfield + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield + Image.swift"; sourceTree = "<group>"; };
 		A73474F828F097F100D2F755 /* Textfield + Underline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Textfield + Underline.swift"; sourceTree = "<group>"; };
 		A73474FA28F0BF8F00D2F755 /* AttributedColor + String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedColor + String.swift"; sourceTree = "<group>"; };
-		A73474FD28F17BF100D2F755 /* RegisterEmailPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterEmailPassViewController.swift; sourceTree = "<group>"; };
+		A73474FD28F17BF100D2F755 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A73474FF28F185ED00D2F755 /* RegisterInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInfoViewController.swift; sourceTree = "<group>"; };
+		A734750928F37CD100D2F755 /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		A734750B28F37D1E00D2F755 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
+		A734750F28F37D7200D2F755 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A734751128F37D8300D2F755 /* MyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedViewController.swift; sourceTree = "<group>"; };
+		A734751328F3803D00D2F755 /* UIView + Anchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Anchor.swift"; sourceTree = "<group>"; };
+		A734751528F4260500D2F755 /* String + isValidEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + isValidEmail.swift"; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +82,7 @@
 		A73474EE28F087B800D2F755 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				A73474EA28F0878600D2F755 /* LoginEmailViewController.swift */,
+				A73474EA28F0878600D2F755 /* LoginViewController.swift */,
 				A73474EC28F0879C00D2F755 /* LoginPasswordViewController.swift */,
 			);
 			path = Login;
@@ -81,6 +95,8 @@
 				A73474F428F0916A00D2F755 /* Textfield + Image.swift */,
 				A73474F828F097F100D2F755 /* Textfield + Underline.swift */,
 				A73474FA28F0BF8F00D2F755 /* AttributedColor + String.swift */,
+				A734751328F3803D00D2F755 /* UIView + Anchor.swift */,
+				A734751528F4260500D2F755 /* String + isValidEmail.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -88,10 +104,61 @@
 		A73474FC28F17BCA00D2F755 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				A73474FD28F17BF100D2F755 /* RegisterEmailPassViewController.swift */,
+				A73474FD28F17BF100D2F755 /* RegisterViewController.swift */,
 				A73474FF28F185ED00D2F755 /* RegisterInfoViewController.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		A734750328F37BC200D2F755 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A73474F128F088DE00D2F755 /* Extensions */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		A734750428F37BC600D2F755 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		A734750528F37BC900D2F755 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */,
+				A73474EE28F087B800D2F755 /* Login */,
+				A73474FC28F17BCA00D2F755 /* Register */,
+				A734750928F37CD100D2F755 /* MainTabViewController.swift */,
+				A734750B28F37D1E00D2F755 /* FeedViewController.swift */,
+				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
+				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
+				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A734750628F37BCD00D2F755 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		A734750728F37BD000D2F755 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A734750828F37BD700D2F755 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A7FD2AAD28EAFC4700E48E4A = {
@@ -113,17 +180,19 @@
 		A7FD2AB828EAFC4800E48E4A /* e-emlak */ = {
 			isa = PBXGroup;
 			children = (
+				A734750828F37BD700D2F755 /* Model */,
+				A734750728F37BD000D2F755 /* View */,
+				A734750628F37BCD00D2F755 /* ViewModel */,
+				A734750528F37BC900D2F755 /* Controller */,
+				A734750428F37BC600D2F755 /* API */,
+				A734750328F37BC200D2F755 /* Utilities */,
 				A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */,
 				A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */,
-				A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */,
 				A73474EF28F0888400D2F755 /* ThemeColors.swift */,
 				A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */,
 				A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */,
 				A7FD2AC728EAFC5300E48E4A /* Info.plist */,
 				A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */,
-				A73474FC28F17BCA00D2F755 /* Register */,
-				A73474F128F088DE00D2F755 /* Extensions */,
-				A73474EE28F087B800D2F755 /* Login */,
 			);
 			path = "e-emlak";
 			sourceTree = "<group>";
@@ -213,14 +282,21 @@
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
 				A734750028F185EE00D2F755 /* RegisterInfoViewController.swift in Sources */,
 				A7FD2ABE28EAFC4800E48E4A /* ViewController.swift in Sources */,
-				A73474EB28F0878600D2F755 /* LoginEmailViewController.swift in Sources */,
+				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
+				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */,
+				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
+				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
+				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
+				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
-				A73474FE28F17BF100D2F755 /* RegisterEmailPassViewController.swift in Sources */,
+				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
+				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,
 				A73474ED28F0879C00D2F755 /* LoginPasswordViewController.swift in Sources */,
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
+				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -132,7 +132,7 @@ class ViewController: UIViewController {
     }
     
     @objc func test(){
-        let vc = LoginEmailViewController()
+        let vc = LoginViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 // MARK: - Properties

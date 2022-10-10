@@ -1,5 +1,5 @@
 //
-//  LoginEmailViewController.swift
+//  LoginPasswordViewController.swift
 //  e-emlak
 //
 //  Created by Hakan Or on 7.10.2022.
@@ -7,9 +7,20 @@
 
 import UIKit
 
-class LoginEmailViewController: UIViewController {
+class LoginPasswordViewController: UIViewController {
     
 //    MARK: - Subviews
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "arrow.left")
+        button.tintColor = themeColors.dark
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBackButton), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var backgroundImage: UIImageView = {
         let backgroundImage = UIImageView()
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +56,7 @@ class LoginEmailViewController: UIViewController {
         subtitleLabel.textColor = themeColors.grey
         subtitleLabel.numberOfLines = 2
         subtitleLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        subtitleLabel.text = "Enter your email or number"
+        subtitleLabel.text = "Enter your password"
         return subtitleLabel
     }()
     
@@ -55,7 +66,7 @@ class LoginEmailViewController: UIViewController {
         textFieldLabel.textColor = themeColors.dark
         textFieldLabel.numberOfLines = 2
         textFieldLabel.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        textFieldLabel.text = "EMAIL OR MOBILE NUMBER"
+        textFieldLabel.text = "PASSWORD"
         return textFieldLabel
     }()
     
@@ -67,7 +78,7 @@ class LoginEmailViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        textField.rightImage(UIImage(systemName: "checkmark.circle"), imageWidth: 36, padding: 0, tintColor: themeColors.success)
+        textField.rightImage(UIImage(systemName: "eye.fill"), imageWidth: 36, padding: 0, tintColor: themeColors.grey)
 //        textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
         return textField
        }()
@@ -75,13 +86,12 @@ class LoginEmailViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .custom)
         button.tintColor = .white
-        button.setTitle("Next step", for: .normal)
+        button.setTitle("Login", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
         button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
         button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -129,14 +139,14 @@ class LoginEmailViewController: UIViewController {
         label.attributedText = attributedString
         return label
     }()
+    
     // MARK: - OBJC Func
-    @objc func handleNextButton(){
-        let vc = LoginPasswordViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+    @objc func handleBackButton(){
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func handleCreateAccountButton(){
-        let vc = RegisterEmailPassViewController()
+        let vc = RegisterViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -146,7 +156,12 @@ class LoginEmailViewController: UIViewController {
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        [backgroundImage, containerView] .forEach(view.addSubview(_:))
+        [backgroundImage, containerView, backButton] .forEach(view.addSubview(_:))
+        
+        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 20).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 24).isActive = true
         
         backgroundImage.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         backgroundImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -195,4 +210,5 @@ class LoginEmailViewController: UIViewController {
 
     
 }
+
 
