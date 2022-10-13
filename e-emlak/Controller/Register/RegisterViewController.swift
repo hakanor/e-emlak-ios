@@ -46,7 +46,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.text = "Create new account"
+        label.text = "Yeni hesap oluştur"
         return label
     }()
     
@@ -56,7 +56,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.grey
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.text = "Fill these form and jump to next step"
+        label.text = "Kayıt esnasında girdiğiniz bilgiler son derece önemlidir ve bazıları kayıttan sonra değiştirilemez."
         return label
     }()
     
@@ -72,6 +72,7 @@ class RegisterViewController: UIViewController {
     
     private lazy var emailTextField: UITextField = {
         let textField = UITextField()
+        textField.keyboardType = .emailAddress
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
             string: "example@example.com",
@@ -91,7 +92,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "PASSWORD"
+        label.text = "ŞİFRE"
         return label
     }()
     
@@ -124,7 +125,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "NAME"
+        label.text = "İSİM"
         return label
     }()
     
@@ -146,7 +147,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "SURNAME"
+        label.text = "SOYİSİM"
         return label
     }()
     
@@ -168,7 +169,7 @@ class RegisterViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "PHONE NUMBER"
+        label.text = "TELEFON NUMARASI"
         return label
     }()
     
@@ -189,7 +190,7 @@ class RegisterViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Next step", for: .normal)
+        button.setTitle("Kayıt Ol", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
@@ -203,9 +204,12 @@ class RegisterViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
+        setKeyboardDelegates()
+        
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
-        
+
         [backgroundImage, containerView, backButton] .forEach(view.addSubview(_:))
         
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingLeft: 20, width: 24, height: 24)
@@ -240,13 +244,27 @@ class RegisterViewController: UIViewController {
         
         phoneLabel.anchor(top: surnameTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
-        phoneTextField.anchor(top: phoneLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        phoneTextField.anchor(top: phoneLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
 
         nextButton.anchor(top: phoneTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 20, paddingRight: 24)
 
     }
     
     // MARK: - Helpers
+    
+    func setKeyboardDelegates(){
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        nameTextField.delegate = self
+        surnameTextField.delegate = self
+        phoneTextField.delegate = self
+        
+        emailTextField.tag = 1
+        passwordTextField.tag = 2
+        nameTextField.tag = 3
+        surnameTextField.tag = 4
+        phoneTextField.tag = 5
+    }
     func isValidEmail(tf: UITextField){
         if tf.text!.isValidEmail() {
             tf.rightImage(UIImage(systemName: "checkmark.circle"), imageWidth: 40, padding: 0, tintColor: themeColors.success)
@@ -293,7 +311,7 @@ class RegisterViewController: UIViewController {
 
     // MARK: - Selectors
     @objc func handleNextButton(){
-        let vc = LoginPasswordViewController()
+        let vc = MainTabViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -314,4 +332,17 @@ class RegisterViewController: UIViewController {
         isValidNumber(tf: phoneTextField)
     }
     
+}
+
+extension RegisterViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //Check if there is any other text-field in the view whose tag is +1 greater than the current text-field on which the return key was pressed. If yes → then move the cursor to that next text-field. If No → Dismiss the keyboard
+        if let nextField = self.view.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+        }
+        return false
+    }
 }

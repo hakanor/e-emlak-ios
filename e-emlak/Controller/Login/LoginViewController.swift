@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         titleLabel.textColor = themeColors.dark
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "Welcome Back"
+        titleLabel.text = "e-emlak'a Hoşgeldin"
         return titleLabel
     }()
     
@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
         label.textColor = themeColors.grey
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.text = "Enter your email or number"
+        label.text = "Giriş yapmak için lütfen e-mail ve şifrenizi girin."
         return label
     }()
     
@@ -55,12 +55,13 @@ class LoginViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "EMAIL OR MOBILE NUMBER"
+        label.text = "EMAIL"
         return label
     }()
     
     private lazy var textField: UITextField = {
         let textField = UITextField()
+        textField.keyboardType = .emailAddress
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
@@ -80,7 +81,7 @@ class LoginViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "PASSWORD"
+        label.text = "ŞİFRE"
         return label
     }()
     
@@ -103,15 +104,26 @@ class LoginViewController: UIViewController {
         eyeImageView.tintColor = .black
         eyeImageView.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action:#selector(showPassword(_:)))
-        textField.rightView(eyeImageView, width: 24, padding: 8 , tapGesture:tapGesture)
+        textField.rightView(eyeImageView, width: 24, padding: 4 , tapGesture:tapGesture)
         
         return textField
        }()
     
+    private lazy var resetPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setTitle("Şifreni mi unuttun", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(themeColors.primary, for: .normal)
+        button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(handleResetPasswordButton), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Next step", for: .normal)
+        button.setTitle("Giriş Yap", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
@@ -128,14 +140,14 @@ class LoginViewController: UIViewController {
         label.textColor = themeColors.grey
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        label.text = "or"
+        label.text = "veya"
         return label
     }()
     
     private lazy var createAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Create an account", for: .normal)
+        button.setTitle("Hesap Oluştur", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.dark, for: .normal)
         button.backgroundColor = themeColors.white
@@ -152,15 +164,18 @@ class LoginViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.grey
-        label.numberOfLines = 1
+        label.numberOfLines = 2
+        label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.text = "By signing in you agree to our Terms of Service"
-        let text = "By signing in you agree to our"
-        let termsText = "Terms of Service"
-        let stringValue = text + " " + termsText
+        label.text = "Kayıt ol düğmesine tıklayarak, Koşullarımızı kabul etmiş olursunuz."
+        let text = "Kayıt ol düğmesine tıklayarak,"
+        let termsText = "Koşullarımızı"
+        let text2 = "kabul etmiş olursunuz."
+        let stringValue = text + " " + termsText + " " + text2
         let attributedString: NSMutableAttributedString = NSMutableAttributedString(string: stringValue)
         attributedString.setColorForText(textForAttribute: text , withColor: themeColors.grey)
         attributedString.setColorForText(textForAttribute: termsText , withColor: themeColors.primary)
+        attributedString.setColorForText(textForAttribute: text2 , withColor: themeColors.grey)
         label.attributedText = attributedString
         return label
     }()
@@ -168,6 +183,7 @@ class LoginViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         
@@ -177,9 +193,9 @@ class LoginViewController: UIViewController {
         backgroundImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
         
         containerView.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
-        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.55).isActive = true
+        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.60).isActive = true
         
-        [titleLabel , subtitleLabel, textFieldLabel, textField, passLabel, passTextField, nextButton, orLabel, createAccountButton, termsLabel] .forEach(containerView.addSubview(_:))
+        [titleLabel , subtitleLabel, textFieldLabel, textField, passLabel, passTextField, resetPasswordButton, nextButton, orLabel, createAccountButton, termsLabel] .forEach(containerView.addSubview(_:))
  
         titleLabel.anchor(top: containerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 24, paddingRight: 24)
 
@@ -193,14 +209,17 @@ class LoginViewController: UIViewController {
         
         passTextField.anchor(top: passLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        nextButton.anchor(top: passTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        resetPasswordButton.anchor(top: passTextField.bottomAnchor,  paddingTop: 18)
+        resetPasswordButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        nextButton.anchor(top: resetPasswordButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 12, paddingLeft: 24, paddingRight: 24)
         
         orLabel.anchor(top: nextButton.bottomAnchor,paddingTop: 8)
         orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         createAccountButton.anchor(top: orLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        termsLabel.anchor(top: createAccountButton.bottomAnchor,paddingTop: 52)
+        termsLabel.anchor(top: createAccountButton.bottomAnchor,left: view.leftAnchor, right:view.rightAnchor, paddingTop: 46, paddingLeft: 8, paddingRight: 8)
         termsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
@@ -237,6 +256,11 @@ class LoginViewController: UIViewController {
     
     @objc func handleNextButton(){
         let vc = MainTabViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func handleResetPasswordButton(){
+        let vc = ResetPasswordViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
