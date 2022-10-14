@@ -23,6 +23,7 @@
 		A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751528F4260500D2F755 /* String + isValidEmail.swift */; };
 		A734751828F4944000D2F755 /* UIView + HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751728F4944000D2F755 /* UIView + HideKeyboard.swift */; };
 		A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751A28F8194E00D2F755 /* ResetPasswordViewController.swift */; };
+		A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */; };
 		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
@@ -73,6 +74,7 @@
 				A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */,
 				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
 				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
+				A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +229,7 @@
 				A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */,
 				A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */,
 				A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */,
+				A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */,
 			);
 			productName = "e-emlak";
 			productReference = A7FD2AB628EAFC4800E48E4A /* e-emlak.app */;
@@ -258,6 +261,7 @@
 			mainGroup = A7FD2AAD28EAFC4700E48E4A;
 			packageReferences = (
 				A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = A7FD2AB728EAFC4800E48E4A /* Products */;
 			projectDirPath = "";
@@ -516,6 +520,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -527,6 +539,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
 		A764CA5528EB1DDD00772AE7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
