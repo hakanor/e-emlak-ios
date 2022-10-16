@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ResetPasswordViewController: UIViewController {
     // MARK: - Subviews
@@ -140,9 +141,33 @@ class ResetPasswordViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func handleResetPasswordButton(){
-        let vc = LoginViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-        print("Şifre sıfırlandı")
+        guard let email = textField.text else { return }
+        
+        if textField.text == ""{
+            self.subtitleLabel.text = "E-mail alanı boş bırakılamaz."
+        }
+        
+        else if textField.text!.isValidEmail() {
+            Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+                if let error = error {
+                    self.subtitleLabel.text = error.localizedDescription
+                }
+                print("DEBUG: Succesfully send reset password email.")
+                
+                let dialogMessage = UIAlertController(title: "Şifre Sıfırlama", message: "Şifre sıfırlma maili başarıyla gönderildi.", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Giriş ekranına dön.", style: .cancel) { (action) -> Void in
+                    guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+                    guard let tab = window.rootViewController as? MainTabViewController else { return }
+                    
+                    tab.authenticateUserAndConfigureUI()
+                    self.dismiss(animated: true, completion: nil)
+                }
+                dialogMessage.addAction(cancel)
+                self.present(dialogMessage, animated: true, completion: nil)
+            }
+        } else {
+            subtitleLabel.text = "E-mail alanı doğru formatta değil."
+        }
     }
     
     @objc func handleEmailTextField(){
