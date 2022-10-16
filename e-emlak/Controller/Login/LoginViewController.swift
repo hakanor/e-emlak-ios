@@ -129,7 +129,7 @@ class LoginViewController: UIViewController {
         button.backgroundColor = themeColors.primary
         button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
         button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -183,7 +183,6 @@ class LoginViewController: UIViewController {
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         
@@ -254,9 +253,23 @@ class LoginViewController: UIViewController {
         togglePassword(tf: passTextField)
     }
     
-    @objc func handleNextButton(){
-        let vc = MainTabViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+    @objc func handleLoginButton(){
+        guard let email = textField.text else { return }
+        guard let password = passTextField.text else { return }
+        AuthService.shared.logUserIn(withEmail: email, password: password) {(result,error) in
+            if let error = error {
+                self.subtitleLabel.text = error.localizedDescription
+                return
+            }
+            
+            print("DEBUG: Succesfully log in ...")
+            
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+            guard let tab = window.rootViewController as? MainTabViewController else { return }
+            
+            tab.authenticateUserAndConfigureUI()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func handleResetPasswordButton(){

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RegisterViewController: UIViewController {
     
@@ -308,11 +309,53 @@ class RegisterViewController: UIViewController {
             tf.rightImage(UIImage(systemName: "x.circle"), imageWidth: 40, padding: 0, tintColor: themeColors.error)
         }
     }
+    
+    func checkRegisterFields() -> String {
+        guard emailTextField.text != "" else { return "E-mail alanı boş olamaz."}
+        guard passwordTextField.text != "" else { return "Şifre alanı boş olamaz."}
+        guard nameTextField.text != "" else { return "İsim alanı boş olamaz."}
+        guard surnameTextField.text != "" else { return "Soyisim alanı boş olamaz."}
+        guard phoneTextField.text != "" else { return "Telefon numarası alanı boş olamaz."}
+        
+        if emailTextField.text!.isValidEmail() {
+        } else {
+            return "E-mail doğru formatta değil."
+        }
+        
+        if phoneTextField.text?.count == 13 {
+        } else {
+            return "Telefon numarası doğru formatta değil"
+        }
+        
+        return ""
+    }
+    
 
     // MARK: - Selectors
     @objc func handleNextButton(){
-        let vc = MainTabViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let name  = nameTextField.text else { return }
+        guard let surname = surnameTextField.text else { return }
+        guard let phoneNumber = phoneTextField.text else { return }
+
+        if checkRegisterFields() != "" {
+            subtitleLabel.text = checkRegisterFields()
+        } else {
+            let credentials = AuthCredentials(email: email, password: password, name: name, surname: surname, phoneNumber: phoneNumber)
+            AuthService.shared.registerUser(credentials: credentials) { (error) in
+                print("DEBUG: Sign up successful. - Register VC")
+                
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+                guard let tab = window.rootViewController as? MainTabViewController else { return }
+                
+                tab.authenticateUserAndConfigureUI()
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        }
+        
     }
     
     @objc func handleBackButton(){

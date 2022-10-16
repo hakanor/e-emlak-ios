@@ -103,7 +103,6 @@ class ResetPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTappedAround()
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         

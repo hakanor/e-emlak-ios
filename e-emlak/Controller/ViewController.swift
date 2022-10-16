@@ -108,7 +108,6 @@ class ViewController: UIViewController {
             guard let strongSelf = self else { return }
             if(error != nil){
                 strongSelf.label.text = "Error check email pass"
-                print(error)
                 return
             }
             strongSelf.label.text = "Login success"

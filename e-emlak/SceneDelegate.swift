@@ -13,13 +13,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        guard let _ = (scene as? UIWindowScene) else { return }
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = navigationController
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        guard let _ = (scene as? UIWindowScene) else { return }
+//        let viewController = MainTabViewController()
+//        let navigationController = UINavigationController(rootViewController: viewController)
+//        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+//        window?.windowScene = windowScene
+//        window?.rootViewController = navigationController
+//        window?.makeKeyAndVisible()
+        
+        guard let scene = scene as? UIWindowScene else { return }
+        window = UIWindow(windowScene: scene)
+        window?.rootViewController = MainTabViewController()
         window?.makeKeyAndVisible()
     }
 
