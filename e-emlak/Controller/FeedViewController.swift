@@ -97,14 +97,19 @@ class FeedViewController: UIViewController {
             self.label3.text = "Bilgiler: \(String(describing: snapshot?.data()))"
         }
     }
-    // MARK: - Selectors
-    @objc func handleLogOutButton(){
-        logUserOut()
+    
+    func dismissPage(){
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
         guard let tab = window.rootViewController as? MainTabViewController else { return }
         
         tab.authenticateUserAndConfigureUI()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Selectors
+    @objc func handleLogOutButton(){
+        logUserOut()
+        dismissPage()
     }
 
 }
