@@ -51,5 +51,14 @@ struct AuthService {
             print("DEBUG: SUCCESFULLY REGISTERED - AuthService")
         })
     }
+    
+    func getCurrentUserId() -> String {
+        let user = Auth.auth().currentUser
+        var uid = ""
+        if let user = user {
+            uid = user.uid
+        }
+        return uid
+    }
 
 }

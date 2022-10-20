@@ -25,6 +25,7 @@
 		A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734751A28F8194E00D2F755 /* ResetPasswordViewController.swift */; };
 		A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */; };
 		A734752328FAF27200D2F755 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752228FAF27200D2F755 /* AuthService.swift */; };
+		A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752428FEB2D200D2F755 /* UIImage + Url.swift */; };
 		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
@@ -56,6 +57,7 @@
 		A734751728F4944000D2F755 /* UIView + HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + HideKeyboard.swift"; sourceTree = "<group>"; };
 		A734751A28F8194E00D2F755 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A734752228FAF27200D2F755 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		A734752428FEB2D200D2F755 /* UIImage + Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Url.swift"; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				A734751328F3803D00D2F755 /* UIView + Anchor.swift */,
 				A734751528F4260500D2F755 /* String + isValidEmail.swift */,
 				A734751728F4944000D2F755 /* UIView + HideKeyboard.swift */,
+				A734752428FEB2D200D2F755 /* UIImage + Url.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
 				A7FD2ABE28EAFC4800E48E4A /* ViewController.swift in Sources */,
+				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
 				A734751828F4944000D2F755 /* UIView + HideKeyboard.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
