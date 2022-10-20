@@ -8,13 +8,21 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import SDWebImage
 
 class ProfileViewController: UIViewController {
     
     let imagePicker = UIImagePickerController()
+    
+    // MARK: - Properties
+    var user: User? {
+        didSet {
+            configureUserData()
+        }
+    }
 
     // MARK: - Subviews
-    private lazy var profilePhotoButton: UIButton = {
+    private lazy var profilePhotoButton2: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "registerBg"), for: .normal)
         button.addTarget(self, action: #selector(handleAddProfilePhoto), for: .touchUpInside)
@@ -25,6 +33,20 @@ class ProfileViewController: UIViewController {
         button.layer.borderColor = themeColors.white.cgColor
         button.layer.borderWidth = 2
         return button
+    }()
+    
+    private lazy var profilePhoto: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "bookmark")?.withTintColor(.white)
+        imageView.image = image
+        imageView.isUserInteractionEnabled = true
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderColor = themeColors.white.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 40
+        return imageView
     }()
     
     private lazy var backgroundImage: UIImageView = {
@@ -52,7 +74,7 @@ class ProfileViewController: UIViewController {
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        label.text = "Hakan OR"
+        label.text = user?.name
         return label
     }()
     
@@ -81,13 +103,16 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = themeColors.white
-        getUserName()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        fetchUser()
         
-        [backgroundImage, containerView, profilePhotoButton] .forEach(view.addSubview(_:))
+        [backgroundImage, containerView, profilePhoto] .forEach(view.addSubview(_:))
         
-        profilePhotoButton.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: containerView.topAnchor, paddingLeft: 24, paddingBottom: -24, width: 80, height: 80)
+        let gestureProfilePhoto = UITapGestureRecognizer(target: self, action: #selector(self.handleAddProfilePhoto(_:)))
+        profilePhoto.addGestureRecognizer(gestureProfilePhoto)
+        
+        profilePhoto.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: containerView.topAnchor, paddingLeft: 24, paddingBottom: -24, width: 80, height: 80)
         
         backgroundImage.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)
         backgroundImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35).isActive = true
@@ -104,47 +129,29 @@ class ProfileViewController: UIViewController {
         aboutMeLabel.anchor(top: subtitleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
     }
+    // MARK: - API
+    func fetchUser(){
+        UserService.shared.fetchUser { user in
+            self.user = user
+        }
+    }
     
     // MARK: - Helpers
-    // will be deleted
-    func getUserName(){
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let uid = user.uid
-            print(uid)
-        }
-        Firestore.firestore().collection("users").document(user?.uid ?? "").getDocument(completion: ) { (snapshot,error) in
-            let datas = snapshot?.data()
-            
-            self.titleLabel.text = datas!["name"] as? String
-            self.subtitleLabel.text = datas!["uid"] as? String
-        }
+    func configureUserData(){
+        guard let user = user else { return }
+        titleLabel.text = user.name
+        
+        guard let profileImageUrl = URL(string: user.imageUrl) else { return }
+        print("debug : URL \(profileImageUrl)")
+        self.profilePhoto.sd_setImage(with: profileImageUrl,completed: nil)
+        
     }
-    
-    // will be deleted
-    func getProfileUrl()-> String{
-        var url = ""
-        let user = Auth.auth().currentUser
-        if let user = user {
-            let uid = user.uid
-        }
-        Firestore.firestore().collection("users").document(user?.uid ?? "").getDocument(completion: ) { (snapshot,error) in
-            let datas = snapshot?.data()
-            
-            url = (datas!["imageUrl"] as? String)!
-        }
-        return url
-    }
-    
     func saveImage(imageData: Data){
         let uid = AuthService.shared.getCurrentUserId()
-        print("debug2")
         Storage.storage().reference().child("profile_images").child(uid).putData(imageData, metadata: nil) {(meta,error) in
             Storage.storage().reference().child("profile_images").child(uid).downloadURL { (url, error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    print("debug3")
-                    
                 }
                 guard let profileImageUrl = url?.absoluteString else { return }
                 let values = [
@@ -161,7 +168,7 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Selectors
-    @objc func handleAddProfilePhoto(){
+    @objc func handleAddProfilePhoto(_ sender: UITapGestureRecognizer? = nil){
        present(imagePicker,animated: true, completion: nil)
     }
 }
@@ -169,11 +176,9 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let profileImage = info[.editedImage] as? UIImage else { return }
-        self.profilePhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.profilePhoto.image = profileImage.withRenderingMode(.alwaysOriginal)
         guard let imageData = profileImage.jpegData(compressionQuality: 0.6) else { return }
-        print("debug1")
         saveImage(imageData: imageData)
-        print("debug4")
         dismiss(animated: true, completion: nil)
     }
 }

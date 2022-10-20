@@ -11,6 +11,11 @@ import Firebase
 class MainTabViewController: UITabBarController {
 
     // MARK: - Properties
+    var user: User? {
+        didSet {
+            print("DEBUG: Did set user in main tab")
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -24,6 +29,12 @@ class MainTabViewController: UITabBarController {
     }
     
     // MARK: - API
+    func fetchUser(){
+        UserService.shared.fetchUser { user in
+            self.user = user
+        }
+    }
+    
     func authenticateUserAndConfigureUI(){
         if Auth.auth().currentUser == nil {
             DispatchQueue.main.async {
@@ -34,6 +45,7 @@ class MainTabViewController: UITabBarController {
             
         } else {
             configureViewControllers()
+            fetchUser()
         }
     }
     

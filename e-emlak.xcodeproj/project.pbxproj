@@ -26,6 +26,9 @@
 		A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */; };
 		A734752328FAF27200D2F755 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752228FAF27200D2F755 /* AuthService.swift */; };
 		A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752428FEB2D200D2F755 /* UIImage + Url.swift */; };
+		A734752729019C4B00D2F755 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752629019C4A00D2F755 /* UserService.swift */; };
+		A73475292901A05600D2F755 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475282901A05600D2F755 /* User.swift */; };
+		A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A734752C2901B2F700D2F755 /* SDWebImage */; };
 		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
@@ -58,6 +61,8 @@
 		A734751A28F8194E00D2F755 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A734752228FAF27200D2F755 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		A734752428FEB2D200D2F755 /* UIImage + Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Url.swift"; sourceTree = "<group>"; };
+		A734752629019C4A00D2F755 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		A73475282901A05600D2F755 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +81,7 @@
 				A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */,
 				A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */,
 				A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */,
+				A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */,
 				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
 				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
 				A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */,
@@ -128,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A734752228FAF27200D2F755 /* AuthService.swift */,
+				A734752629019C4A00D2F755 /* UserService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -165,6 +172,7 @@
 		A734750828F37BD700D2F755 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A73475282901A05600D2F755 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */,
 				A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */,
 				A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */,
+				A734752C2901B2F700D2F755 /* SDWebImage */,
 			);
 			productName = "e-emlak";
 			productReference = A7FD2AB628EAFC4800E48E4A /* e-emlak.app */;
@@ -268,6 +277,7 @@
 			packageReferences = (
 				A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				A734752B2901B2F700D2F755 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = A7FD2AB728EAFC4800E48E4A /* Products */;
 			projectDirPath = "";
@@ -302,6 +312,7 @@
 				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
 				A734751828F4944000D2F755 /* UIView + HideKeyboard.swift in Sources */,
+				A734752729019C4B00D2F755 /* UserService.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
@@ -317,6 +328,7 @@
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
+				A73475292901A05600D2F755 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +548,14 @@
 				kind = branch;
 			};
 		};
+		A734752B2901B2F700D2F755 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -551,6 +571,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		A734752C2901B2F700D2F755 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A734752B2901B2F700D2F755 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		A764CA5528EB1DDD00772AE7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
