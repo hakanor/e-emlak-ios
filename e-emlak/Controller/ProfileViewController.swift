@@ -17,7 +17,7 @@ class ProfileViewController: UIViewController {
     // MARK: - Properties
     var user: User? {
         didSet {
-            configureUserData()
+            applyUserData()
         }
     }
 
@@ -137,13 +137,10 @@ class ProfileViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    func configureUserData(){
+    func applyUserData(){
         guard let user = user else { return }
         titleLabel.text = user.name
-        
-        guard let profileImageUrl = URL(string: user.imageUrl) else { return }
-        print("debug : URL \(profileImageUrl)")
-        self.profilePhoto.sd_setImage(with: profileImageUrl,completed: nil)
+        self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
         
     }
     func saveImage(imageData: Data){

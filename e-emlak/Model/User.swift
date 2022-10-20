@@ -12,7 +12,7 @@ struct User {
     let surname: String
     let email: String
     let phoneNumber: String
-    let imageUrl: String
+    var imageUrl: URL?
     let uid: String
     
     init(uid:String, dictionary: [String: AnyObject]){
@@ -21,6 +21,10 @@ struct User {
         self.surname = dictionary["surname"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.phoneNumber = dictionary["phoneNumber"] as? String ?? ""
-        self.imageUrl = dictionary["imageUrl"] as? String ?? ""
+        
+        if let imageUrlString = dictionary["imageUrl"] as? String {
+            let defaultUrl = URL(string: "https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/logo.PNG?alt=media&token=edf0ed7d-5fce-4bd2-a8fa-1d785795cafb")
+            self.imageUrl = URL(string: imageUrlString) ?? defaultUrl!
+        }
     }
 }

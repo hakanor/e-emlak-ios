@@ -69,7 +69,7 @@ class MainTabViewController: UITabBarController {
         conversations.tabBarItem.image = UIImage(systemName: "pencil")
         
         let profile = ProfileViewController()
-        profile.tabBarItem.image = UIImage(systemName: "pencil")
+        profile.tabBarItem.image = UIImage(systemName: "person.circle")
         
         viewControllers = [feed, myFeed, conversations, profile]
     }
