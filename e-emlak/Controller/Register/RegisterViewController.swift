@@ -85,7 +85,7 @@ class RegisterViewController: UIViewController {
         textField.autocapitalizationType = .none
         textField.addTarget(self, action: #selector(handleEmailTextField), for: .allEditingEvents)
         return textField
-       }()
+    }()
     
     private lazy var passwordLabel: UILabel = {
         let label = UILabel()
@@ -118,7 +118,7 @@ class RegisterViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action:#selector(showPassword(_:)))
         textField.rightView(eyeImageView, width: 40, padding: 0 , tapGesture:tapGesture)
         return textField
-       }()
+    }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -140,7 +140,7 @@ class RegisterViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         textField.setUnderLine()
         return textField
-       }()
+    }()
     
     private lazy var surnameLabel: UILabel = {
         let label = UILabel()
@@ -162,7 +162,7 @@ class RegisterViewController: UIViewController {
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         textField.setUnderLine()
         return textField
-       }()
+    }()
 
     private lazy var phoneLabel: UILabel = {
         let label = UILabel()
@@ -186,7 +186,7 @@ class RegisterViewController: UIViewController {
         textField.setUnderLine()
         textField.addTarget(self, action: #selector(handlePhoneTextField), for: .allEditingEvents)
         return textField
-       }()
+    }()
     
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)

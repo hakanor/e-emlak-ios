@@ -10,13 +10,13 @@ import Firebase
 
 class FeedViewController: UIViewController {
     // MARK: - Subviews
-        private lazy var label: UILabel = {
-            let label = UILabel()
-            label.textAlignment = . center
-            label.text = "mail"
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.textAlignment = . center
+        label.text = "mail"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     private lazy var label2: UILabel = {
         let label = UILabel()
@@ -51,6 +51,22 @@ class FeedViewController: UIViewController {
         return button
     }()
     
+    private lazy var uploadButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setTitle("İlan Ekle", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(themeColors.dark, for: .normal)
+        button.backgroundColor = themeColors.white
+        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
+        button.layer.cornerRadius = 20
+        button.layer.borderWidth = 1
+        button.layer.borderColor = themeColors.grey.cgColor
+        button.addTarget(self, action: #selector(handleUploadButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Properties
     
     // MARK: - Lifecycle
@@ -73,7 +89,7 @@ class FeedViewController: UIViewController {
     
     // MARK: - Helpers
     func configureUI(){
-        [label, label2, label3, testButton] .forEach(view.addSubview(_:))
+        [label, label2, label3, testButton, uploadButton] .forEach(view.addSubview(_:))
         
         label.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
         
@@ -82,6 +98,8 @@ class FeedViewController: UIViewController {
         label3.anchor(top: label2.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
         
         testButton.anchor(top: label3.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
+        
+        uploadButton.anchor(top: testButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 20, paddingRight: 20)
     }
     
     func getCurrentUser(){
@@ -112,4 +130,9 @@ class FeedViewController: UIViewController {
         dismissPage()
     }
 
+    @objc func handleUploadButton(){
+        let nav = UINavigationController(rootViewController: UploadAdViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+    }
 }

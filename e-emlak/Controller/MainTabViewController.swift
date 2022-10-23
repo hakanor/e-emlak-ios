@@ -22,7 +22,6 @@ class MainTabViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        logUserOut()
         authenticateUserAndConfigureUI()
         
         // Do any additional setup after loading the view.
@@ -60,7 +59,7 @@ class MainTabViewController: UITabBarController {
     // MARK: - Helpers
     func configureViewControllers(){
         let feed = FeedViewController()
-        feed.tabBarItem.image = UIImage(systemName: "pencil")
+        feed.tabBarItem.image = UIImage(systemName: "house.circle")
         
         let myFeed = MyFeedViewController()
         myFeed.tabBarItem.image = UIImage(systemName: "pencil")

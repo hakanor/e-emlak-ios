@@ -29,6 +29,9 @@
 		A734752729019C4B00D2F755 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752629019C4A00D2F755 /* UserService.swift */; };
 		A73475292901A05600D2F755 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475282901A05600D2F755 /* User.swift */; };
 		A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A734752C2901B2F700D2F755 /* SDWebImage */; };
+		A734753029040B1100D2F755 /* UploadAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752F29040B1100D2F755 /* UploadAdViewController.swift */; };
+		A73475342905A7AE00D2F755 /* UploadAdDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */; };
+		A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */; };
 		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
@@ -37,7 +40,6 @@
 		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
-		A7FD2ABE28EAFC4800E48E4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */; };
 		A7FD2AC328EAFC5300E48E4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */; };
 		A7FD2AC628EAFC5300E48E4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -63,11 +65,13 @@
 		A734752428FEB2D200D2F755 /* UIImage + Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Url.swift"; sourceTree = "<group>"; };
 		A734752629019C4A00D2F755 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A73475282901A05600D2F755 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A734752F29040B1100D2F755 /* UploadAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdViewController.swift; sourceTree = "<group>"; };
+		A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdDetailsViewController.swift; sourceTree = "<group>"; };
+		A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + setPlaceHolder.swift"; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7FD2AC528EAFC5300E48E4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7FD2AC728EAFC5300E48E4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 				A734751528F4260500D2F755 /* String + isValidEmail.swift */,
 				A734751728F4944000D2F755 /* UIView + HideKeyboard.swift */,
 				A734752428FEB2D200D2F755 /* UIImage + Url.swift */,
+				A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -142,7 +147,6 @@
 		A734750528F37BC900D2F755 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A7FD2ABD28EAFC4800E48E4A /* ViewController.swift */,
 				A73474EE28F087B800D2F755 /* Login */,
 				A73474FC28F17BCA00D2F755 /* Register */,
 				A734751928F8185E00D2F755 /* ResetPassword */,
@@ -151,6 +155,8 @@
 				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
 				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
+				A734752F29040B1100D2F755 /* UploadAdViewController.swift */,
+				A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -306,13 +312,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A734753029040B1100D2F755 /* UploadAdViewController.swift in Sources */,
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
-				A7FD2ABE28EAFC4800E48E4A /* ViewController.swift in Sources */,
 				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
+				A73475342905A7AE00D2F755 /* UploadAdDetailsViewController.swift in Sources */,
 				A734751828F4944000D2F755 /* UIView + HideKeyboard.swift in Sources */,
 				A734752729019C4B00D2F755 /* UserService.swift in Sources */,
+				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
