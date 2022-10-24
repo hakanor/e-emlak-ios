@@ -22,6 +22,17 @@ class UploadAdDetailsViewController: UIViewController{
         button.backgroundColor = .clear
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "multiply")
+        button.tintColor = .black
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return button
     }()
@@ -86,17 +97,6 @@ class UploadAdDetailsViewController: UIViewController{
         return label
     }()
     
-//    private lazy var descriptionTextField: UITextField = {
-//        let textField = UITextField()
-//        textField.translatesAutoresizingMaskIntoConstraints = false
-//        textField.attributedPlaceholder = NSAttributedString(
-//            string: "Açıklama giriniz.",
-//            attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
-//        )
-//        textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-//        textField.setUnderLine()
-//        return textField
-//    }()
     private lazy var descriptionTextField: UITextView = {
         let textField = UITextView()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -193,8 +193,12 @@ class UploadAdDetailsViewController: UIViewController{
     }
     
     // MARK: - Selectors
-    @objc func handleCancel(){
+    @objc func handleBack(){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func handleCancel(){
+        dismiss(animated: true,completion: nil)
     }
     
     @objc func handleNextButton(){
@@ -202,6 +206,9 @@ class UploadAdDetailsViewController: UIViewController{
         guard let title = titleTextField.text else { return }
         guard let desc = descriptionTextField.text else { return }
         guard let name  = priceTextField.text else { return }
+        
+        let vc = LocationViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     // MARK: - API
@@ -212,6 +219,7 @@ class UploadAdDetailsViewController: UIViewController{
         title = self.estateType
         navigationController?.navigationBar.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         
         [scrollView] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)

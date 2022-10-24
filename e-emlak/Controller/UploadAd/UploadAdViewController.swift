@@ -27,6 +27,17 @@ class UploadAdViewController: UIViewController{
         button.backgroundColor = .clear
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var cancelButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "multiply")
+        button.tintColor = .black
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleCancel), for: .touchUpInside)
         return button
     }()
@@ -142,6 +153,9 @@ class UploadAdViewController: UIViewController{
     }
     
     // MARK: - Selectors
+    @objc func handleBack(){
+        dismiss(animated: true,completion: nil)
+    }
     @objc func handleCancel(){
         dismiss(animated: true,completion: nil)
     }
@@ -152,7 +166,7 @@ class UploadAdViewController: UIViewController{
         guard let desc = descriptionTextField.text else { return }
         guard let name  = serviceTypeTextField.text else { return }
         
-        var estateType = title + ">" + desc + ">" + name
+        let estateType = title + " > " + desc + " > " + name
         
         let vc = UploadAdDetailsViewController()
         vc.estateType = estateType
