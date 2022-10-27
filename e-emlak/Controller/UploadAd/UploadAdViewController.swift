@@ -70,7 +70,7 @@ class UploadAdViewController: UIViewController{
         return stackView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    private lazy var propertyTypeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
@@ -80,7 +80,7 @@ class UploadAdViewController: UIViewController{
         return label
     }()
     
-    private lazy var titleTextField: UITextField = {
+    private lazy var propertyTypeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
@@ -93,7 +93,7 @@ class UploadAdViewController: UIViewController{
         return textField
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    private lazy var categoryTypeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
@@ -103,7 +103,7 @@ class UploadAdViewController: UIViewController{
         return label
     }()
     
-    private lazy var descriptionTextField: UITextField = {
+    private lazy var categoryTypeTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
@@ -145,10 +145,11 @@ class UploadAdViewController: UIViewController{
         super.viewDidLoad()
         configureUI()
         fetchPropertyType()
+        setTextFieldDelegates()
         pickerView.delegate = self
         pickerView.dataSource = self
-        titleTextField.inputView = pickerView
-        descriptionTextField.inputView = pickerView
+        propertyTypeTextField.inputView = pickerView
+        categoryTypeTextField.inputView = pickerView
         serviceTypeTextField.inputView = pickerView
     }
     
@@ -162,8 +163,8 @@ class UploadAdViewController: UIViewController{
     
     @objc func handleNextButton(){
         
-        guard let title = titleTextField.text else { return }
-        guard let desc = descriptionTextField.text else { return }
+        guard let title = propertyTypeTextField.text else { return }
+        guard let desc = categoryTypeTextField.text else { return }
         guard let name  = serviceTypeTextField.text else { return }
         
         let estateType = title + " > " + desc + " > " + name
@@ -174,37 +175,6 @@ class UploadAdViewController: UIViewController{
         
     }
     // MARK: - API
-    
-    // MARK: - Helpers
-    func configureUI(){
-        view.backgroundColor = themeColors.white
-        title = "İlan Ekle"
-        navigationController?.navigationBar.backgroundColor = .white
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        [scrollView] .forEach(view.addSubview(_:))
-        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        
-        [titleLabel, titleTextField, descriptionLabel, descriptionTextField, serviceTypeLabel, serviceTypeTextField, nextButton] .forEach(scrollView.addSubview(_:))
-        
-        titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
-        
-        titleTextField.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
-        
-        descriptionLabel.anchor(top: titleTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
-        
-        descriptionTextField.anchor(top: descriptionLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
-        
-        serviceTypeLabel.anchor(top: descriptionTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
-        
-        serviceTypeTextField.anchor(top: serviceTypeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
-        
-        nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
-        
-    }
-    
-    
     func fetchPropertyType(){
         self.propertyTypeArray.removeAll()
         
@@ -273,6 +243,41 @@ class UploadAdViewController: UIViewController{
                 
         }
     }
+    
+    // MARK: - Helpers
+    func configureUI(){
+        view.backgroundColor = themeColors.white
+        title = "İlan Ekle"
+        navigationController?.navigationBar.backgroundColor = .white
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        [scrollView] .forEach(view.addSubview(_:))
+        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        
+        [propertyTypeLabel, propertyTypeTextField, categoryTypeLabel, categoryTypeTextField, serviceTypeLabel, serviceTypeTextField, nextButton] .forEach(scrollView.addSubview(_:))
+        
+        propertyTypeLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        propertyTypeTextField.anchor(top: propertyTypeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        categoryTypeLabel.anchor(top: propertyTypeTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        categoryTypeTextField.anchor(top: categoryTypeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        serviceTypeLabel.anchor(top: categoryTypeTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        serviceTypeTextField.anchor(top: serviceTypeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
+        
+    }
+    
+    func setTextFieldDelegates(){
+        propertyTypeTextField.delegate = self
+        categoryTypeTextField.delegate = self
+        serviceTypeTextField.delegate = self
+    }
         
 }
 
@@ -280,11 +285,12 @@ extension UploadAdViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if titleTextField.isFirstResponder {
+        if propertyTypeTextField.isFirstResponder {
             return propertyTypeArray.count
         }
-        if descriptionTextField.isFirstResponder{
+        if categoryTypeTextField.isFirstResponder{
             return categoryTypeArray.count
         }
         if serviceTypeTextField.isFirstResponder{
@@ -294,11 +300,12 @@ extension UploadAdViewController: UIPickerViewDelegate,UIPickerViewDataSource {
             return 0
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if titleTextField.isFirstResponder {
+        if propertyTypeTextField.isFirstResponder {
             return propertyTypeArray[row]
         }
-        if descriptionTextField.isFirstResponder{
+        if categoryTypeTextField.isFirstResponder{
             return categoryTypeArray[row]
         }
         if serviceTypeTextField.isFirstResponder{
@@ -308,21 +315,42 @@ extension UploadAdViewController: UIPickerViewDelegate,UIPickerViewDataSource {
             return "Boş"
         }
     }
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if titleTextField.isFirstResponder {
-            titleTextField.text = propertyTypeArray[row]
-            fetchCategoryType(name: titleTextField.text ?? "")
-            descriptionTextField.text = "Kategori seçiniz."
-            serviceTypeTextField.text = "Servis türü seçiniz."
+        if propertyTypeTextField.isFirstResponder {
+            propertyTypeTextField.text = propertyTypeArray[row]
+            fetchCategoryType(name: propertyTypeTextField.text ?? "")
+            pickerView.reloadAllComponents()
+            categoryTypeTextField.text?.removeAll()
+            serviceTypeTextField.text?.removeAll()
         }
-        if descriptionTextField.isFirstResponder{
-            descriptionTextField.text = categoryTypeArray[row]
+        if categoryTypeTextField.isFirstResponder{
+            categoryTypeTextField.text = categoryTypeArray[row]
             fetchServiceType(id: ID)
-            serviceTypeTextField.text = "Servis türü seçiniz."
+            pickerView.reloadAllComponents()
+            serviceTypeTextField.text?.removeAll()
         }
         if serviceTypeTextField.isFirstResponder{
             serviceTypeTextField.text = serviceTypeArray[row]
+            pickerView.reloadAllComponents()
         }
     }
     
+}
+
+extension UploadAdViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == propertyTypeTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+        if textField == categoryTypeTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+        if textField == serviceTypeTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+    }
 }

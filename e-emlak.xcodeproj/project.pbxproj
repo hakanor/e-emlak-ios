@@ -41,6 +41,7 @@
 		A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */; };
 		A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */; };
 		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
+		A77D1A862907241700E7D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A852907241600E7D510 /* ViewController.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -76,6 +77,7 @@
 		A73475392906D8E000D2F755 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		A734753B2906DE4D00D2F755 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A77D1A852907241600E7D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			children = (
 				A73475282901A05600D2F755 /* User.swift */,
 				A73475372906D7B300D2F755 /* CityModel.swift */,
+				A77D1A852907241600E7D510 /* ViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
 				A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
+				A77D1A862907241700E7D510 /* ViewController.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,

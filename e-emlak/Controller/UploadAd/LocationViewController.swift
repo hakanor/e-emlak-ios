@@ -12,10 +12,10 @@ import Firebase
 class LocationViewController: UIViewController{
     
     // MARK: - Properties
-    var CityArray = [""]
-    var TownArray = [""]
-    var DistrictArray = [""]
-    var QuarterArray = [""]
+    var cityArray = [""]
+    var townArray = [""]
+    var districtArray = [""]
+    var quarterArray = [""]
     var cityRow = 0
     var townRow = 0
     var districtRow = 0
@@ -177,6 +177,7 @@ class LocationViewController: UIViewController{
         townTextField.inputView = pickerView
         districtTextField.inputView = pickerView
         quarterTextField.inputView = pickerView
+        setTextFieldDelegates()
         loadCities()
     }
     
@@ -189,40 +190,59 @@ class LocationViewController: UIViewController{
     }
     
     @objc func handleNextButton(){
+
+        let viewControllerToPresent = ViewController()
+        if let sheet = viewControllerToPresent.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.largestUndimmedDetentIdentifier = .medium
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheet.prefersEdgeAttachedInCompactHeight = true
+            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            sheet.prefersGrabberVisible = true
+            sheet.preferredCornerRadius = 20
+            sheet.selectedDetentIdentifier = .medium
+        }
+        present(viewControllerToPresent, animated: true, completion: nil)
         
     }
     // MARK: - API
     func loadCities(){
         let data = DataLoader().cityData
-        CityArray.removeAll()
+        cityArray.removeAll()
+        townArray.removeAll()
+        districtArray.removeAll()
+        quarterArray.removeAll()
         for city in data {
-            CityArray.append(city.name)
+            cityArray.append(city.name)
         }
     }
     
     func loadTowns(){
         let data = DataLoader().cityData
         let ref = data[cityRow].towns
-        TownArray.removeAll()
+        townArray.removeAll()
+        districtArray.removeAll()
+        quarterArray.removeAll()
         for i in ref {
-            TownArray.append(i.name)
+            townArray.append(i.name)
         }
     }
     
     func loadDistricts(){
         let data = DataLoader().cityData
         let ref = data[cityRow].towns[townRow].districts
-        DistrictArray.removeAll()
+        districtArray.removeAll()
+        quarterArray.removeAll()
         for i in ref {
-            DistrictArray.append(i.name)
+            districtArray.append(i.name)
         }
     }
     func loadQuarters(){
         let data = DataLoader().cityData
         let ref = data[cityRow].towns[townRow].districts[districtRow].quarters
-        QuarterArray.removeAll()
+        quarterArray.removeAll()
         for i in ref {
-            QuarterArray.append(i.name)
+            quarterArray.append(i.name)
         }
     }
     
@@ -258,6 +278,12 @@ class LocationViewController: UIViewController{
         nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
         
     }
+    func setTextFieldDelegates(){
+        cityTextField.delegate = self
+        townTextField.delegate = self
+        districtTextField.delegate = self
+        quarterTextField.delegate = self
+    }
         
 }
 
@@ -267,16 +293,16 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if cityTextField.isFirstResponder {
-            return CityArray.count
+            return cityArray.count
         }
         if townTextField.isFirstResponder{
-            return TownArray.count
+            return townArray.count
         }
         if districtTextField.isFirstResponder{
-            return DistrictArray.count
+            return districtArray.count
         }
         if quarterTextField.isFirstResponder{
-            return QuarterArray.count
+            return quarterArray.count
         }
         else {
             return 0
@@ -285,16 +311,16 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if cityTextField.isFirstResponder {
-            return CityArray[row]
+            return cityArray[row]
         }
         if townTextField.isFirstResponder{
-            return TownArray[row]
+            return townArray[row]
         }
         if districtTextField.isFirstResponder{
-            return DistrictArray[row]
+            return districtArray[row]
         }
         if quarterTextField.isFirstResponder{
-            return QuarterArray[row]
+            return quarterArray[row]
         }
         else {
             return "Boş"
@@ -303,24 +329,55 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if cityTextField.isFirstResponder {
-            cityTextField.text = CityArray[row]
+            cityTextField.text = cityArray[row]
             cityRow = row
             loadTowns()
+            pickerView.reloadAllComponents()
+            townTextField.text?.removeAll()
+            districtTextField.text?.removeAll()
+            quarterTextField.text?.removeAll()
         }
         if townTextField.isFirstResponder{
-            townTextField.text = TownArray[row]
+            townTextField.text = townArray[row]
             townRow = row
             loadDistricts()
+            pickerView.reloadAllComponents()
+            districtTextField.text?.removeAll()
+            quarterTextField.text?.removeAll()
         }
         if districtTextField.isFirstResponder{
-            districtTextField.text = DistrictArray[row]
+            districtTextField.text = districtArray[row]
             districtRow = row
             loadQuarters()
+            pickerView.reloadAllComponents()
+            quarterTextField.text?.removeAll()
         }
         if quarterTextField.isFirstResponder{
-            quarterTextField.text = QuarterArray[row]
+            quarterTextField.text = quarterArray[row]
+            pickerView.reloadAllComponents()
         }
         
     }
     
+}
+
+extension LocationViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == cityTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+        if textField == townTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+        if textField == districtTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+        if textField == quarterTextField {
+            self.pickerView.selectRow(0, inComponent: 0, animated: true)
+            self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
+        }
+    }
 }
