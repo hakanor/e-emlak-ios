@@ -23,6 +23,9 @@ class LocationViewController: UIViewController{
     
     var pickerView = UIPickerView()
     
+    var estateType = ""
+    var propertyType = ""
+    
     // MARK: - SubViews
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -167,7 +170,6 @@ class LocationViewController: UIViewController{
     }()
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -190,19 +192,44 @@ class LocationViewController: UIViewController{
     }
     
     @objc func handleNextButton(){
-
-        let viewControllerToPresent = ViewController()
-        if let sheet = viewControllerToPresent.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.largestUndimmedDetentIdentifier = .medium
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-            sheet.prefersGrabberVisible = true
-            sheet.preferredCornerRadius = 20
-            sheet.selectedDetentIdentifier = .medium
+        
+        guard let city = cityTextField.text else { return }
+        guard let town = townTextField.text else { return }
+        guard let district  = districtTextField.text else { return }
+        guard let quarter  = quarterTextField.text else { return }
+        
+        switch propertyType {
+            
+        case "Konut":
+            var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "")
+            credentials.estateType = self.estateType
+            credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            
+            let vc = ResidentialViewController()
+            vc.credentials = credentials
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case "İş Yeri":
+            var credentials = CommercialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", location: "", uid: "", ageOfBuilding: 0, numberOfFloors: 0, heating: "")
+            credentials.estateType = self.estateType
+            credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            
+            let vc = CommercialViewController()
+            vc.credentials = credentials
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        case "Arsa":
+            var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0)
+            credentials.estateType = self.estateType
+            credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            
+            let vc = LandViewController()
+            vc.credentials = credentials
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        default:
+            print("An error occurred while selecting ViewControllers via by propertyType.")
         }
-        present(viewControllerToPresent, animated: true, completion: nil)
         
     }
     // MARK: - API
@@ -237,6 +264,7 @@ class LocationViewController: UIViewController{
             districtArray.append(i.name)
         }
     }
+    
     func loadQuarters(){
         let data = DataLoader().cityData
         let ref = data[cityRow].towns[townRow].districts[districtRow].quarters
@@ -276,8 +304,8 @@ class LocationViewController: UIViewController{
         quarterTextField.anchor(top: quarterLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
         nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
-        
     }
+    
     func setTextFieldDelegates(){
         cityTextField.delegate = self
         townTextField.delegate = self

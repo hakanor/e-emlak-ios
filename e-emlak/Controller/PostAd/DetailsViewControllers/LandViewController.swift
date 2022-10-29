@@ -1,19 +1,20 @@
 //
-//  UploadAdDetailsViewController.swift
+//  LandViewController.swift
 //  e-emlak
 //
-//  Created by Hakan Or on 23.10.2022.
+//  Created by Hakan Or on 28.10.2022.
 //
 
 import Foundation
 import UIKit
 import Firebase
 
-class UploadAdDetailsViewController: UIViewController{
+class LandViewController: UIViewController{
     
     // MARK: - Properties
     var estateType : String = ""
-    
+    var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0)
+
     // MARK: - SubViews
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -57,14 +58,7 @@ class UploadAdDetailsViewController: UIViewController{
         scrollView.backgroundColor = themeColors.white
         return scrollView
     }()
-    
-    private lazy var scrollStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        return stackView
-    }()
-    
+
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -161,21 +155,44 @@ class UploadAdDetailsViewController: UIViewController{
         return textField
     }()
     
-    private lazy var squareMeterNetLabel: UILabel = {
+    private lazy var blockNumberLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Metrekare (Net)"
+        label.text = "Ada Numarası"
         return label
     }()
     
-    private lazy var squareMeterNetTextField: UITextField = {
+    private lazy var blockNumberTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
-            string: "Metrekare giriniz.",
+            string: "Ada Numarası giriniz.",
+            attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
+        )
+        textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        textField.setUnderLine()
+        textField.keyboardType = .numberPad
+        return textField
+    }()
+    
+    private lazy var parcelNumberLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.dark
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.text = "Parsel Numarası"
+        return label
+    }()
+    
+    private lazy var parcelNumberTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.attributedPlaceholder = NSAttributedString(
+            string: "Parsel numarası giriniz.",
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -192,6 +209,10 @@ class UploadAdDetailsViewController: UIViewController{
         descriptionTextField.delegate = self
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+    }
+    
     // MARK: - Selectors
     @objc func handleBack(){
         self.navigationController?.popViewController(animated: true)
@@ -205,10 +226,30 @@ class UploadAdDetailsViewController: UIViewController{
         
         guard let title = titleTextField.text else { return }
         guard let desc = descriptionTextField.text else { return }
-        guard let name  = priceTextField.text else { return }
+        guard let price  = priceTextField.text else { return }
+        guard let meter  = squareMeterTextField.text else { return }
+        guard let blockNumber  = blockNumberTextField.text else { return }
+        guard let parcelNumber  = parcelNumberTextField.text else { return }
+
         
-        let vc = LocationViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.credentials.title = title
+        self.credentials.description = desc
+        self.credentials.price = price
+        self.credentials.squareMeter = meter
+        self.credentials.pricePerSquareMeter = (Double(price) ?? 0) / (Double(meter) ?? 0)
+        self.credentials.blockNumber = Int(blockNumber) ?? 0
+        self.credentials.parcelNumber = Int(parcelNumber) ?? 0
+        
+        let user = Auth.auth().currentUser
+        if let user = user {
+            let uid = user.uid
+            self.credentials.uid = uid
+        }
+        
+        AdService.shared.postAd(landCredentials: credentials) { (error) in
+            print("DEBUG: Uploading AD successful")
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     // MARK: - API
@@ -216,7 +257,7 @@ class UploadAdDetailsViewController: UIViewController{
     // MARK: - Helpers
     func configureUI(){
         view.backgroundColor = themeColors.white
-        title = self.estateType
+        title = self.credentials.estateType
         navigationController?.navigationBar.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
@@ -224,7 +265,7 @@ class UploadAdDetailsViewController: UIViewController{
         [scrollView] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
-        [titleLabel, titleTextField, descriptionLabel, descriptionTextField, priceLabel, priceTextField, squareMeterLabel,squareMeterTextField, squareMeterNetLabel, squareMeterNetTextField, nextButton, divider] .forEach(scrollView.addSubview(_:))
+        [titleLabel, titleTextField, descriptionLabel, descriptionTextField, priceLabel, priceTextField, squareMeterLabel,squareMeterTextField, blockNumberLabel, blockNumberTextField, parcelNumberLabel, parcelNumberTextField, nextButton, divider] .forEach(scrollView.addSubview(_:))
         
         titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -245,9 +286,13 @@ class UploadAdDetailsViewController: UIViewController{
         squareMeterTextField.anchor(top: squareMeterLabel
             .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        squareMeterNetLabel.anchor(top: squareMeterTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        blockNumberLabel.anchor(top: squareMeterTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
-        squareMeterNetTextField.anchor(top: squareMeterNetLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        blockNumberTextField.anchor(top: blockNumberLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        parcelNumberLabel.anchor(top: blockNumberTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        parcelNumberTextField.anchor(top: parcelNumberLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
         nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
         
@@ -255,7 +300,7 @@ class UploadAdDetailsViewController: UIViewController{
         
 }
 
-extension UploadAdDetailsViewController: UITextViewDelegate {
+extension LandViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textView.checkPlaceholder()
     }

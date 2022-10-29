@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class UploadAdViewController: UIViewController{
+class EstateTypeViewController: UIViewController{
     
     // MARK: - Properties
     var propertyTypeArray = [""]
@@ -163,14 +163,16 @@ class UploadAdViewController: UIViewController{
     
     @objc func handleNextButton(){
         
-        guard let title = propertyTypeTextField.text else { return }
-        guard let desc = categoryTypeTextField.text else { return }
-        guard let name  = serviceTypeTextField.text else { return }
+        guard let propertyType = propertyTypeTextField.text else { return }
+        guard let categoryType = categoryTypeTextField.text else { return }
+        guard let serviceType  = serviceTypeTextField.text else { return }
         
-        let estateType = title + " > " + desc + " > " + name
+        let estateType = propertyType + "/" + categoryType + "/" + serviceType
         
-        let vc = UploadAdDetailsViewController()
+        let vc = LocationViewController()
         vc.estateType = estateType
+        vc.propertyType = propertyType
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -222,8 +224,6 @@ class UploadAdViewController: UIViewController{
             }
             
         }
-        
-       
     }
   
     func fetchServiceType(id:String){
@@ -249,7 +249,6 @@ class UploadAdViewController: UIViewController{
         view.backgroundColor = themeColors.white
         title = "İlan Ekle"
         navigationController?.navigationBar.backgroundColor = .white
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         [scrollView] .forEach(view.addSubview(_:))
@@ -281,7 +280,7 @@ class UploadAdViewController: UIViewController{
         
 }
 
-extension UploadAdViewController: UIPickerViewDelegate,UIPickerViewDataSource {
+extension EstateTypeViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -338,7 +337,7 @@ extension UploadAdViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
 }
 
-extension UploadAdViewController: UITextFieldDelegate{
+extension EstateTypeViewController: UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == propertyTypeTextField {
             self.pickerView.selectRow(0, inComponent: 0, animated: true)

@@ -131,7 +131,7 @@ class FeedViewController: UIViewController {
     }
 
     @objc func handleUploadButton(){
-        let nav = UINavigationController(rootViewController: UploadAdViewController())
+        let nav = UINavigationController(rootViewController: EstateTypeViewController())
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
     }

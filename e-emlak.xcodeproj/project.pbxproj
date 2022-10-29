@@ -29,8 +29,7 @@
 		A734752729019C4B00D2F755 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752629019C4A00D2F755 /* UserService.swift */; };
 		A73475292901A05600D2F755 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475282901A05600D2F755 /* User.swift */; };
 		A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A734752C2901B2F700D2F755 /* SDWebImage */; };
-		A734753029040B1100D2F755 /* UploadAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752F29040B1100D2F755 /* UploadAdViewController.swift */; };
-		A73475342905A7AE00D2F755 /* UploadAdDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */; };
+		A734753029040B1100D2F755 /* EstateTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734752F29040B1100D2F755 /* EstateTypeViewController.swift */; };
 		A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */; };
 		A73475382906D7B300D2F755 /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73475372906D7B300D2F755 /* CityModel.swift */; };
 		A734753A2906D8E000D2F755 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = A73475392906D8E000D2F755 /* data.json */; };
@@ -41,7 +40,10 @@
 		A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */; };
 		A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */; };
 		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
-		A77D1A862907241700E7D510 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A852907241600E7D510 /* ViewController.swift */; };
+		A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A89290B06E300E7D510 /* AdService.swift */; };
+		A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */; };
+		A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8E290C242500E7D510 /* LandViewController.swift */; };
+		A77D1A91290C245600E7D510 /* CommercialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A90290C245600E7D510 /* CommercialViewController.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -70,14 +72,16 @@
 		A734752428FEB2D200D2F755 /* UIImage + Url.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Url.swift"; sourceTree = "<group>"; };
 		A734752629019C4A00D2F755 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		A73475282901A05600D2F755 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A734752F29040B1100D2F755 /* UploadAdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdViewController.swift; sourceTree = "<group>"; };
-		A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAdDetailsViewController.swift; sourceTree = "<group>"; };
+		A734752F29040B1100D2F755 /* EstateTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstateTypeViewController.swift; sourceTree = "<group>"; };
 		A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView + setPlaceHolder.swift"; sourceTree = "<group>"; };
 		A73475372906D7B300D2F755 /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		A73475392906D8E000D2F755 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		A734753B2906DE4D00D2F755 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A77D1A852907241600E7D510 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A77D1A89290B06E300E7D510 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
+		A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialViewController.swift; sourceTree = "<group>"; };
+		A77D1A8E290C242500E7D510 /* LandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandViewController.swift; sourceTree = "<group>"; };
+		A77D1A90290C245600E7D510 /* CommercialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommercialViewController.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				A734752228FAF27200D2F755 /* AuthService.swift */,
 				A734752629019C4A00D2F755 /* UserService.swift */,
 				A734753B2906DE4D00D2F755 /* DataLoader.swift */,
+				A77D1A89290B06E300E7D510 /* AdService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -162,7 +167,7 @@
 				A73474FC28F17BCA00D2F755 /* Register */,
 				A734751928F8185E00D2F755 /* ResetPassword */,
 				A734750928F37CD100D2F755 /* MainTabViewController.swift */,
-				A7F4F3F92906E2F3001B5048 /* UploadAd */,
+				A7F4F3F92906E2F3001B5048 /* PostAd */,
 				A734750B28F37D1E00D2F755 /* FeedViewController.swift */,
 				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
@@ -190,7 +195,6 @@
 			children = (
 				A73475282901A05600D2F755 /* User.swift */,
 				A73475372906D7B300D2F755 /* CityModel.swift */,
-				A77D1A852907241600E7D510 /* ViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -203,14 +207,24 @@
 			path = ResetPassword;
 			sourceTree = "<group>";
 		};
-		A7F4F3F92906E2F3001B5048 /* UploadAd */ = {
+		A77D1A8D290C23F800E7D510 /* DetailsViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A734752F29040B1100D2F755 /* UploadAdViewController.swift */,
-				A73475332905A7AD00D2F755 /* UploadAdDetailsViewController.swift */,
-				A7F4F3FA2906E318001B5048 /* LocationViewController.swift */,
+				A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */,
+				A77D1A8E290C242500E7D510 /* LandViewController.swift */,
+				A77D1A90290C245600E7D510 /* CommercialViewController.swift */,
 			);
-			path = UploadAd;
+			path = DetailsViewControllers;
+			sourceTree = "<group>";
+		};
+		A7F4F3F92906E2F3001B5048 /* PostAd */ = {
+			isa = PBXGroup;
+			children = (
+				A734752F29040B1100D2F755 /* EstateTypeViewController.swift */,
+				A7F4F3FA2906E318001B5048 /* LocationViewController.swift */,
+				A77D1A8D290C23F800E7D510 /* DetailsViewControllers */,
+			);
+			path = PostAd;
 			sourceTree = "<group>";
 		};
 		A7FD2AAD28EAFC4700E48E4A = {
@@ -336,27 +350,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A734753029040B1100D2F755 /* UploadAdViewController.swift in Sources */,
+				A734753029040B1100D2F755 /* EstateTypeViewController.swift in Sources */,
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
+				A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */,
 				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
-				A73475342905A7AE00D2F755 /* UploadAdDetailsViewController.swift in Sources */,
 				A734751828F4944000D2F755 /* UIView + HideKeyboard.swift in Sources */,
+				A77D1A91290C245600E7D510 /* CommercialViewController.swift in Sources */,
 				A734752729019C4B00D2F755 /* UserService.swift in Sources */,
 				A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */,
 				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
+				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
 				A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */,
 				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
 				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
 				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
+				A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */,
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
 				A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
-				A77D1A862907241700E7D510 /* ViewController.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,
