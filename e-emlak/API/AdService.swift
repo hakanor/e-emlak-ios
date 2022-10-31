@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import MapKit
 
 struct ResidentialCredentials {
     var estateType: String
@@ -23,6 +24,8 @@ struct ResidentialCredentials {
     var floorNumber: Int
     var numberOfFloors : Int
     var heating: String
+    var latitude: Double
+    var longitude: Double
 }
 
 struct LandCredentials {
@@ -36,6 +39,8 @@ struct LandCredentials {
     var uid: String
     var blockNumber: Int
     var parcelNumber: Int
+    var latitude: Double
+    var longitude: Double
 }
 
 struct CommercialCredentials {
@@ -49,6 +54,8 @@ struct CommercialCredentials {
     var ageOfBuilding: Int
     var numberOfFloors : Int
     var heating: String
+    var latitude: Double
+    var longitude: Double
 }
 
 
@@ -66,6 +73,8 @@ struct AdService {
         let ageOfBuilding = commercialCredentials.ageOfBuilding
         let numberOfFloors = commercialCredentials.numberOfFloors
         let heating = commercialCredentials.heating
+        let latitude = commercialCredentials.latitude
+        let longitude = commercialCredentials.longitude
         
         let values = [
             "estateType":estateType,
@@ -78,6 +87,8 @@ struct AdService {
             "ageOfBuilding":ageOfBuilding,
             "numberOfFloors":numberOfFloors,
             "heating":heating,
+            "latitude":latitude,
+            "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
@@ -98,6 +109,8 @@ struct AdService {
         let numberOfFloors = residentialCredentials.numberOfFloors
         let floorNumber = residentialCredentials.floorNumber
         let heating = residentialCredentials.heating
+        let latitude = residentialCredentials.latitude
+        let longitude = residentialCredentials.longitude
     
         let values = [
             "estateType":estateType,
@@ -114,6 +127,8 @@ struct AdService {
             "numberOfFloors":numberOfFloors,
             "floorNumber":floorNumber,
             "heating":heating,
+            "latitude":latitude,
+            "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
@@ -130,6 +145,8 @@ struct AdService {
         let uid = landCredentials.uid
         let blockNumber = landCredentials.blockNumber
         let parcelNumber = landCredentials.parcelNumber
+        let latitude = landCredentials.latitude
+        let longitude = landCredentials.longitude
 
         let values = [
             "estateType":estateType,
@@ -142,7 +159,8 @@ struct AdService {
             "uid":uid,
             "blockNumber":blockNumber,
             "parcelNumber":parcelNumber,
-
+            "latitude":latitude,
+            "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)

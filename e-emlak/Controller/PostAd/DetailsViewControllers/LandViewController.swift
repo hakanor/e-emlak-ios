@@ -13,7 +13,7 @@ class LandViewController: UIViewController{
     
     // MARK: - Properties
     var estateType : String = ""
-    var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0)
+    var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0, latitude: 0, longitude: 0)
 
     // MARK: - SubViews
     private lazy var backButton: UIButton = {
@@ -41,7 +41,7 @@ class LandViewController: UIViewController{
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Konum bilgilerini gir", for: .normal)
+        button.setTitle("İlanı Ekle", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary

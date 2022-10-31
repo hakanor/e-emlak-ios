@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Firebase
+import MapKit
 
 class LocationViewController: UIViewController{
     
@@ -25,6 +26,8 @@ class LocationViewController: UIViewController{
     
     var estateType = ""
     var propertyType = ""
+    
+    var pickedCoordinate =  CLLocationCoordinate2D(latitude: 0, longitude: 0)
     
     // MARK: - SubViews
     private lazy var backButton: UIButton = {
@@ -59,6 +62,20 @@ class LocationViewController: UIViewController{
         button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
         button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(handleNextButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var mapButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setTitle("Haritadan Konum Ekle", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(themeColors.white, for: .normal)
+        button.backgroundColor = themeColors.primary
+        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleMapButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -191,6 +208,12 @@ class LocationViewController: UIViewController{
         dismiss(animated: true,completion: nil)
     }
     
+    @objc func handleMapButton(){
+        let vc = CoordinateViewController()
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @objc func handleNextButton(){
         
         guard let city = cityTextField.text else { return }
@@ -201,27 +224,33 @@ class LocationViewController: UIViewController{
         switch propertyType {
             
         case "Konut":
-            var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "")
+            var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "", latitude: 0, longitude: 0)
             credentials.estateType = self.estateType
             credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            credentials.latitude = self.pickedCoordinate.latitude
+            credentials.longitude = self.pickedCoordinate.longitude
             
             let vc = ResidentialViewController()
             vc.credentials = credentials
             self.navigationController?.pushViewController(vc, animated: true)
             
         case "İş Yeri":
-            var credentials = CommercialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", location: "", uid: "", ageOfBuilding: 0, numberOfFloors: 0, heating: "")
+            var credentials = CommercialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", location: "", uid: "", ageOfBuilding: 0, numberOfFloors: 0, heating: "", latitude: 0, longitude: 0)
             credentials.estateType = self.estateType
             credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            credentials.latitude = self.pickedCoordinate.latitude
+            credentials.longitude = self.pickedCoordinate.longitude
             
             let vc = CommercialViewController()
             vc.credentials = credentials
             self.navigationController?.pushViewController(vc, animated: true)
             
         case "Arsa":
-            var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0)
+            var credentials = LandCredentials(estateType: "", title: "", description: "", price: "", pricePerSquareMeter: 0, squareMeter: "", location: "", uid: "", blockNumber: 0, parcelNumber: 0, latitude: 0, longitude: 0)
             credentials.estateType = self.estateType
             credentials.location = city + "/" + town + "/" + district + "/" + quarter
+            credentials.latitude = self.pickedCoordinate.latitude
+            credentials.longitude = self.pickedCoordinate.longitude
             
             let vc = LandViewController()
             vc.credentials = credentials
@@ -285,7 +314,7 @@ class LocationViewController: UIViewController{
         [scrollView] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         
-        [cityLabel, cityTextField, townLabel, townTextField, districtLabel, districtTextField, quarterLabel, quarterTextField,nextButton] .forEach(scrollView.addSubview(_:))
+        [cityLabel, cityTextField, townLabel, townTextField, districtLabel, districtTextField, quarterLabel, quarterTextField, mapButton, nextButton] .forEach(scrollView.addSubview(_:))
         
         cityLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -302,6 +331,8 @@ class LocationViewController: UIViewController{
         quarterLabel.anchor(top: districtTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         quarterTextField.anchor(top: quarterLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        mapButton.anchor(left: view.leftAnchor, bottom: nextButton.topAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 8,paddingRight: 24)
         
         nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
     }
@@ -407,5 +438,12 @@ extension LocationViewController: UITextFieldDelegate{
             self.pickerView.selectRow(0, inComponent: 0, animated: true)
             self.pickerView(pickerView, didSelectRow: 0, inComponent: 0)
         }
+    }
+}
+
+extension LocationViewController: FetchCoordinateDelegate {
+    func fetchCoordinate(coordinate: CLLocationCoordinate2D) {
+        self.navigationController?.popViewController(animated: true)
+        self.pickedCoordinate = coordinate
     }
 }

@@ -13,7 +13,7 @@ class ResidentialViewController: UIViewController{
     
     // MARK: - Properties
     var estateType : String = ""
-    var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "")
+    var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "", latitude: 0, longitude: 0)
 
     // MARK: - SubViews
     private lazy var backButton: UIButton = {
@@ -41,7 +41,7 @@ class ResidentialViewController: UIViewController{
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Konum bilgilerini gir", for: .normal)
+        button.setTitle("İlanı Ekle", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
