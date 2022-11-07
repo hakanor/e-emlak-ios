@@ -46,6 +46,7 @@
 		A77D1A91290C245600E7D510 /* CommercialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A90290C245600E7D510 /* CommercialViewController.swift */; };
 		A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7848453290FDB870099C0F3 /* CoordinateViewController.swift */; };
 		A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7848455290FE7350099C0F3 /* LocationManager.swift */; };
+		A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C83F22291571EC00CFA8C9 /* StorageService.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -86,6 +87,7 @@
 		A77D1A90290C245600E7D510 /* CommercialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommercialViewController.swift; sourceTree = "<group>"; };
 		A7848453290FDB870099C0F3 /* CoordinateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateViewController.swift; sourceTree = "<group>"; };
 		A7848455290FE7350099C0F3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A7C83F22291571EC00CFA8C9 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				A734753B2906DE4D00D2F755 /* DataLoader.swift */,
 				A77D1A89290B06E300E7D510 /* AdService.swift */,
 				A7848455290FE7350099C0F3 /* LocationManager.swift */,
+				A7C83F22291571EC00CFA8C9 /* StorageService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
+				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
 				A73475382906D7B300D2F755 /* CityModel.swift in Sources */,

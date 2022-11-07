@@ -143,7 +143,7 @@ class ProfileViewController: UIViewController {
         self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
         
     }
-    func saveImage(imageData: Data){
+    func uploadImage(imageData: Data){
         let uid = AuthService.shared.getCurrentUserId()
         Storage.storage().reference().child("profile_images").child(uid).putData(imageData, metadata: nil) {(meta,error) in
             Storage.storage().reference().child("profile_images").child(uid).downloadURL { (url, error) in
@@ -175,7 +175,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         guard let profileImage = info[.editedImage] as? UIImage else { return }
         self.profilePhoto.image = profileImage.withRenderingMode(.alwaysOriginal)
         guard let imageData = profileImage.jpegData(compressionQuality: 0.6) else { return }
-        saveImage(imageData: imageData)
+        uploadImage(imageData: imageData)
         dismiss(animated: true, completion: nil)
     }
 }

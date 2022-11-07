@@ -8,14 +8,25 @@
 import Foundation
 import UIKit
 import Firebase
+import FirebaseStorage
+import Photos
+import PhotosUI
 
 class ResidentialViewController: UIViewController{
     
     // MARK: - Properties
     var estateType : String = ""
     var credentials = ResidentialCredentials(estateType: "", title: "", description: "", price: "", squareMeter: "", squareMeterNet: "", location: "", uid: "", numberOfRooms: 0, numberOfBathrooms: 0, ageOfBuilding: 0, floorNumber: 0, numberOfFloors: 0, heating: "", latitude: 0, longitude: 0)
+    var images = [Data]()
 
     // MARK: - SubViews
+    private var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
+        cv.register(MyCell.self, forCellWithReuseIdentifier: "cell")
+        return cv
+    }()
+    
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         let image = UIImage(systemName: "arrow.left")
@@ -315,12 +326,36 @@ class ResidentialViewController: UIViewController{
         return textField
     }()
     
+    private lazy var photoLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.dark
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.text = "İlan Fotoğrafları seçiniz."
+        return label
+    }()
+    
+    private lazy var addPhotoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        let image = UIImage(systemName: "photo")
+        button.setImage(image, for: .normal)
+        button.backgroundColor = themeColors.grey
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleAddPhoto), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         descriptionTextField.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -334,6 +369,17 @@ class ResidentialViewController: UIViewController{
     
     @objc func handleCancel(){
         dismiss(animated: true,completion: nil)
+    }
+    
+    @objc func handleAddPhoto(){
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 6
+        config.filter = .images
+        images.removeAll()
+        collectionView.reloadData()
+        let vc = PHPickerViewController(configuration: config)
+        vc.delegate = self
+        present(vc,animated: true)
     }
     
     @objc func handleNextButton(){
@@ -368,8 +414,8 @@ class ResidentialViewController: UIViewController{
             self.credentials.uid = uid
         }
         
-        AdService.shared.postAd(residentialCredentials: credentials) { (error) in
-            print("DEBUG: Uploading AD successful")
+        AdService.shared.postAd(residentialCredentials: credentials, images: self.images) { (error)  in
+            print("DEBUG: Uploading residential AD successful")
             self.dismiss(animated: true, completion: nil)
         }
         
@@ -384,10 +430,10 @@ class ResidentialViewController: UIViewController{
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         
-        [scrollView] .forEach(view.addSubview(_:))
-        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        [scrollView, nextButton] .forEach(view.addSubview(_:))
+        scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nextButton.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0)
         
-        [titleLabel, titleTextField, descriptionLabel, descriptionTextField, priceLabel, priceTextField, squareMeterLabel,squareMeterTextField, squareMeterNetLabel, squareMeterNetTextField, numberOfFloorsLabel, numberOfFloorsTextField, numberOfRoomsLabel, numberOfRoomsTextField, ageOfBuildingLabel, ageOfBuildingTextField ,numberOfBathroomsLabel, numberOfBathroomsTextField, floorNumberLabel, floorNumberTextField, heatingLabel, heatingTextField ,nextButton, divider] .forEach(scrollView.addSubview(_:))
+        [titleLabel, titleTextField, descriptionLabel, descriptionTextField, priceLabel, priceTextField, squareMeterLabel,squareMeterTextField, squareMeterNetLabel, squareMeterNetTextField, numberOfFloorsLabel, numberOfFloorsTextField, numberOfRoomsLabel, numberOfRoomsTextField, ageOfBuildingLabel, ageOfBuildingTextField ,numberOfBathroomsLabel, numberOfBathroomsTextField, floorNumberLabel, floorNumberTextField, heatingLabel, heatingTextField, divider, photoLabel,addPhotoButton, collectionView] .forEach(scrollView.addSubview(_:))
         
         titleLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -436,7 +482,13 @@ class ResidentialViewController: UIViewController{
         
         heatingTextField.anchor(top: heatingLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        nextButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor, paddingLeft: 24, paddingBottom: 20,paddingRight: 24)
+        photoLabel.anchor(top: heatingTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        addPhotoButton.anchor(top: photoLabel.bottomAnchor, left: view.leftAnchor,  paddingTop: 8, paddingLeft: 24,width: 42,height: 42)
+        
+        collectionView.anchor(top: addPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingBottom: 100 ,paddingRight: 24, height: 200)
+        
+        nextButton.anchor(top: scrollView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 24, paddingBottom: 0, paddingRight: 24)
         
     }
         
@@ -445,5 +497,63 @@ class ResidentialViewController: UIViewController{
 extension ResidentialViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textView.checkPlaceholder()
+    }
+}
+
+extension ResidentialViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        let group = DispatchGroup()
+        results.forEach { result in
+            group.enter()
+            result.itemProvider.loadObject(ofClass: UIImage.self){ reading, error in
+                group.leave()
+                guard let image = reading as? UIImage, error == nil else {
+                    return
+                }
+                guard let imageData = image.jpegData(compressionQuality: 0.6) else { return }
+                self.images.append(imageData)
+            }
+        }
+        group.notify(queue: .main){
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+extension ResidentialViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MyCell else { fatalError() }
+        cell.imageView.image = UIImage(data: images[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        self.images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
+        images.remove(at: indexPath.row)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+class MyCell: UICollectionViewCell{
+    public let imageView = UIImageView()
+    
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        addSubview(imageView)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        imageView.frame = bounds
     }
 }

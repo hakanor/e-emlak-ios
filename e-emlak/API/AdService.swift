@@ -62,7 +62,7 @@ struct CommercialCredentials {
 struct AdService {
     static let shared = AdService()
     
-    func postAd(commercialCredentials: CommercialCredentials, completion: @escaping(Error?) -> Void) {
+    func postAd(commercialCredentials: CommercialCredentials, images: [Data], completion: @escaping(Error?) -> Void) {
         let estateType = commercialCredentials.estateType
         let title = commercialCredentials.title
         let description = commercialCredentials.description
@@ -91,10 +91,13 @@ struct AdService {
             "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
-        Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
+        
+        let uuid = UUID().uuidString
+        FirFile.shared.startUploading(images: images, id: uuid)
+        Firestore.firestore().collection("ads").document(uuid).setData(values,completion: completion)
     }
     
-    func postAd(residentialCredentials: ResidentialCredentials, completion: @escaping(Error?) -> Void) {
+    func postAd(residentialCredentials: ResidentialCredentials, images: [Data], completion: @escaping(Error?) -> Void) {
         let estateType = residentialCredentials.estateType
         let title = residentialCredentials.title
         let description = residentialCredentials.description
@@ -131,10 +134,15 @@ struct AdService {
             "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
-        Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
+        
+        let uuid = UUID().uuidString
+        //Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
+        FirFile.shared.startUploading(images: images, id: uuid)
+        Firestore.firestore().collection("ads").document(uuid).setData(values,completion: completion)
+        
     }
     
-    func postAd(landCredentials: LandCredentials, completion: @escaping(Error?) -> Void) {
+    func postAd(landCredentials: LandCredentials, images: [Data], completion: @escaping(Error?) -> Void) {
         let estateType = landCredentials.estateType
         let title = landCredentials.title
         let description = landCredentials.description
@@ -163,6 +171,9 @@ struct AdService {
             "longitude":longitude,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
-        Firestore.firestore().collection("ads").addDocument(data: values, completion: completion)
+        
+        let uuid = UUID().uuidString
+        FirFile.shared.startUploading(images: images, id: uuid)
+        Firestore.firestore().collection("ads").document(uuid).setData(values,completion: completion)
     }
 }
