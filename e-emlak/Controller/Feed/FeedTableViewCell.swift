@@ -65,7 +65,6 @@ class FeedTableViewCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = cornerRadiusValue
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         return imageView
     }()
     
@@ -106,6 +105,14 @@ class FeedTableViewCell: UITableViewCell {
         return bookmarkIcon
     }()
     
+    private lazy var locationIcon: UIImageView = {
+        let locationIcon = UIImageView()
+        let image = UIImage(named: "location-sign")?.withTintColor(themeColors.error)
+        locationIcon.image = image
+        locationIcon.contentMode = .scaleAspectFit
+        return locationIcon
+    }()
+    
     
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -116,17 +123,22 @@ class FeedTableViewCell: UITableViewCell {
 
         containerView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 0)
         
-        [adImage, titleLabel, bookmarkIcon, locationLabel, priceLabel] .forEach(containerView.addSubview(_:))
+        [adImage, titleLabel, bookmarkIcon, locationLabel, priceLabel, locationIcon] .forEach(containerView.addSubview(_:))
         
-        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, height: 192)
+        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 96, height: 96)
+        adImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         
-        titleLabel.anchor(top: adImage.bottomAnchor, left: containerView.leftAnchor,  paddingTop: 20, paddingLeft: 20)
-
-        locationLabel.anchor(top: titleLabel.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 20)
+        titleLabel.anchor(top: containerView.topAnchor, left: adImage.rightAnchor, right:bookmarkIcon.leftAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 3 )
         
-        priceLabel.anchor(top: titleLabel.bottomAnchor, bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingTop: 10, paddingBottom: 20, paddingRight: 20)
+        bookmarkIcon.anchor(top: titleLabel.topAnchor, right: priceLabel.rightAnchor, paddingTop: 1, width: 16, height: 16)
         
-        bookmarkIcon.anchor(top: containerView.topAnchor, right: containerView.rightAnchor, paddingTop: 16, paddingRight: 16, width: 20, height: 20)
+        locationIcon.anchor(left: titleLabel.leftAnchor, bottom: containerView.bottomAnchor, paddingBottom: 16, width:13, height: 13)
+        
+        locationLabel.anchor(left: locationIcon.rightAnchor, bottom: containerView.bottomAnchor, paddingLeft:3, paddingBottom: 16)
+        
+        priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
+        
+        
         
         let gestureBookmarkIcon = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
         bookmarkIcon.addGestureRecognizer(gestureBookmarkIcon)
@@ -179,7 +191,9 @@ class FeedTableViewCell: UITableViewCell {
     func configureCell(title:String, price:String, location:String, url:String){
         titleLabel.text = title
         priceLabel.text = price + " ₺"
-        locationLabel.text = location
+        let locationSplitted = location.split(separator: "/")
+        let locationNew = locationSplitted[0] + "/" + locationSplitted[1]
+        locationLabel.text = String(locationNew)
         let formattedURL = URL(string: url)
         self.adImage.sd_setImage(with: formattedURL,completed: nil)
         
