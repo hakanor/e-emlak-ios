@@ -327,6 +327,11 @@ class RegisterViewController: UIViewController {
             return "Telefon numarası doğru formatta değil"
         }
         
+        if passwordTextField.text?.count ?? 0 > 6 {
+        } else {
+            return "Şifre için minimum 6 karakter girmeniz gerekmektedir."
+        }
+        
         return ""
     }
     
@@ -341,12 +346,16 @@ class RegisterViewController: UIViewController {
         guard let phoneNumber = phoneTextField.text else { return }
 
         if checkRegisterFields() != "" {
-            subtitleLabel.text = checkRegisterFields()
+            self.view.makeToast(checkRegisterFields(), duration: 3.0, position: .bottom)
         } else {
             let credentials = AuthCredentials(email: email, password: password, name: name, surname: surname, phoneNumber: phoneNumber)
             AuthService.shared.registerUser(credentials: credentials) { (error) in
                 print("DEBUG: Sign up successful. - Register VC")
-                
+                if let error = error {
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .bottom)
+                    return
+                }
+               
                 guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
                 guard let tab = window.rootViewController as? MainTabViewController else { return }
                 

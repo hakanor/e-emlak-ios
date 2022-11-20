@@ -144,29 +144,31 @@ class ResetPasswordViewController: UIViewController {
         guard let email = textField.text else { return }
         
         if textField.text == ""{
-            self.subtitleLabel.text = "E-mail alanı boş bırakılamaz."
+            self.view.makeToast("E-mail alanı boş bırakılamaz.", duration: 3.0, position: .bottom)
         }
         
         else if textField.text!.isValidEmail() {
             Auth.auth().sendPasswordReset(withEmail: email) { (error) in
                 if let error = error {
-                    self.subtitleLabel.text = error.localizedDescription
-                }
-                print("DEBUG: Succesfully send reset password email.")
-                
-                let dialogMessage = UIAlertController(title: "Şifre Sıfırlama", message: "Şifre sıfırlma maili başarıyla gönderildi.", preferredStyle: .alert)
-                let cancel = UIAlertAction(title: "Giriş ekranına dön.", style: .cancel) { (action) -> Void in
-                    guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
-                    guard let tab = window.rootViewController as? MainTabViewController else { return }
+                    self.view.makeToast(error.localizedDescription, duration: 3.0, position: .bottom)
+                } else {
+                    print("DEBUG: Succesfully send reset password email.")
                     
-                    tab.authenticateUserAndConfigureUI()
-                    self.dismiss(animated: true, completion: nil)
+                    let dialogMessage = UIAlertController(title: "Şifre Sıfırlama", message: "Şifre sıfırlma maili başarıyla gönderildi.", preferredStyle: .alert)
+                    let cancel = UIAlertAction(title: "Giriş ekranına dön.", style: .cancel) { (action) -> Void in
+                        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+                        guard let tab = window.rootViewController as? MainTabViewController else { return }
+                        
+                        tab.authenticateUserAndConfigureUI()
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    dialogMessage.addAction(cancel)
+                    self.present(dialogMessage, animated: true, completion: nil)
                 }
-                dialogMessage.addAction(cancel)
-                self.present(dialogMessage, animated: true, completion: nil)
+                
             }
         } else {
-            subtitleLabel.text = "E-mail alanı doğru formatta değil."
+            self.view.makeToast("E-mail alanı doğru formatta değil.", duration: 3.0, position: .bottom)
         }
     }
     

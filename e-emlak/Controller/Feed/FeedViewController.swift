@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Toast
 
 class FeedViewController: UIViewController {
     // MARK: - Properties
@@ -150,5 +151,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         print("Selected \(indexPath.row)")
+        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
+
     }
 }

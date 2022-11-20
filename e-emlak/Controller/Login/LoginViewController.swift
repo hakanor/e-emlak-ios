@@ -258,7 +258,7 @@ class LoginViewController: UIViewController {
         guard let password = passTextField.text else { return }
         AuthService.shared.logUserIn(withEmail: email, password: password) {(result,error) in
             if let error = error {
-                self.subtitleLabel.text = error.localizedDescription
+                self.view.makeToast(error.localizedDescription, duration: 3.0, position: .bottom)
                 return
             }
             

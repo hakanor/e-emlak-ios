@@ -156,12 +156,13 @@ class FeedTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.grey)
+        bookmarkIcon.image = UIImage(systemName: "heart")?.withTintColor(themeColors.grey)
     }
     
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
         print("Bookmark icon")
+        self.bookmarkIcon.image = UIImage(systemName: "heart.fill")?.withTintColor(themeColors.error)
     }
     
     func configureCells(with viewModel: FeedTableViewCellViewModel){
