@@ -138,8 +138,6 @@ class FeedTableViewCell: UITableViewCell {
         
         priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
         
-        
-        
         let gestureBookmarkIcon = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
         bookmarkIcon.addGestureRecognizer(gestureBookmarkIcon)
         bookmarkIcon.isUserInteractionEnabled = true
@@ -158,7 +156,7 @@ class FeedTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.grey)
+        //bookmarkIcon.image = UIImage(named: "bookmark")?.withTintColor(themeColors.grey)
     }
     
     // MARK: - Configuration
