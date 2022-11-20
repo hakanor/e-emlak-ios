@@ -391,12 +391,12 @@ extension CommercialViewController: PHPickerViewControllerDelegate {
         results.forEach { result in
             group.enter()
             result.itemProvider.loadObject(ofClass: UIImage.self){ reading, error in
-                group.leave()
                 guard let image = reading as? UIImage, error == nil else {
                     return
                 }
                 guard let imageData = image.jpegData(compressionQuality: 0.6) else { return }
                 self.images.append(imageData)
+                group.leave()
             }
         }
         group.notify(queue: .main){

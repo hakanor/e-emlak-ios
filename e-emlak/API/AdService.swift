@@ -176,4 +176,36 @@ struct AdService {
         FirFile.shared.startUploading(images: images, id: uuid)
         Firestore.firestore().collection("ads").document(uuid).setData(values,completion: completion)
     }
+    
+    func fetchAds(completion: @escaping([Ad]) -> Void){
+        var ads = [Ad]()
+        Firestore.firestore().collection("ads").addSnapshotListener { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if snapshot?.isEmpty != true && snapshot != nil {
+                    for document in snapshot!.documents {
+                        let documentID = document.documentID
+//                        if let title = document.get("title") as? String {
+//                            print(title)
+//                        }
+                        let dictionary = [
+                            "adId": documentID,
+                            "uid": document.get("uid"),
+                            "title": document.get("title"),
+                            "price": document.get("price"),
+                            "location": document.get("location"),
+                            "images": document.get("images"),
+                            "estateType": document.get("estateType"),
+                            "timestamp": document.get("date"),
+                        ]
+                        let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                        ads.append(ad)
+                    }
+                    completion(ads)
+                }
+            }
+            
+        }
+    }
 }

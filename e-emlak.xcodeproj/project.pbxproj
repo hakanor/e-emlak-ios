@@ -46,6 +46,10 @@
 		A77D1A91290C245600E7D510 /* CommercialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A90290C245600E7D510 /* CommercialViewController.swift */; };
 		A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7848453290FDB870099C0F3 /* CoordinateViewController.swift */; };
 		A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7848455290FE7350099C0F3 /* LocationManager.swift */; };
+		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
+		A7BBFD3229193F7900F696AF /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */; };
+		A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD33291946E800F696AF /* UILabel + Image.swift */; };
+		A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD3529197D5A00F696AF /* AdModel.swift */; };
 		A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C83F22291571EC00CFA8C9 /* StorageService.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
@@ -87,6 +91,10 @@
 		A77D1A90290C245600E7D510 /* CommercialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommercialViewController.swift; sourceTree = "<group>"; };
 		A7848453290FDB870099C0F3 /* CoordinateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateViewController.swift; sourceTree = "<group>"; };
 		A7848455290FE7350099C0F3 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
+		A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		A7BBFD33291946E800F696AF /* UILabel + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Image.swift"; sourceTree = "<group>"; };
+		A7BBFD3529197D5A00F696AF /* AdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdModel.swift; sourceTree = "<group>"; };
 		A7C83F22291571EC00CFA8C9 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,6 +143,8 @@
 				A734751728F4944000D2F755 /* UIView + HideKeyboard.swift */,
 				A734752428FEB2D200D2F755 /* UIImage + Url.swift */,
 				A73475352905ECD100D2F755 /* UITextView + setPlaceHolder.swift */,
+				A7BBFD33291946E800F696AF /* UILabel + Image.swift */,
+				A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,7 +186,7 @@
 				A734751928F8185E00D2F755 /* ResetPassword */,
 				A734750928F37CD100D2F755 /* MainTabViewController.swift */,
 				A7F4F3F92906E2F3001B5048 /* PostAd */,
-				A734750B28F37D1E00D2F755 /* FeedViewController.swift */,
+				A7BBFD3029193F6200F696AF /* Feed */,
 				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
 				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
@@ -202,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				A73475282901A05600D2F755 /* User.swift */,
+				A7BBFD3529197D5A00F696AF /* AdModel.swift */,
 				A73475372906D7B300D2F755 /* CityModel.swift */,
 			);
 			path = Model;
@@ -223,6 +234,15 @@
 				A77D1A90290C245600E7D510 /* CommercialViewController.swift */,
 			);
 			path = DetailsViewControllers;
+			sourceTree = "<group>";
+		};
+		A7BBFD3029193F6200F696AF /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				A734750B28F37D1E00D2F755 /* FeedViewController.swift */,
+				A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		A7F4F3F92906E2F3001B5048 /* PostAd */ = {
@@ -371,16 +391,20 @@
 				A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */,
 				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
+				A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */,
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
+				A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */,
 				A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */,
 				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
 				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
 				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
 				A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */,
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
+				A7BBFD3229193F7900F696AF /* FeedTableViewCell.swift in Sources */,
 				A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */,
+				A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */,
 				A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
