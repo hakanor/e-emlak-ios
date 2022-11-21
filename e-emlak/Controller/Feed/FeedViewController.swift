@@ -49,7 +49,7 @@ class FeedViewController: UIViewController {
     private lazy var filterButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        let image = UIImage(systemName: "line.3.horizontal.decrease.circle.fill")
+        let image = UIImage(systemName: "line.3.horizontal.decrease")
         button.setImage(image, for: .normal)
         button.backgroundColor = themeColors.primary
         button.layer.cornerRadius = 18
@@ -80,6 +80,14 @@ class FeedViewController: UIViewController {
         }
     }
     
+    func fetchAds(with Keyword:String) {
+        AdService.shared.fetchAds(with: Keyword) { fetchedAds in
+            let vc = FilteredResultViewController()
+            vc.ads = fetchedAds
+            self.present(vc,animated: true,completion: nil)
+        }
+    }
+    
     // MARK: - Helpers
     func configureUI(){
         [tableView, textField, filterButton] .forEach(view.addSubview(_:))
@@ -99,7 +107,7 @@ class FeedViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0  )
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0  )
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
@@ -108,15 +116,13 @@ class FeedViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
-//        fetchNews()
-//        textField.text = ""
         tableView.reloadData()
         print("refresh")
         refreshControl.endRefreshing()
     }
     
     @objc func searchFunc() {
-        print("search")
+        fetchAds(with: textField.text ?? "")
     }
     
     @objc private func didTouchClearAllButton(_ sender: UITapGestureRecognizer? = nil) {
@@ -124,7 +130,9 @@ class FeedViewController: UIViewController {
     }
     
     @objc func handleFilterButton() {
-        print("filter")
+        let nav = UINavigationController(rootViewController: FilterViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
     }
     
     

@@ -327,7 +327,7 @@ class RegisterViewController: UIViewController {
             return "Telefon numarası doğru formatta değil"
         }
         
-        if passwordTextField.text?.count ?? 0 > 6 {
+        if passwordTextField.text?.count ?? 0 >= 6 {
         } else {
             return "Şifre için minimum 6 karakter girmeniz gerekmektedir."
         }

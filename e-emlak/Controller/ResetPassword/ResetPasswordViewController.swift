@@ -107,7 +107,6 @@ class ResetPasswordViewController: UIViewController {
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
         
-        
         [backgroundImage, containerView, backButton] .forEach(view.addSubview(_:))
         
         backgroundImage.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor)

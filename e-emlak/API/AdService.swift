@@ -208,4 +208,88 @@ struct AdService {
             
         }
     }
+    
+    func fetchAds(with Keyword:String, completion: @escaping([Ad]) -> Void){
+        var ads = [Ad]()
+        
+        Firestore.firestore().collection("ads").addSnapshotListener { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if snapshot?.isEmpty != true && snapshot != nil {
+                    for document in snapshot!.documents {
+                        let documentID = document.documentID
+//                        if let title = document.get("title") as? String {
+//                            print(title)
+//                        }
+                        let dictionary = [
+                            "adId": documentID,
+                            "uid": document.get("uid"),
+                            "title": document.get("title"),
+                            "price": document.get("price"),
+                            "location": document.get("location"),
+                            "images": document.get("images"),
+                            "estateType": document.get("estateType"),
+                            "timestamp": document.get("date"),
+                        ]
+                        let string = document.get("location") as! String
+                        if string.contains(Keyword){
+                            let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                            ads.append(ad)
+                        }
+                    }
+                    completion(ads)
+                }
+            }
+            
+        }
+    }
+    
+    func fetchAds(withDictionary dictionary: [String:Any], completion: @escaping([Ad]) -> Void){
+        var ads = [Ad]()
+        
+        guard let propertyType = dictionary["propertyType"] else { return }
+        guard let numberOfRooms = dictionary["numberOfRooms"] else { return }
+        
+        guard let priceMin = dictionary["priceMin"] else { return }
+        guard let priceMax = dictionary["priceMin"] else{ return }
+        
+        Firestore.firestore().collection("ads").addSnapshotListener { snapshot, error in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if snapshot?.isEmpty != true && snapshot != nil {
+                    for document in snapshot!.documents {
+                        let documentID = document.documentID
+//                        if let title = document.get("title") as? String {
+//                            print(title)
+//                        }
+                        let dictionary = [
+                            "adId": documentID,
+                            "uid": document.get("uid"),
+                            "title": document.get("title"),
+                            "price": document.get("price"),
+                            "location": document.get("location"),
+                            "images": document.get("images"),
+                            "estateType": document.get("estateType"),
+                            "timestamp": document.get("date"),
+                        ]
+                        let string = document.get("location") as! String
+                        if string.contains("Keyword"){
+                            let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                            ads.append(ad)
+                        }
+                        
+                        let price = document.get("price") as! Int
+                        if price>(priceMin as! Int) && price<(priceMax as! Int){
+                            let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                            ads.append(ad)
+                        }
+                    }
+                    completion(ads)
+                }
+            }
+            
+        }
+    }
 }

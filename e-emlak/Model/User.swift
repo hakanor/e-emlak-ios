@@ -23,7 +23,7 @@ struct User {
         self.phoneNumber = dictionary["phoneNumber"] as? String ?? ""
         
         if let imageUrlString = dictionary["imageUrl"] as? String {
-            let defaultUrl = URL(string: "https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/logo.PNG?alt=media&token=edf0ed7d-5fce-4bd2-a8fa-1d785795cafb")
+            let defaultUrl = URL(string: "https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/avatar.jpg?alt=media&token=0ee27972-fd95-4f7d-bd64-e019049e8ab5")
             self.imageUrl = URL(string: imageUrlString) ?? defaultUrl!
         }
     }

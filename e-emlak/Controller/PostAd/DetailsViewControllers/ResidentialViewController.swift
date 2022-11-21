@@ -22,6 +22,7 @@ class ResidentialViewController: UIViewController{
     // MARK: - SubViews
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 100)
         let cv = UICollectionView(frame: .zero,collectionViewLayout: layout)
         cv.register(MyCell.self, forCellWithReuseIdentifier: "cell")
         return cv
@@ -359,7 +360,7 @@ class ResidentialViewController: UIViewController{
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 200)
     }
     
     // MARK: - Selectors
@@ -486,7 +487,7 @@ class ResidentialViewController: UIViewController{
         
         addPhotoButton.anchor(top: photoLabel.bottomAnchor, left: view.leftAnchor,  paddingTop: 8, paddingLeft: 24,width: 42,height: 42)
         
-        collectionView.anchor(top: addPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingBottom: 100 ,paddingRight: 24, height: 200)
+        collectionView.anchor(top: addPhotoButton.bottomAnchor, left: view.leftAnchor, bottom: scrollView.bottomAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingBottom: 100 ,paddingRight: 24, height: 350)
         
         nextButton.anchor(top: scrollView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 24, paddingBottom: 0, paddingRight: 24)
         
@@ -533,18 +534,36 @@ extension ResidentialViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView,didSelectItemAt indexPath: IndexPath){
-        images.remove(at: indexPath.row)
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        self.imageTapped(image: UIImage(data: images[indexPath.row]) ?? UIImage())
+    }
+    
+    func imageTapped(image:UIImage){
+        let newImageView = UIImageView(image: image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage(_:)))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
     }
 }
 
 class MyCell: UICollectionViewCell{
     public let imageView = UIImageView()
     
+    
     override init(frame: CGRect){
         super.init(frame: frame)
+        imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
     }
     

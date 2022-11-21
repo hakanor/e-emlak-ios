@@ -257,7 +257,7 @@ class LocationViewController: UIViewController{
             self.navigationController?.pushViewController(vc, animated: true)
             
         default:
-            print("An error occurred while selecting ViewControllers via by propertyType.")
+            self.view.makeToast("Emlak Türü alanının doldurulması gerekmektedir.", duration: 3.0, position: .bottom)
         }
         
     }
@@ -388,7 +388,7 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if cityTextField.isFirstResponder {
-            cityTextField.text = cityArray[row]
+            cityTextField.text = cityArray[safe: row]
             cityRow = row
             loadTowns()
             pickerView.reloadAllComponents()
@@ -397,7 +397,7 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
             quarterTextField.text?.removeAll()
         }
         if townTextField.isFirstResponder{
-            townTextField.text = townArray[row]
+            townTextField.text = townArray[safe: row]
             townRow = row
             loadDistricts()
             pickerView.reloadAllComponents()
@@ -405,14 +405,14 @@ extension LocationViewController: UIPickerViewDelegate,UIPickerViewDataSource {
             quarterTextField.text?.removeAll()
         }
         if districtTextField.isFirstResponder{
-            districtTextField.text = districtArray[row]
+            districtTextField.text = districtArray[safe: row]
             districtRow = row
             loadQuarters()
             pickerView.reloadAllComponents()
             quarterTextField.text?.removeAll()
         }
         if quarterTextField.isFirstResponder{
-            quarterTextField.text = quarterArray[row]
+            quarterTextField.text = quarterArray[safe: row]
             pickerView.reloadAllComponents()
         }
         
