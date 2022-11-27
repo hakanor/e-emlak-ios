@@ -191,7 +191,7 @@ class FeedTableViewCell: UITableViewCell {
         titleLabel.text = title
         priceLabel.text = price + " ₺"
         let locationSplitted = location.split(separator: "/")
-        let locationNew = locationSplitted[0] + "/" + locationSplitted[1]
+        let locationNew = locationSplitted[0] ?? "" + "/" + locationSplitted[1] ?? ""
         locationLabel.text = String(locationNew)
         let formattedURL = URL(string: url)
         self.adImage.sd_setImage(with: formattedURL,completed: nil)
