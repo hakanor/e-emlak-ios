@@ -339,23 +339,47 @@ class FilterViewController: UIViewController{
             
         case "Konut":
             let vc = ResidentialFilterViewController()
-            vc.priceMin = Int(self.priceMinTextField.text ?? "") ?? 0
-            vc.priceMax = Int(self.priceMaxTextField.text ?? "") ?? 0
             vc.estateType = propertyType
+            vc.filterOptions.priceMin = Int(priceMinTextField.text ?? "") ?? 0
+            vc.filterOptions.priceMax = Int(priceMaxTextField.text ?? "") ?? 0
+            vc.filterOptions.propertyType = propertyTypeTextField.text ?? ""
+            vc.filterOptions.categoryType = categoryTypeTextField.text ?? ""
+            vc.filterOptions.serviceType = serviceTypeTextField.text ?? ""
+            vc.filterOptions.city = cityTextField.text ?? ""
+            vc.filterOptions.town = townTextField.text ?? ""
+            vc.filterOptions.district = districtTextField.text ?? ""
+            vc.filterOptions.quarter = quarterTextField.text ?? ""
+            
             
             self.navigationController?.pushViewController(vc, animated: true)
             
         case "İş Yeri":
             let vc = CommercialFilterViewController()
-            vc.priceMin = Int(self.priceMinTextField.text ?? "") ?? 0
-            vc.priceMax = Int(self.priceMaxTextField.text ?? "") ?? 0
             vc.estateType = propertyType
+            vc.filterOptions.priceMin = Int(priceMinTextField.text ?? "") ?? 0
+            vc.filterOptions.priceMax = Int(priceMaxTextField.text ?? "") ?? 0
+            vc.filterOptions.propertyType = propertyTypeTextField.text ?? ""
+            vc.filterOptions.categoryType = categoryTypeTextField.text ?? ""
+            vc.filterOptions.serviceType = serviceTypeTextField.text ?? ""
+            vc.filterOptions.city = cityTextField.text ?? ""
+            vc.filterOptions.town = townTextField.text ?? ""
+            vc.filterOptions.district = districtTextField.text ?? ""
+            vc.filterOptions.quarter = quarterTextField.text ?? ""
             
             self.navigationController?.pushViewController(vc, animated: true)
             
         case "Arsa":
             let vc = LandFilterViewController()
             vc.estateType = propertyType
+            vc.filterOptions.priceMin = Int(priceMinTextField.text ?? "") ?? 0
+            vc.filterOptions.priceMax = Int(priceMaxTextField.text ?? "") ?? 0
+            vc.filterOptions.propertyType = propertyTypeTextField.text ?? ""
+            vc.filterOptions.categoryType = categoryTypeTextField.text ?? ""
+            vc.filterOptions.serviceType = serviceTypeTextField.text ?? ""
+            vc.filterOptions.city = cityTextField.text ?? ""
+            vc.filterOptions.town = townTextField.text ?? ""
+            vc.filterOptions.district = districtTextField.text ?? ""
+            vc.filterOptions.quarter = quarterTextField.text ?? ""
             
             self.navigationController?.pushViewController(vc, animated: true)
             

@@ -8,13 +8,25 @@
 import UIKit
 import Firebase
 
+struct GeneralFilters {
+    var estateType: String
+    var propertyType : String
+    var categoryType : String
+    var serviceType : String
+    var city : String
+    var town : String
+    var district : String
+    var quarter : String
+    var priceMin: Int
+    var priceMax: Int
+}
+
 class ResidentialFilterViewController: UIViewController {
     // MARK: - Properties
     var ads = [Ad]()
     var adsFiltered = [Ad]()
     
-    var priceMin = 0
-    var priceMax = 0 
+    var filterOptions = GeneralFilters(estateType: "", propertyType: "", categoryType: "", serviceType: "", city: "", town: "", district: "", quarter: "", priceMin: 0, priceMax: 0)
     
     var estateType : String = ""
     var pickerView = UIPickerView()
@@ -286,12 +298,13 @@ class ResidentialFilterViewController: UIViewController {
     }
     
     @objc func handleNextButton(){
+        self.adsFiltered.removeAll()
         fetchAds()
     }
     
     // MARK: - API
     func fetchAds() {
-        AdService.shared.fetchAds() { fetchedAds in
+        AdService.shared.fetchAds() { [self] fetchedAds in
             let vc = FilteredResultViewController()
             
             for ad in fetchedAds {
@@ -300,11 +313,151 @@ class ResidentialFilterViewController: UIViewController {
                 }
             }
             
+//            var adsTemp = [Ad]()
+//            for ad in self.adsFiltered {
+//                if ad.location.contains("Konya"){
+//                    adsTemp.append(ad)
+//                }
+//            }
+//            self.adsFiltered.removeAll()
+//            self.adsFiltered = adsTemp
+//            adsTemp.removeAll()
+            applyFilters()
+            
             vc.ads = self.adsFiltered
             self.present(vc,animated: true,completion: nil)
         }
     }
     
+    // MARK: - Filters
+    func applyFilters(){
+        self.adsFiltered = self.applyPriceMinFilter(priceMin: filterOptions.priceMin, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyPriceMaxFilter(priceMax: filterOptions.priceMax, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyCategoryTypeFilter(categoryType: filterOptions.categoryType, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyServiceTypeFilter(serviceType: filterOptions.serviceType, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyCityFilter(cityName: filterOptions.city, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyTownFilter(townName: filterOptions.town, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyDistrictFilter(districtName: filterOptions.district, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyQuarterFilter(quarterName: filterOptions.quarter, adsFiltered: self.adsFiltered)
+    }
+    
+    func applyPriceMinFilter(priceMin:Int, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.priceMin != 0 {
+            print(filterOptions.priceMin)
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if Int(ad.price) ?? 0 >= priceMin{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyPriceMaxFilter(priceMax:Int, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.priceMax != 0 {
+            print(filterOptions.priceMax)
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if Int(ad.price) ?? 0 <= priceMax{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyCategoryTypeFilter(categoryType:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.categoryType != "" {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.estateType.contains(categoryType){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyServiceTypeFilter(serviceType:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.serviceType != "" {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.estateType.contains(serviceType){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyCityFilter(cityName:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.city != "" {
+            let cityString = filterOptions.city + "/"
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.location.contains(cityString){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyTownFilter(townName:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.town != "" {
+            let townString = filterOptions.city + "/" + townName
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.location.contains(townString){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyDistrictFilter(districtName:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.district != "" {
+            let districtString = filterOptions.city + "/" + filterOptions.town + "/" + districtName
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.location.contains(districtString){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyQuarterFilter(quarterName:String, adsFiltered:[Ad]) -> [Ad]{
+        if self.filterOptions.quarter != "" {
+            let quarterString = filterOptions.city + "/" + filterOptions.town + "/" + filterOptions.district + "/" + quarterName
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.location.contains(quarterString){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
     
     // MARK: - Helpers
     func configureUI(){
