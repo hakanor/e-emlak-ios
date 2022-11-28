@@ -69,13 +69,20 @@ class LandFilterViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var squareMeterMinLabel: UILabel = {
+    var squareMeterStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = 10
+        return view
+    }()
+    private lazy var squareMeterLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Metrekare (min)"
+        label.text = "Metrekare (min-max)"
         return label
     }()
     
@@ -87,19 +94,17 @@ class LandFilterViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        let label = UILabel()
+        label.text = "m²"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = themeColors.grey.withAlphaComponent(0.6)
+        textField.rightView = label
+        textField.rightViewMode = .always
+        
         textField.setUnderLine()
         textField.keyboardType = .numberPad
         return textField
-    }()
-    
-    private lazy var squareMeterMaxLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.dark
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Metrekare (max)"
-        return label
     }()
     
     private lazy var squareMeterMaxTextField: UITextField = {
@@ -110,6 +115,14 @@ class LandFilterViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        let label = UILabel()
+        label.text = "m²"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = themeColors.grey.withAlphaComponent(0.6)
+        textField.rightView = label
+        textField.rightViewMode = .always
+        
         textField.setUnderLine()
         textField.keyboardType = .numberPad
         return textField
@@ -349,19 +362,16 @@ class LandFilterViewController: UIViewController {
         [scrollView, nextButton] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nextButton.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0)
         
-        [squareMeterMinLabel,squareMeterMinTextField,squareMeterMaxLabel,squareMeterMaxTextField,parcelNumberLabel,parcelNumberTextField,blockNumberLabel,blockNumberTextField] .forEach(scrollView.addSubview(_:))
+        [squareMeterStackView,squareMeterLabel,squareMeterMinTextField,squareMeterMaxTextField,parcelNumberLabel,parcelNumberTextField,blockNumberLabel,blockNumberTextField] .forEach(scrollView.addSubview(_:))
         
-        squareMeterMinLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        [squareMeterMinTextField, squareMeterMaxTextField] .forEach(squareMeterStackView.addArrangedSubview(_:))
         
-        squareMeterMinTextField.anchor(top: squareMeterMinLabel
+        squareMeterLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        squareMeterStackView.anchor(top: squareMeterLabel
             .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        squareMeterMaxLabel.anchor(top: squareMeterMinTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
-        
-        squareMeterMaxTextField.anchor(top: squareMeterMaxLabel
-            .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
-        
-        blockNumberLabel.anchor(top: squareMeterMaxTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        blockNumberLabel.anchor(top: squareMeterStackView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         blockNumberTextField.anchor(top: blockNumberLabel
             .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)

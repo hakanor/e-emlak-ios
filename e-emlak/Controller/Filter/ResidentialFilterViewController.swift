@@ -87,13 +87,21 @@ class ResidentialFilterViewController: UIViewController {
         return scrollView
     }()
     
-    private lazy var squareMeterMinLabel: UILabel = {
+    var squareMeterStackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = 10
+        return view
+    }()
+    
+    private lazy var squareMeterLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Metrekare (min)"
+        label.text = "Metrekare (min-max)"
         return label
     }()
     
@@ -105,19 +113,17 @@ class ResidentialFilterViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        let label = UILabel()
+        label.text = "m²"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = themeColors.grey.withAlphaComponent(0.6)
+        textField.rightView = label
+        textField.rightViewMode = .always
+        
         textField.setUnderLine()
         textField.keyboardType = .numberPad
         return textField
-    }()
-    
-    private lazy var squareMeterMaxLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.dark
-        label.numberOfLines = 2
-        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Metrekare (max)"
-        return label
     }()
     
     private lazy var squareMeterMaxTextField: UITextField = {
@@ -128,6 +134,14 @@ class ResidentialFilterViewController: UIViewController {
             attributes: [NSAttributedString.Key.foregroundColor: themeColors.grey.withAlphaComponent(0.6)]
         )
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        
+        let label = UILabel()
+        label.text = "m²"
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.textColor = themeColors.grey.withAlphaComponent(0.6)
+        textField.rightView = label
+        textField.rightViewMode = .always
+        
         textField.setUnderLine()
         textField.keyboardType = .numberPad
         return textField
@@ -459,6 +473,21 @@ class ResidentialFilterViewController: UIViewController {
         }
     }
     
+//    func applySquareMeterMinFilter(adsFiltered:[Ad]) -> [Ad]{
+//        if Int(self.squareMeterMinTextField.text ?? "") ?? 0 != 0 {
+//            print(squareMeterMinTextField.text)
+//            var adsTemp = [Ad]()
+//            for ad in self.adsFiltered {
+//                if Int(ad.price) ?? 0 >= priceMin{
+//                    adsTemp.append(ad)
+//                }
+//            }
+//            return adsTemp
+//        } else {
+//            return adsFiltered
+//        }
+//    }
+    
     // MARK: - Helpers
     func configureUI(){
         view.backgroundColor = themeColors.white
@@ -469,19 +498,16 @@ class ResidentialFilterViewController: UIViewController {
         [scrollView, nextButton] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nextButton.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0)
         
-        [squareMeterMinLabel,squareMeterMinTextField,squareMeterMaxLabel,squareMeterMaxTextField, numberOfFloorsLabel, numberOfFloorsTextField, numberOfRoomsLabel, numberOfRoomsTextField, ageOfBuildingLabel, ageOfBuildingTextField ,numberOfBathroomsLabel, numberOfBathroomsTextField, floorNumberLabel, floorNumberTextField, heatingLabel, heatingTextField] .forEach(scrollView.addSubview(_:))
+        [squareMeterStackView,squareMeterLabel, numberOfFloorsLabel, numberOfFloorsTextField, numberOfRoomsLabel, numberOfRoomsTextField, ageOfBuildingLabel, ageOfBuildingTextField ,numberOfBathroomsLabel, numberOfBathroomsTextField, floorNumberLabel, floorNumberTextField, heatingLabel, heatingTextField] .forEach(scrollView.addSubview(_:))
         
-        squareMeterMinLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        [squareMeterMinTextField, squareMeterMaxTextField] .forEach(squareMeterStackView.addArrangedSubview(_:))
         
-        squareMeterMinTextField.anchor(top: squareMeterMinLabel
+        squareMeterLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        squareMeterStackView.anchor(top: squareMeterLabel
             .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        squareMeterMaxLabel.anchor(top: squareMeterMinTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
-        
-        squareMeterMaxTextField.anchor(top: squareMeterMaxLabel
-            .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
-        
-        ageOfBuildingLabel.anchor(top: squareMeterMaxTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        ageOfBuildingLabel.anchor(top: squareMeterStackView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         ageOfBuildingTextField.anchor(top: ageOfBuildingLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
