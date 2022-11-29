@@ -181,8 +181,6 @@ class LandFilterViewController: UIViewController {
         super.viewDidLoad()
         title = "Daha fazla detay seçiniz."
         configureUI()
-        blockNumberTextField.inputView = pickerView
-        parcelNumberTextField.inputView = pickerView
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -231,6 +229,10 @@ class LandFilterViewController: UIViewController {
         self.adsFiltered = self.applyTownFilter(townName: filterOptions.town, adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyDistrictFilter(districtName: filterOptions.district, adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyQuarterFilter(quarterName: filterOptions.quarter, adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applySquareMeterMinFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applySquareMeterMaxFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyParcelNumberFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyBlockNumberFilter(adsFiltered: self.adsFiltered)
     }
     
     func applyPriceMinFilter(priceMin:Int, adsFiltered:[Ad]) -> [Ad]{
@@ -351,6 +353,65 @@ class LandFilterViewController: UIViewController {
         }
     }
     
+    func applySquareMeterMinFilter(adsFiltered:[Ad]) -> [Ad]{
+        let squareMeterMin = Int(self.squareMeterMinTextField.text ?? "") ?? 0
+        if squareMeterMin != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.squareMeter >= squareMeterMin{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applySquareMeterMaxFilter(adsFiltered:[Ad]) -> [Ad]{
+        let squareMeterMax = Int(self.squareMeterMaxTextField.text ?? "") ?? 0
+        if squareMeterMax != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.squareMeter <= squareMeterMax{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyParcelNumberFilter(adsFiltered:[Ad]) -> [Ad]{
+        let parcelNumber = Int(self.parcelNumberTextField.text ?? "") ?? 0
+        if parcelNumber != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.parcelNumber == parcelNumber{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyBlockNumberFilter(adsFiltered:[Ad]) -> [Ad]{
+        let blockNumber = Int(self.blockNumberTextField.text ?? "") ?? 0
+        if blockNumber != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.blockNumber == blockNumber{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
     
     // MARK: - Helpers
     func configureUI(){

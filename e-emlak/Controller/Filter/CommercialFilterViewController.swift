@@ -308,6 +308,14 @@ class CommercialFilterViewController: UIViewController {
         self.adsFiltered = self.applyTownFilter(townName: filterOptions.town, adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyDistrictFilter(districtName: filterOptions.district, adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyQuarterFilter(quarterName: filterOptions.quarter, adsFiltered: self.adsFiltered)
+        
+        self.adsFiltered = self.applySquareMeterMinFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applySquareMeterMaxFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyAgeOfBuildingFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyFloorNumberFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyNumberOfFloorsFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyNumberOfRoomsFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyHeatingFilter(adsFiltered: self.adsFiltered)
     }
     
     func applyPriceMinFilter(priceMin:Int, adsFiltered:[Ad]) -> [Ad]{
@@ -419,6 +427,180 @@ class CommercialFilterViewController: UIViewController {
             var adsTemp = [Ad]()
             for ad in self.adsFiltered {
                 if ad.location.contains(quarterString){
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applySquareMeterMinFilter(adsFiltered:[Ad]) -> [Ad]{
+        let squareMeterMin = Int(self.squareMeterMinTextField.text ?? "") ?? 0
+        if squareMeterMin != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.squareMeter >= squareMeterMin{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applySquareMeterMaxFilter(adsFiltered:[Ad]) -> [Ad]{
+        let squareMeterMax = Int(self.squareMeterMaxTextField.text ?? "") ?? 0
+        if squareMeterMax != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.squareMeter <= squareMeterMax{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyAgeOfBuildingFilter(adsFiltered:[Ad]) -> [Ad]{
+        switch ageOfBuildingTextField.text {
+            
+        case "Sıfır Bina":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding == 0 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+            
+        case "1-5":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding >= 1 && ad.ageOfBuilding <= 5 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+            
+        case "6-10":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding >= 6 && ad.ageOfBuilding <= 10 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+            
+        case "11-15":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding >= 11 && ad.ageOfBuilding <= 15 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+            
+        case "16-20":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding >= 16 && ad.ageOfBuilding <= 20 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+            
+        case "21 ve üzeri":
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.ageOfBuilding >= 21 {
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        default:
+            print("default")
+        }
+        return adsFiltered
+    }
+    
+    func applyFloorNumberFilter(adsFiltered:[Ad]) -> [Ad]{
+        let floorNumber = Int(self.floorNumberTextField.text ?? "") ?? 0
+        if floorNumber != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.floorNumber == floorNumber{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyNumberOfFloorsFilter(adsFiltered:[Ad]) -> [Ad]{
+        if numberOfFloorsTextField.text != ""{
+            switch numberOfFloorsTextField.text {
+                
+            case "1-5":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 1 && ad.numberOfFloors <= 5 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+                
+            case "6-10":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 6 && ad.numberOfFloors <= 10 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+
+            case "11 ve üzeri":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 11 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+            default:
+                print("default")
+            }
+        }
+        return adsFiltered
+    }
+    
+    func applyNumberOfRoomsFilter(adsFiltered:[Ad]) -> [Ad]{
+        let numberOfRooms = Int(self.numberOfRoomsTextField.text ?? "") ?? 0
+        if numberOfRooms != 0 {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.numberOfRooms == numberOfRooms{
+                    adsTemp.append(ad)
+                }
+            }
+            return adsTemp
+        } else {
+            return adsFiltered
+        }
+    }
+    
+    func applyHeatingFilter(adsFiltered:[Ad]) -> [Ad]{
+        let heating = heatingTextField.text ?? ""
+        if heating != "" {
+            var adsTemp = [Ad]()
+            for ad in self.adsFiltered {
+                if ad.heating.contains(heating){
                     adsTemp.append(ad)
                 }
             }
