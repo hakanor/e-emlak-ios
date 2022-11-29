@@ -224,7 +224,7 @@ class CommercialViewController: UIViewController{
     }()
     
     private lazy var heatingTextField: UITextField = {
-        let textField = UITextField ()
+        let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.attributedPlaceholder = NSAttributedString(
             string: "Isıtıma türünü giriniz.",

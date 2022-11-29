@@ -198,6 +198,22 @@ struct AdService {
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
                             "timestamp": document.get("date"),
+                            
+                            "description": document.get("description"),
+                            "floorNumber": document.get("floorNumber"),
+                            "numberOfFloors": document.get("numberOfFloors"),
+                            "numberOfRooms": document.get("numberOfRooms"),
+                            "numberOfBathrooms": document.get("numberOfBathrooms"),
+                            "squareMeter": document.get("squareMeter"),
+                            "squareMeterNet": document.get("squareMeterNet"),
+                            "pricePerSquareMeter": document.get("pricePerSquareMeter"),
+                            "latitude": document.get("latitude"),
+                            "longitude": document.get("longitude"),
+                            "parcelNumber": document.get("parcelNumber"),
+                            "blockNumber": document.get("blockNumber"),
+                            "heating": document.get("heating"),
+                            "ageOfBuilding": document.get("ageOfBuilding"),
+                            
                         ]
                         let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
                         ads.append(ad)
