@@ -357,6 +357,7 @@ class ResidentialFilterViewController: UIViewController {
         self.adsFiltered = self.applySquareMeterMaxFilter(adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyAgeOfBuildingFilter(adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyFloorNumberFilter(adsFiltered: self.adsFiltered)
+        self.adsFiltered = self.applyNumberOfFloorsFilter(adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyNumberOfRoomsFilter(adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyNumberOfBathroomsFilter(adsFiltered: self.adsFiltered)
         self.adsFiltered = self.applyHeatingFilter(adsFiltered: self.adsFiltered)
@@ -585,6 +586,43 @@ class ResidentialFilterViewController: UIViewController {
         } else {
             return adsFiltered
         }
+    }
+    
+    func applyNumberOfFloorsFilter(adsFiltered:[Ad]) -> [Ad]{
+        if numberOfFloorsTextField.text != ""{
+            switch numberOfFloorsTextField.text {
+                
+            case "1-5":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 1 && ad.numberOfFloors <= 5 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+                
+            case "6-10":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 6 && ad.numberOfFloors <= 10 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+
+            case "11 ve üzeri":
+                var adsTemp = [Ad]()
+                for ad in self.adsFiltered {
+                    if ad.numberOfFloors >= 11 {
+                        adsTemp.append(ad)
+                    }
+                }
+                return adsTemp
+            default:
+                print("default")
+            }
+        }
+        return adsFiltered
     }
     
     func applyNumberOfRoomsFilter(adsFiltered:[Ad]) -> [Ad]{
