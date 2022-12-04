@@ -298,7 +298,7 @@ class FilterViewController: UIViewController{
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Ekle", for: .normal)
+        button.setTitle("İleri", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary

@@ -44,7 +44,7 @@ struct Ad {
         self.numberOfFloors = dictionary["numberOfFloors"] as? Int ?? 0
         self.numberOfRooms = dictionary["numberOfRooms"] as? Int ?? 0
         self.numberOfBathrooms = dictionary["numberOfBathrooms"] as? Int ?? 0
-        self.squareMeter = Int(dictionary["squareMeter"] as! String) ?? 0
+        self.squareMeter = Int(dictionary["squareMeter"] as? String ?? "") ?? 0
         self.squareMeterNet = dictionary["squareMeterNet"] as? Int ?? 0
         self.pricePerSquareMeter = dictionary["pricePerSquareMeter"] as? Double ?? 0
         self.latitude = dictionary["latitude"] as? Double ?? 0
