@@ -163,18 +163,16 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        tableView.deselectRow(at: indexPath, animated: true)
-        print("Selected \(indexPath.row)")
-        
         let ad = ads[indexPath.row]
         
         let propertyType = ad.estateType.split(separator: "/").first
-        print(propertyType as Any)
         
         var dictionary = [CustomDictionaryObject]()
         
         switch propertyType {
         case "Konut":
             dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
                 CustomDictionaryObject(key: "İlan Tarihi", value: "DateDüzenlenecek"),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
@@ -188,6 +186,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
             ]
         case "İş Yeri":
             dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
                 CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
@@ -197,6 +196,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
             ]
         case "Arsa":
             dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
                 CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
@@ -208,13 +208,13 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
             print("Default - FeedViewController")
         }
         
-        print(ad.images.first)
         let vc = ResidentialDetailViewController(
             title: ad.title,
             location: ad.location,
             imageUrl: ad.images.first ?? "",
             description: ad.description,
-            dictionary: dictionary
+            dictionary: dictionary,
+            urls: ad.images
         )
         
         let nav = UINavigationController(rootViewController: vc)

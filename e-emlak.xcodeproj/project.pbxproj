@@ -52,6 +52,8 @@
 		A78757F4292C314E00FE37A6 /* Array + Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F3292C314E00FE37A6 /* Array + Row.swift */; };
 		A78757F7293D1F3500FE37A6 /* ResidentialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */; };
 		A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */; };
+		A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */; };
+		A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
@@ -106,6 +108,8 @@
 		A78757F3292C314E00FE37A6 /* Array + Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Row.swift"; sourceTree = "<group>"; };
 		A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialDetailViewController.swift; sourceTree = "<group>"; };
 		A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
+		A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
+		A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDetailsViewController.swift; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 			children = (
 				A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */,
 				A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */,
+				A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */,
+				A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -436,6 +442,7 @@
 				A78757F0292BE39C00FE37A6 /* LandFilterViewController.swift in Sources */,
 				A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */,
 				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
+				A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
 				A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */,
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
@@ -462,6 +469,7 @@
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
 				A78757EE292BE38C00FE37A6 /* ResidentialFilterViewController.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
+				A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */,
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
 				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
