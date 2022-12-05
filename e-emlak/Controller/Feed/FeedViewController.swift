@@ -9,6 +9,11 @@ import UIKit
 import Firebase
 import Toast
 
+struct CustomDictionaryObject {
+    let key : String
+    let value : String
+}
+
 class FeedViewController: UIViewController {
     // MARK: - Properties
     var ads = [Ad]()
@@ -157,9 +162,67 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         print("Selected \(indexPath.row)")
-        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
+        
+        let ad = ads[indexPath.row]
+        
+        let propertyType = ad.estateType.split(separator: "/").first
+        print(propertyType as Any)
+        
+        var dictionary = [CustomDictionaryObject]()
+        
+        switch propertyType {
+        case "Konut":
+            dictionary = [
+                CustomDictionaryObject(key: "İlan Tarihi", value: "DateDüzenlenecek"),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Metrekare (Brüt)", value: String(ad.squareMeterNet)),
+                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                CustomDictionaryObject(key: "Daire Kat Sayısı", value: String(ad.floorNumber)),
+                CustomDictionaryObject(key: "Oda Sayısı", value: String(ad.numberOfRooms)),
+                CustomDictionaryObject(key: "Banyo Sayısı", value: String(ad.numberOfBathrooms)),
+                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+            ]
+        case "İş Yeri":
+            dictionary = [
+                CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+            ]
+        case "Arsa":
+            dictionary = [
+                CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Metrekare / ₺", value: String(ad.pricePerSquareMeter)),
+                CustomDictionaryObject(key: "Ada Numarası", value: String(ad.blockNumber)),
+                CustomDictionaryObject(key: "Parsel Numarası", value: String(ad.parcelNumber))
+            ]
+        default:
+            print("Default - FeedViewController")
+        }
+        
+        print(ad.images.first)
+        let vc = ResidentialDetailViewController(
+            title: ad.title,
+            location: ad.location,
+            imageUrl: ad.images.first ?? "",
+            description: ad.description,
+            dictionary: dictionary
+        )
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+
+        
+//        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
 
     }
 }

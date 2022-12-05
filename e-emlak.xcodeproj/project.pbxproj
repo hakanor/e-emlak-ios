@@ -50,6 +50,8 @@
 		A78757F0292BE39C00FE37A6 /* LandFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757EF292BE39C00FE37A6 /* LandFilterViewController.swift */; };
 		A78757F2292BE3B000FE37A6 /* CommercialFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F1292BE3B000FE37A6 /* CommercialFilterViewController.swift */; };
 		A78757F4292C314E00FE37A6 /* Array + Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F3292C314E00FE37A6 /* Array + Row.swift */; };
+		A78757F7293D1F3500FE37A6 /* ResidentialDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */; };
+		A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
@@ -102,6 +104,8 @@
 		A78757EF292BE39C00FE37A6 /* LandFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandFilterViewController.swift; sourceTree = "<group>"; };
 		A78757F1292BE3B000FE37A6 /* CommercialFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommercialFilterViewController.swift; sourceTree = "<group>"; };
 		A78757F3292C314E00FE37A6 /* Array + Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Row.swift"; sourceTree = "<group>"; };
+		A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialDetailViewController.swift; sourceTree = "<group>"; };
+		A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -264,6 +268,15 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		A78757F5293D1F0E00FE37A6 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				A78757F6293D1F3500FE37A6 /* ResidentialDetailViewController.swift */,
+				A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		A7BBFD3029193F6200F696AF /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +320,7 @@
 				A734750728F37BD000D2F755 /* View */,
 				A734750628F37BCD00D2F755 /* ViewModel */,
 				A734750528F37BC900D2F755 /* Controller */,
+				A78757F5293D1F0E00FE37A6 /* Details */,
 				A734750428F37BC600D2F755 /* API */,
 				A734750328F37BC200D2F755 /* Utilities */,
 				A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */,
@@ -432,6 +446,7 @@
 				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
 				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
 				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
+				A78757F7293D1F3500FE37A6 /* ResidentialDetailViewController.swift in Sources */,
 				A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */,
 				A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */,
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
@@ -448,6 +463,7 @@
 				A78757EE292BE38C00FE37A6 /* ResidentialFilterViewController.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
+				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
