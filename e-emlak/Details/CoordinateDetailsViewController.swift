@@ -50,6 +50,7 @@ class CoordinateDetailsViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        setLocation()
     }
     
     // MARK: - Selectors
@@ -62,30 +63,13 @@ class CoordinateDetailsViewController: UIViewController{
         delegate?.fetchCoordinate(coordinate: pin.coordinate)
     }
     
-    @objc func mapLongPress(_ recognizer: UIGestureRecognizer) {
-        
-        // Clear All annotations
-        let annotations = map.annotations
-        map.removeAnnotations(annotations)
-
-        let touchedAt = recognizer.location(in: self.map) // adds the location on the view it was pressed
-        let touchedAtCoordinate : CLLocationCoordinate2D = map.convert(touchedAt, toCoordinateFrom: self.map) // will get coordinates
-
-        pin.coordinate = touchedAtCoordinate
-        map.addAnnotation(pin)
-        
-        print("LongPress - \(pin.coordinate)")
-        
+    @objc func handleLocationButton(){
+        setLocation()
     }
     
-    @objc func handleLocationButton(){
-        
-        let pin = MKPointAnnotation()
-        pin.coordinate.longitude = 42.1
-        pin.coordinate.latitude = 42.1
-        self.map.setRegion(MKCoordinateRegion(center: pin.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: true)
-        self.map.addAnnotation(pin)
-        
+    func setLocation(){
+        self.map.setRegion(MKCoordinateRegion(center: self.pin.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: true)
+        self.map.addAnnotation(self.pin)
     }
     
     // MARK: - Helpers

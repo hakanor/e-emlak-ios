@@ -15,6 +15,7 @@ class ResidentialDetailViewController: UIViewController {
     
     private var bookmarkBool = false
     private var items : [Ad]?
+    private var ad = Ad(adId: "", dictionary: ["s":""])
     
     var imageArray = [UIImage?]()
     var dictionary = [CustomDictionaryObject]()
@@ -200,9 +201,19 @@ class ResidentialDetailViewController: UIViewController {
     }
     
     @objc func handleLocationButton(){
-        
-        let vc = CoordinateDetailsViewController()
-        present(vc,animated: true)
+        if (self.ad.latitude != 0 && self.ad.longitude != 0) {
+            let vc = CoordinateDetailsViewController()
+            vc.pin.coordinate = CLLocationCoordinate2D(latitude: self.ad.latitude, longitude: self.ad.longitude)
+            present(vc,animated: true)
+        }
+        else {
+            let dialogMessage = UIAlertController(title: "İlan Konumu Hakkında", message: "Satıcı, ilan harita konumunu eklememiştir.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                
+            }
+            dialogMessage.addAction(cancel)
+            self.present(dialogMessage, animated: true, completion: nil)
+        }
         
     }
     
@@ -217,8 +228,6 @@ class ResidentialDetailViewController: UIViewController {
     
     func configureUI(){
         view.backgroundColor = themeColors.white
-        
-        self.navigationController?.navigationBar
         
         [adImages , pageControl ,scrollView, LocationButton] .forEach(view.addSubview(_:))
         
@@ -273,6 +282,7 @@ class ResidentialDetailViewController: UIViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.alwaysBounceVertical = false
+        tableView.isScrollEnabled = false
     }
     
     func configureCollectionView(){
@@ -322,7 +332,7 @@ class ResidentialDetailViewController: UIViewController {
         }
     }
     
-    init(title:String, location:String, imageUrl:String , description:String, dictionary: [CustomDictionaryObject],urls: [String]) {
+    init(title:String, location:String, imageUrl:String , description:String, dictionary: [CustomDictionaryObject],urls: [String], ad: Ad) {
         super.init(nibName: nil, bundle: nil)
         
         self.titleLabel.text = title
@@ -340,6 +350,7 @@ class ResidentialDetailViewController: UIViewController {
         
         self.dictionary = dictionary
         
+        self.ad = ad 
         bookmarkBool = isArticleBookmarked(title: title)
     }
     

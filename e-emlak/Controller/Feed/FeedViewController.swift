@@ -208,13 +208,16 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
             print("Default - FeedViewController")
         }
         
+        let prime = ad.latitude
+        print (prime)
         let vc = ResidentialDetailViewController(
             title: ad.title,
             location: ad.location,
             imageUrl: ad.images.first ?? "",
             description: ad.description,
             dictionary: dictionary,
-            urls: ad.images
+            urls: ad.images,
+            ad : ad
         )
         
         let nav = UINavigationController(rootViewController: vc)
