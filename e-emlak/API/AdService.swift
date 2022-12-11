@@ -230,7 +230,6 @@ struct AdService {
     
     private func formatDate(date:[String.SubSequence]?) -> String {
         var formatDate = date?.first?.split(separator: "/")
-        print(formatDate)
         var day = String(formatDate?[safe:1] ?? "")
         var month = String(formatDate?[safe:0] ?? "")
         let year = String(formatDate?[safe:2] ?? "")

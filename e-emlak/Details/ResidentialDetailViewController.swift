@@ -217,7 +217,6 @@ class ResidentialDetailViewController: UIViewController {
             }
             dialogMessage.addAction(cancel)
             self.present(dialogMessage, animated: true, completion: nil)
-            print(self.ad.timestamp)
         }
         
     }
