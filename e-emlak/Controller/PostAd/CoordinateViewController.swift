@@ -28,6 +28,7 @@ class CoordinateViewController: UIViewController{
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
         return button
     }()
     

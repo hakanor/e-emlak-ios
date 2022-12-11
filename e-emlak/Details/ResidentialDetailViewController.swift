@@ -61,6 +61,7 @@ class ResidentialDetailViewController: UIViewController {
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
+        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
         return button
     }()
     
@@ -91,7 +92,7 @@ class ResidentialDetailViewController: UIViewController {
         titleLabel.numberOfLines = 1
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
-        titleLabel.text = "The latest situation in the presidential electionppppppjdjdjdjdjdjdjdjdjdjsdnnjhbdjshbdjhdsbdbjsbdsjbdhbjdjbhsdbsjhdsbjhdsbjhdsbjhdsbjhdsbjhdsbjdsbjhdsbjhdbjbhjdbjhdsbjdhsjbhdbhjdbjshddsbjdjbdbjdsbj"
+        titleLabel.text = "Title"
         return titleLabel
     }()
     
@@ -101,7 +102,7 @@ class ResidentialDetailViewController: UIViewController {
         label.textColor = themeColors.grey
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.text = "The latest situation in the presidential election"
+        label.text = "Location Label"
         return label
     }()
     
@@ -150,7 +151,7 @@ class ResidentialDetailViewController: UIViewController {
         label.textColor = themeColors.grey
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam hendrerit purus a massa condimentum consequat in eu turpis. Donec maximus ipsum id luctus dictum. Fusce eu arcu mi. Nulla ullamcorper lectus ut ipsum semper, eu posuere odio porttitor. Suspendisse accumsan tellus et dui luctus, et feugiat quam suscipit. Praesent ligula dui, efficitur eu elementum vitae, vehicula tincidunt risus. Quisque faucibus sapien vitae iaculis aliquam. Maecenas felis elit, dapibus vitae suscipit non, commodo ut lorem. Vivamus facilisis, sapien vitae porttitor ullamcorper, ligula ante facilisis augue, id hendrerit erat justo in elit. Nunc imperdiet at quam sed sollicitudin."
+        label.text = "Açıklama"
         return label
     }()
     

@@ -230,10 +230,10 @@ struct AdService {
     
     private func formatDate(date:[String.SubSequence]?) -> String {
         var formatDate = date?.first?.split(separator: "/")
-        formatDate?.swapAt(0, 1)
-        var day = String(formatDate?[0] ?? "")
-        var month = String(formatDate?[1] ?? "")
-        let year = String(formatDate?[2] ?? "")
+        print(formatDate)
+        var day = String(formatDate?[safe:1] ?? "")
+        var month = String(formatDate?[safe:0] ?? "")
+        let year = String(formatDate?[safe:2] ?? "")
         
         if((Int(day) ?? 0) < 10){
             day = "0" + day

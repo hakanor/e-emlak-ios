@@ -54,6 +54,7 @@
 		A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */; };
 		A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */; };
 		A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */; };
+		A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
@@ -110,6 +111,7 @@
 		A78757F8293DEB4B00FE37A6 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDetailsViewController.swift; sourceTree = "<group>"; };
+		A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + addBlurEffect.swift"; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				A7BBFD33291946E800F696AF /* UILabel + Image.swift */,
 				A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */,
 				A78757F3292C314E00FE37A6 /* Array + Row.swift */,
+				A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -433,6 +436,7 @@
 				A734753029040B1100D2F755 /* EstateTypeViewController.swift in Sources */,
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
+				A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */,
 				A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */,
 				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
