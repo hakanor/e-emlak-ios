@@ -25,6 +25,7 @@ class ResidentialDetailViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = themeColors.white
+        scrollView.contentInsetAdjustmentBehavior = .never
         return scrollView
     }()
     
@@ -232,33 +233,29 @@ class ResidentialDetailViewController: UIViewController {
     func configureUI(){
         view.backgroundColor = themeColors.white
         
-        [adImages , pageControl ,scrollView, LocationButton] .forEach(view.addSubview(_:))
-        
-        adImages.anchor(top: view.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        adImages.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
-        
-        view.bringSubviewToFront(adImages)
-        
-        pageControl.anchor(left: view.leftAnchor, bottom: adImages.bottomAnchor, right: view.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
-        pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        view.bringSubviewToFront(pageControl)
+        [scrollView, LocationButton] .forEach(view.addSubview(_:))
         
         LocationButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 10, paddingRight: 12, width: 42, height: 42)
         
-        scrollView.anchor(top: adImages.bottomAnchor,left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
-//        scrollView.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
-//        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
+        scrollView.anchor(top: view.topAnchor,left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
         
         [contentView] .forEach(scrollView.addSubview(_:))
         
         contentView.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, width: UIScreen.main.bounds.width)
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        [titleLabel, locationLabel, locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
+        [adImages, pageControl, titleLabel, locationLabel, locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
         
-        titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        adImages.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        adImages.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
+        
+        pageControl.anchor(left: contentView.leftAnchor, bottom: adImages.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
+        pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        view.bringSubviewToFront(adImages)
+        view.bringSubviewToFront(pageControl)
+        
+        titleLabel.anchor(top: adImages.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         locationIcon.anchor(left: contentView.leftAnchor, paddingTop: 10, paddingLeft: 24, width: 13, height: 13)
         locationIcon.centerYAnchor.constraint(equalTo: locationLabel.centerYAnchor).isActive = true
@@ -271,16 +268,13 @@ class ResidentialDetailViewController: UIViewController {
         
         descriptionLabel.anchor(top: stackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
         
-        descriptionContent.anchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor ,right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingBottom: 40, paddingRight: 24)
-
-        
-
+        descriptionContent.anchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor ,right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingBottom: 70, paddingRight: 24)
     }
     
     
     func configureStackView(){
-        let numberOfdictionaryItem = self.dictionary.count - 1
-        for i in 0...numberOfdictionaryItem {
+        let countOfDictionary = self.dictionary.count - 1
+        for i in 0...countOfDictionary {
             let cell = DetailsTableViewCell()
             cell.config(
                 leftSide: Array(dictionary)[i].key,
