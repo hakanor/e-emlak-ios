@@ -29,4 +29,13 @@ struct UserService {
         }
         
     }
+    
+    func fetchUser(uid:String, completion: @escaping(User) -> Void){
+        Firestore.firestore().collection("users").document(uid).getDocument(completion: ) { (snapshot,error) in
+            guard let data = snapshot?.data() as? [String: AnyObject] else { return }
+            let user = User.init(uid: uid, dictionary: data)
+            completion(user)
+        }
+        
+    }
 }

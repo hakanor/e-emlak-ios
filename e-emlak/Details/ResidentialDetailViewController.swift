@@ -125,6 +125,41 @@ class ResidentialDetailViewController: UIViewController {
         return label
     }()
     
+    private lazy var sellerNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.dark
+        label.numberOfLines = 1
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        label.text = "Satıcı"
+        return label
+    }()
+    
+    private lazy var sellerName: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.grey
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        label.text = "Satıcı İsim"
+        return label
+    }()
+    
+    private lazy var sellerProfilePhoto: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(named: "bookmark")?.withTintColor(.white)
+        imageView.image = image
+        imageView.isUserInteractionEnabled = true
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.borderColor = themeColors.white.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 20
+        return imageView
+    }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -244,7 +279,7 @@ class ResidentialDetailViewController: UIViewController {
         contentView.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, width: UIScreen.main.bounds.width)
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        [adImages, pageControl, titleLabel, locationLabel, locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
+        [adImages, pageControl, titleLabel, locationLabel, sellerNameLabel, sellerName, sellerProfilePhoto ,locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
         
         adImages.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         adImages.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
@@ -262,7 +297,13 @@ class ResidentialDetailViewController: UIViewController {
         
         locationLabel.anchor(top: titleLabel.bottomAnchor, left: locationIcon.rightAnchor, right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 4, paddingRight: 24)
         
-        detailsLabel.anchor(top: locationLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
+        sellerNameLabel.anchor(top: locationLabel.bottomAnchor, left: contentView.leftAnchor, right: sellerProfilePhoto.leftAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 6)
+        
+        sellerName.anchor(top: sellerNameLabel.bottomAnchor, left: contentView.leftAnchor, right: sellerProfilePhoto.leftAnchor, paddingTop: 5, paddingLeft: 24, paddingRight: 6)
+        
+        sellerProfilePhoto.anchor(top: sellerNameLabel.topAnchor, bottom: sellerName.bottomAnchor, right:contentView.rightAnchor, paddingRight: 24 ,width: 45, height: 45)
+        
+        detailsLabel.anchor(top: sellerName.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
         
         stackView.anchor(top: detailsLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingRight: 24, height: 400)
         
@@ -349,7 +390,13 @@ class ResidentialDetailViewController: UIViewController {
         
         self.dictionary = dictionary
         
-        self.ad = ad 
+        self.ad = ad
+        
+        UserService.shared.fetchUser(uid: ad.uid) { user in
+            self.sellerName.text = user.name + " " + user.surname
+            self.sellerProfilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
+        }
+        
         bookmarkBool = isArticleBookmarked(title: title)
     }
     
