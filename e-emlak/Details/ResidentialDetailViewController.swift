@@ -123,10 +123,12 @@ class ResidentialDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 3
+        return stackView
     }()
     
     private lazy var descriptionLabel: UILabel = {
@@ -173,9 +175,9 @@ class ResidentialDetailViewController: UIViewController {
         bookmarkIcon.addGestureRecognizer(gestureBookmark)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         configureUI()
-        configureTableView()
         configureCollectionView()
         configurePageControl()
+        configureStackView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -254,7 +256,7 @@ class ResidentialDetailViewController: UIViewController {
         contentView.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, width: UIScreen.main.bounds.width)
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        [titleLabel, locationLabel, locationIcon, detailsLabel ,tableView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
+        [titleLabel, locationLabel, locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
         
         titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -265,25 +267,27 @@ class ResidentialDetailViewController: UIViewController {
         
         detailsLabel.anchor(top: locationLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
         
-        tableView.anchor(top: detailsLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingRight: 24, height: 400)
+        stackView.anchor(top: detailsLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingRight: 24, height: 400)
         
-        descriptionLabel.anchor(top: tableView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
+        descriptionLabel.anchor(top: stackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
         
-        descriptionContent.anchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor ,right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingRight: 24)
+        descriptionContent.anchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor ,right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingBottom: 40, paddingRight: 24)
 
         
 
     }
     
-    func configureTableView(){
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(DetailsTableViewCell.self, forCellReuseIdentifier: "Details")
-        tableView.showsVerticalScrollIndicator = false
-        tableView.showsHorizontalScrollIndicator = false
-        tableView.separatorStyle = .none
-        tableView.alwaysBounceVertical = false
-        tableView.isScrollEnabled = false
+    
+    func configureStackView(){
+        let numberOfdictionaryItem = self.dictionary.count - 1
+        for i in 0...numberOfdictionaryItem {
+            let cell = DetailsTableViewCell()
+            cell.config(
+                leftSide: Array(dictionary)[i].key,
+                rightSide: Array(dictionary)[i].value
+            )
+            stackView.addArrangedSubview(cell)
+        }
     }
     
     func configureCollectionView(){
@@ -359,25 +363,6 @@ class ResidentialDetailViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-
-// MARK: - UITableViewDelegate,UITableViewDataSource
-extension ResidentialDetailViewController : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dictionary.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Details") as! DetailsTableViewCell
-        cell.config(
-            leftSide: Array(dictionary)[indexPath.row].key,
-            rightSide: Array(dictionary)[indexPath.row].value
-        )
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
