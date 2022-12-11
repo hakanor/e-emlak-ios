@@ -213,6 +213,7 @@ class ResidentialDetailViewController: UIViewController {
             }
             dialogMessage.addAction(cancel)
             self.present(dialogMessage, animated: true, completion: nil)
+            print(self.ad.timestamp)
         }
         
     }
@@ -270,7 +271,7 @@ class ResidentialDetailViewController: UIViewController {
         
         descriptionContent.anchor(top: descriptionLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor ,right: contentView.rightAnchor, paddingTop: 7, paddingLeft: 24, paddingRight: 24)
 
-        tableView.backgroundColor = .red
+        
 
     }
     

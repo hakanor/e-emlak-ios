@@ -173,7 +173,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
         case "Konut":
             dictionary = [
                 CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: "DateDüzenlenecek"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
                 CustomDictionaryObject(key: "Metrekare (Brüt)", value: String(ad.squareMeterNet)),
@@ -187,7 +187,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
         case "İş Yeri":
             dictionary = [
                 CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
                 CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
@@ -197,7 +197,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
         case "Arsa":
             dictionary = [
                 CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: "10.11.1451"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
                 CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
                 CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
                 CustomDictionaryObject(key: "Metrekare / ₺", value: String(ad.pricePerSquareMeter)),

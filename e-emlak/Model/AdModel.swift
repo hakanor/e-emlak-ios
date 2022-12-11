@@ -15,7 +15,7 @@ struct Ad {
     let location: String
     let images: [String]
     let estateType: String
-    var timestamp: Date!
+    var timestamp: String
     var description: String
     var floorNumber: Int
     var numberOfFloors: Int
@@ -53,9 +53,6 @@ struct Ad {
         self.blockNumber = dictionary["blockNumber"] as? Int ?? 0
         self.heating = dictionary["heating"] as? String ?? ""
         self.ageOfBuilding = dictionary["ageOfBuilding"] as? Int ?? 0
-
-        if let timestamp = dictionary["timestamp"] as? Double {
-            self.timestamp = Date(timeIntervalSince1970: timestamp)
-        }
+        self.timestamp = dictionary["timestamp"] as? String ?? ""
     }
 }

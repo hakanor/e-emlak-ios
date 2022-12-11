@@ -189,6 +189,10 @@ struct AdService {
 //                        if let title = document.get("title") as? String {
 //                            print(title)
 //                        }
+                        let timestamp = document.get("date") as? Timestamp
+                        let formattedTimeStamp = timestamp?.dateValue().formatted().split(separator: " ")
+                        var formattedTimeStampString = formatDate(date: formattedTimeStamp)
+                        
                         let dictionary = [
                             "adId": documentID,
                             "uid": document.get("uid"),
@@ -197,8 +201,7 @@ struct AdService {
                             "location": document.get("location"),
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
-                            "timestamp": document.get("date"),
-                            
+                            "timestamp": formattedTimeStampString,
                             "description": document.get("description"),
                             "floorNumber": document.get("floorNumber"),
                             "numberOfFloors": document.get("numberOfFloors"),
@@ -223,6 +226,24 @@ struct AdService {
             }
             
         }
+    }
+    
+    private func formatDate(date:[String.SubSequence]?) -> String {
+        var formatDate = date?.first?.split(separator: "/")
+        formatDate?.swapAt(0, 1)
+        var day = String(formatDate?[0] ?? "")
+        var month = String(formatDate?[1] ?? "")
+        let year = String(formatDate?[2] ?? "")
+        
+        if((Int(day) ?? 0) < 10){
+            day = "0" + day
+        }
+        if((Int(month) ?? 0) < 10){
+            month = "0" + month
+        }
+        
+        let formattedTimeStampString = day + "." + month + "." + year
+        return formattedTimeStampString
     }
     
     func fetchAds(with Keyword:String, completion: @escaping([Ad]) -> Void){
