@@ -189,9 +189,13 @@ struct AdService {
 //                        if let title = document.get("title") as? String {
 //                            print(title)
 //                        }
+                        
                         let timestamp = document.get("date") as? Timestamp
-                        let formattedTimeStamp = timestamp?.dateValue().formatted().split(separator: " ")
-                        var formattedTimeStampString = formatDate(date: formattedTimeStamp)
+                        // Create Date Formatter
+                        let dateFormatter = DateFormatter()
+                        // Set Date Format
+                        dateFormatter.dateFormat = "dd.MM.YYYY"
+                        let formattedDate = dateFormatter.string(from: timestamp?.dateValue() ?? Date())
                         
                         let dictionary = [
                             "adId": documentID,
@@ -201,7 +205,7 @@ struct AdService {
                             "location": document.get("location"),
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
-                            "timestamp": formattedTimeStampString,
+                            "timestamp": formattedDate,
                             "description": document.get("description"),
                             "floorNumber": document.get("floorNumber"),
                             "numberOfFloors": document.get("numberOfFloors"),
@@ -226,23 +230,6 @@ struct AdService {
             }
             
         }
-    }
-    
-    private func formatDate(date:[String.SubSequence]?) -> String {
-        var formatDate = date?.first?.split(separator: "/")
-        var day = String(formatDate?[safe:1] ?? "")
-        var month = String(formatDate?[safe:0] ?? "")
-        let year = String(formatDate?[safe:2] ?? "")
-        
-        if((Int(day) ?? 0) < 10){
-            day = "0" + day
-        }
-        if((Int(month) ?? 0) < 10){
-            month = "0" + month
-        }
-        
-        let formattedTimeStampString = day + "." + month + "." + year
-        return formattedTimeStampString
     }
     
     func fetchAds(with Keyword:String, completion: @escaping([Ad]) -> Void){
