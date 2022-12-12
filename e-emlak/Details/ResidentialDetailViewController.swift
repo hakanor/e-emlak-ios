@@ -16,6 +16,7 @@ class ResidentialDetailViewController: UIViewController {
     private var bookmarkBool = false
     private var items : [Ad]?
     private var ad = Ad(adId: "", dictionary: ["s":""])
+    private var phoneNumber = ""
     
     var imageArray = [UIImage?]()
     var dictionary = [CustomDictionaryObject]()
@@ -117,7 +118,7 @@ class ResidentialDetailViewController: UIViewController {
     private lazy var detailsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.dark
+        label.textColor = themeColors.primary
         label.numberOfLines = 1
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -128,7 +129,7 @@ class ResidentialDetailViewController: UIViewController {
     private lazy var sellerNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.dark
+        label.textColor = themeColors.primary
         label.numberOfLines = 1
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -168,10 +169,18 @@ class ResidentialDetailViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
+        return stackView
+    }()
+    
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = themeColors.dark
+        label.textColor = themeColors.primary
         label.numberOfLines = 1
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
@@ -199,6 +208,34 @@ class ResidentialDetailViewController: UIViewController {
         button.backgroundColor = themeColors.primary
         button.layer.cornerRadius = 20
         button.addTarget(self, action: #selector(handleLocationButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var callButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setTitle("Ara", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(themeColors.white, for: .normal)
+        button.backgroundColor = themeColors.success
+        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleCallButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var messageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        button.setTitle("Mesaj", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(themeColors.white, for: .normal)
+        button.backgroundColor = themeColors.primary
+        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handleMessageButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -256,6 +293,18 @@ class ResidentialDetailViewController: UIViewController {
         
     }
     
+    @objc func handleCallButton(){
+        guard let url = URL(string: "telprompt://\(self.phoneNumber)"),
+            UIApplication.shared.canOpenURL(url) else {
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
+    @objc func handleMessageButton(){
+        
+    }
+    
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
         if bookmarkBool == false {
             print("not bookmarked")
@@ -268,9 +317,14 @@ class ResidentialDetailViewController: UIViewController {
     func configureUI(){
         view.backgroundColor = themeColors.white
         
-        [scrollView, LocationButton] .forEach(view.addSubview(_:))
+        [scrollView, LocationButton, buttonStackView ] .forEach(view.addSubview(_:))
         
-        LocationButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingBottom: 10, paddingRight: 12, width: 42, height: 42)
+        LocationButton.anchor(right: view.safeAreaLayoutGuide.rightAnchor, paddingRight: 24, width: 42, height: 42)
+        LocationButton.centerYAnchor.constraint(equalTo: buttonStackView.centerYAnchor).isActive = true
+        
+        buttonStackView.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: LocationButton.leftAnchor, paddingLeft: 24, paddingBottom: 10, paddingRight: 20)
+        
+        [callButton, messageButton] .forEach(buttonStackView.addArrangedSubview(_:))
         
         scrollView.anchor(top: view.topAnchor,left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
         
@@ -395,6 +449,7 @@ class ResidentialDetailViewController: UIViewController {
         UserService.shared.fetchUser(uid: ad.uid) { user in
             self.sellerName.text = user.name + " " + user.surname
             self.sellerProfilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
+            self.phoneNumber = user.phoneNumber
         }
         
         bookmarkBool = isArticleBookmarked(title: title)
