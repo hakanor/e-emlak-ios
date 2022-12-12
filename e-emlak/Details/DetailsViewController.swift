@@ -65,26 +65,6 @@ class DetailsVievController: UIViewController {
         return button
     }()
     
-    private lazy var bookmarkIcon: UIImageView = {
-        let icon = UIImageView()
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "bookmark")?.withTintColor(.white)
-        icon.image = image
-        icon.isUserInteractionEnabled = true
-        icon.clipsToBounds = true
-        return icon
-    }()
-    
-    private lazy var shareIcon: UIImageView = {
-        let icon = UIImageView()
-        icon.translatesAutoresizingMaskIntoConstraints = false
-        let image = UIImage(named: "share")?.withTintColor(.white)
-        icon.image = image
-        icon.isUserInteractionEnabled = true
-        icon.clipsToBounds = true
-        return icon
-    }()
-    
     private lazy var titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -176,6 +156,38 @@ class DetailsVievController: UIViewController {
         return stackView
     }()
     
+    private lazy var shareBookmarkStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 18
+        return stackView
+    }()
+    
+    private lazy var bookmarkIcon: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "bookmark")
+        button.tintColor = .white
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBookmarkButton), for: .touchUpInside)
+        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
+        return button
+    }()
+    
+    private lazy var shareIcon: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "square.and.arrow.up")
+        button.tintColor = .white
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleShareButton), for: .touchUpInside)
+        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
+        return button
+    }()
+    
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -243,14 +255,15 @@ class DetailsVievController: UIViewController {
     //  MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationItem.setHidesBackButton(true, animated: true)
-        let gestureBookmark = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
-        bookmarkIcon.addGestureRecognizer(gestureBookmark)
+//        self.navigationItem.setHidesBackButton(true, animated: true
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBookmarkStackView)
         configureUI()
         configureCollectionView()
         configurePageControl()
         configureStackView()
+        
+        configureShareBookmarkStackView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -270,6 +283,58 @@ class DetailsVievController: UIViewController {
     @objc func handleBack(){
         self.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func handleBookmarkButton(){
+        if bookmarkBool == false {
+            print("not bookmarked")
+            let image = UIImage(systemName: "bookmark.fill")?.withTintColor(themeColors.grey)
+            self.bookmarkIcon.setImage(image, for: .normal)
+            bookmarkBool = true
+            
+        } else {
+            print("bookmarked")
+            let image = UIImage(systemName: "bookmark")?.withTintColor(themeColors.grey)
+            self.bookmarkIcon.setImage(image, for: .normal)
+            bookmarkBool = false
+        }
+    }
+    
+    @objc func handleShareButton(sender:UIView){
+        // Setting description
+        let firstActivityItem = (self.titleLabel.text ?? "") + " ilanını paylaş."
+
+            // Setting url
+            let secondActivityItem : NSURL = NSURL(string: "http://github.com/hakanor")!
+           
+            let activityViewController : UIActivityViewController = UIActivityViewController(
+                activityItems: [firstActivityItem, secondActivityItem], applicationActivities: nil)
+            
+            // This lines is for the popover you need to show in iPad
+            activityViewController.popoverPresentationController?.sourceView = (sender as! UIButton)
+            
+            // This line remove the arrow of the popover to show in iPad
+            activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+            
+            // Pre-configuring activity items
+            activityViewController.activityItemsConfiguration = [
+            UIActivity.ActivityType.message
+            ] as? UIActivityItemsConfigurationReading
+            
+            // Anything you want to exclude
+            activityViewController.excludedActivityTypes = [
+                UIActivity.ActivityType.copyToPasteboard,
+                UIActivity.ActivityType.message,
+                UIActivity.ActivityType.mail,
+                UIActivity.ActivityType.postToFacebook,
+                UIActivity.ActivityType.postToTwitter
+            ]
+            
+            activityViewController.isModalInPresentation = true
+            self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    
     
     @objc func handleTapGestureBack(_ sender: UITapGestureRecognizer? = nil) {
         self.navigationController?.popViewController(animated: true)
@@ -304,14 +369,6 @@ class DetailsVievController: UIViewController {
         
     }
     
-    @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
-        if bookmarkBool == false {
-            print("not bookmarked")
-        } else {
-            print("bookmarked")
-            
-        }
-    }
     
     func configureUI(){
         view.backgroundColor = themeColors.white
@@ -340,8 +397,13 @@ class DetailsVievController: UIViewController {
         pageControl.anchor(left: contentView.leftAnchor, bottom: adImages.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+//        [shareIcon , bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
+        
+//        shareBookmarkStackView.anchor(top: contentView.topAnchor, right: contentView.rightAnchor, paddingTop: 10, paddingRight: 24)
+        
         view.bringSubviewToFront(adImages)
         view.bringSubviewToFront(pageControl)
+//        view.bringSubviewToFront(shareBookmarkStackView)
         
         titleLabel.anchor(top: adImages.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -378,6 +440,10 @@ class DetailsVievController: UIViewController {
         }
     }
     
+    func configureShareBookmarkStackView(){
+        [shareIcon,bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
+    }
+    
     func configureCollectionView(){
         adImages.dataSource = self
         adImages.delegate = self
@@ -395,7 +461,8 @@ class DetailsVievController: UIViewController {
     private func isArticleBookmarked(title:String) -> Bool {
         for item in items ?? [] {
             if (item.title == title){
-                bookmarkIcon.image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.grey)
+                let image = UIImage(named: "bookmark-filled")?.withTintColor(themeColors.grey)
+                self.bookmarkIcon.setImage(image, for: .normal)
                 return true
             }
         }
@@ -499,4 +566,36 @@ extension DetailsVievController : UICollectionViewDelegate, UICollectionViewData
         sender.view?.removeFromSuperview()
     }
     
+}
+
+
+extension UIApplication {
+    class var topViewController: UIViewController? { return getTopViewController() }
+    private class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController { return getTopViewController(base: nav.visibleViewController) }
+        if let tab = base as? UITabBarController {
+            if let selected = tab.selectedViewController { return getTopViewController(base: selected) }
+        }
+        if let presented = base?.presentedViewController { return getTopViewController(base: presented) }
+        return base
+    }
+
+    private class func _share(_ data: [Any],
+                              applicationActivities: [UIActivity]?,
+                              setupViewControllerCompletion: ((UIActivityViewController) -> Void)?) {
+        let activityViewController = UIActivityViewController(activityItems: data, applicationActivities: nil)
+        setupViewControllerCompletion?(activityViewController)
+        UIApplication.topViewController?.present(activityViewController, animated: true, completion: nil)
+    }
+
+    class func share(_ data: Any...,
+                     applicationActivities: [UIActivity]? = nil,
+                     setupViewControllerCompletion: ((UIActivityViewController) -> Void)? = nil) {
+        _share(data, applicationActivities: applicationActivities, setupViewControllerCompletion: setupViewControllerCompletion)
+    }
+    class func share(_ data: [Any],
+                     applicationActivities: [UIActivity]? = nil,
+                     setupViewControllerCompletion: ((UIActivityViewController) -> Void)? = nil) {
+        _share(data, applicationActivities: applicationActivities, setupViewControllerCompletion: setupViewControllerCompletion)
+    }
 }
