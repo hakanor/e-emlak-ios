@@ -210,7 +210,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
         
         let prime = ad.latitude
         print (prime)
-        let vc = ResidentialDetailViewController(
+        let vc = DetailsVievController(
             title: ad.title,
             location: ad.location,
             imageUrl: ad.images.first ?? "",

@@ -9,9 +9,8 @@ import Foundation
 import UIKit
 import CoreLocation
 import MapKit
-import SwiftUI
 
-class ResidentialDetailViewController: UIViewController {
+class DetailsVievController: UIViewController {
     
     private var bookmarkBool = false
     private var items : [Ad]?
@@ -199,7 +198,7 @@ class ResidentialDetailViewController: UIViewController {
         return label
     }()
     
-    private lazy var LocationButton: UIButton = {
+    private lazy var locationButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = themeColors.white
         let image = UIImage(named:"location-sign")
@@ -317,12 +316,12 @@ class ResidentialDetailViewController: UIViewController {
     func configureUI(){
         view.backgroundColor = themeColors.white
         
-        [scrollView, LocationButton, buttonStackView ] .forEach(view.addSubview(_:))
+        [scrollView, locationButton, buttonStackView ] .forEach(view.addSubview(_:))
         
-        LocationButton.anchor(right: view.safeAreaLayoutGuide.rightAnchor, paddingRight: 24, width: 42, height: 42)
-        LocationButton.centerYAnchor.constraint(equalTo: buttonStackView.centerYAnchor).isActive = true
+        locationButton.anchor(right: view.safeAreaLayoutGuide.rightAnchor, paddingRight: 24, width: 42, height: 42)
+        locationButton.centerYAnchor.constraint(equalTo: buttonStackView.centerYAnchor).isActive = true
         
-        buttonStackView.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: LocationButton.leftAnchor, paddingLeft: 24, paddingBottom: 10, paddingRight: 20)
+        buttonStackView.anchor(left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: locationButton.leftAnchor, paddingLeft: 24, paddingBottom: 10, paddingRight: 20)
         
         [callButton, messageButton] .forEach(buttonStackView.addArrangedSubview(_:))
         
@@ -462,7 +461,7 @@ class ResidentialDetailViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension ResidentialDetailViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailsVievController : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imageArray.count
     }
