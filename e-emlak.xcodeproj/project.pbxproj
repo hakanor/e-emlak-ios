@@ -55,6 +55,7 @@
 		A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */; };
 		A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */; };
 		A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */; };
+		A78758072947762200FE37A6 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78758062947762200FE37A6 /* ProfileTableViewCell.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
@@ -112,6 +113,7 @@
 		A78757FF293E39A900FE37A6 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDetailsViewController.swift; sourceTree = "<group>"; };
 		A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + addBlurEffect.swift"; sourceTree = "<group>"; };
+		A78758062947762200FE37A6 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -216,7 +218,7 @@
 				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
 				A78757EB292BE33B00FE37A6 /* Filter */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
-				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
+				A78758052947760300FE37A6 /* Profile */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -284,6 +286,15 @@
 				A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */,
 			);
 			path = Details;
+			sourceTree = "<group>";
+		};
+		A78758052947760300FE37A6 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
+				A78758062947762200FE37A6 /* ProfileTableViewCell.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		A7BBFD3029193F6200F696AF /* Feed */ = {
@@ -455,6 +466,7 @@
 				A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */,
 				A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */,
 				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
+				A78758072947762200FE37A6 /* ProfileTableViewCell.swift in Sources */,
 				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
 				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
 				A78757F7293D1F3500FE37A6 /* DetailsViewController.swift in Sources */,

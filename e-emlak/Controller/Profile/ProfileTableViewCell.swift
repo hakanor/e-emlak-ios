@@ -1,15 +1,15 @@
 //
-//  FeedTableViewCell.swift
+//  ProfileTableViewCell.swift
 //  e-emlak
 //
-//  Created by Hakan Or on 7.11.2022.
+//  Created by Hakan Or on 12.12.2022.
 //
 
 import Foundation
 import UIKit
 import CoreData
 
-class FeedTableViewCellViewModel {
+class ProfileTableViewCellModel {
     let title: String
     let imageURL: URL?
     var imageData: Data?
@@ -41,12 +41,11 @@ class FeedTableViewCellViewModel {
     }
 }
 
-class FeedTableViewCell: UITableViewCell {
+class ProfileTableViewCell: UITableViewCell {
     
-    var model = FeedTableViewCellViewModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
+    var model = ProfileTableViewCellModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
     // MARK: - Properties
     private let cornerRadiusValue : CGFloat = 16
-    var bookmarkBool : Bool = false
     
     // MARK: - Subviews
     private lazy var containerView: UIView = {
@@ -62,6 +61,7 @@ class FeedTableViewCell: UITableViewCell {
         imageView.image = image
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = cornerRadiusValue
+        imageView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
@@ -96,13 +96,6 @@ class FeedTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var bookmarkIcon: UIImageView = {
-        let bookmarkIcon = UIImageView()
-        let image = UIImage(systemName: "heart")?.withTintColor(themeColors.error)
-        bookmarkIcon.image = image
-        return bookmarkIcon
-    }()
-    
     private lazy var locationIcon: UIImageView = {
         let locationIcon = UIImageView()
         let image = UIImage(named: "location-sign")?.withTintColor(themeColors.error)
@@ -111,34 +104,80 @@ class FeedTableViewCell: UITableViewCell {
         return locationIcon
     }()
     
+    private lazy var buttonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 70
+        return stackView
+    }()
+    
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "trash.fill")
+        button.tintColor = .white
+        button.backgroundColor = themeColors.error
+        button.setImage(image, for: .normal)
+        button.layer.cornerRadius = 10
+        button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var activateButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "checkmark")
+        button.tintColor = .white
+        button.backgroundColor = themeColors.success
+        button.setImage(image, for: .normal)
+        button.layer.cornerRadius = 10
+        button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var editButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "pencil")
+        button.tintColor = .white
+        button.backgroundColor = themeColors.primary
+        button.setImage(image, for: .normal)
+        button.layer.cornerRadius = 10
+        button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     // MARK: - Lifecycle
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+         
         selectionStyle = .none
         contentView.addSubview(containerView)
 
         containerView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 0)
         
-        [adImage, titleLabel, bookmarkIcon, locationLabel, priceLabel, locationIcon] .forEach(containerView.addSubview(_:))
+        [adImage, titleLabel, locationLabel, priceLabel, locationIcon, buttonStackView] .forEach(containerView.addSubview(_:))
         
-        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 96, height: 96)
-        adImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 150)
         
-        titleLabel.anchor(top: containerView.topAnchor, left: adImage.rightAnchor, right:bookmarkIcon.leftAnchor, paddingTop: 12, paddingLeft: 12, paddingRight: 3 )
+        titleLabel.anchor(top: adImage.bottomAnchor, left: containerView.leftAnchor, right:containerView.rightAnchor, paddingTop: 12, paddingLeft: 20, paddingRight: 20 )
         
-        bookmarkIcon.anchor(top: titleLabel.topAnchor, right: priceLabel.rightAnchor, paddingTop: 1, width: 16, height: 16)
+        locationIcon.anchor(top: titleLabel.bottomAnchor, left:
+                                containerView.leftAnchor, paddingTop: 12, paddingLeft: 20, width: 13, height: 13)
         
-        locationIcon.anchor(left: titleLabel.leftAnchor, bottom: containerView.bottomAnchor, paddingBottom: 16, width:13, height: 13)
+        locationLabel.anchor(left: locationIcon.rightAnchor, right: priceLabel.leftAnchor, paddingLeft:5, paddingRight: 10)
         
-        locationLabel.anchor(left: locationIcon.rightAnchor, bottom: containerView.bottomAnchor, paddingLeft:3, paddingBottom: 16)
+        locationLabel.centerYAnchor.constraint(equalTo: locationIcon.centerYAnchor).isActive = true
+        priceLabel.centerYAnchor.constraint(equalTo: locationIcon.centerYAnchor).isActive = true
         
-        priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
+        priceLabel.anchor(right: containerView.rightAnchor, paddingRight: 20)
         
-        let gestureBookmarkIcon = UITapGestureRecognizer(target: self, action: #selector(self.handleTapGestureBookmark(_:)))
-        bookmarkIcon.addGestureRecognizer(gestureBookmarkIcon)
-        bookmarkIcon.isUserInteractionEnabled = true
+        [deleteButton, activateButton, editButton] .forEach(buttonStackView.addArrangedSubview(_:))
+        
+        buttonStackView.anchor(top: locationLabel.bottomAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 14, paddingLeft: 20, paddingBottom: 14, paddingRight: 20)
+    
     }
     
     required init?(coder: NSCoder) {
@@ -152,18 +191,9 @@ class FeedTableViewCell: UITableViewCell {
         containerView.layer.borderWidth = 0.2
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        bookmarkIcon.image = UIImage(systemName: "heart")?.withTintColor(themeColors.grey)
-    }
-    
     // MARK: - Configuration
-    @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
-        print("Bookmark icon")
-        self.bookmarkIcon.image = UIImage(systemName: "heart.fill")?.withTintColor(themeColors.error)
-    }
     
-    func configureCells(with viewModel: FeedTableViewCellViewModel){
+    func configureCells(with viewModel: ProfileTableViewCellModel){
         titleLabel.text = viewModel.title
         self.model = viewModel
         
