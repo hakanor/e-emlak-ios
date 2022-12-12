@@ -397,13 +397,8 @@ class DetailsVievController: UIViewController {
         pageControl.anchor(left: contentView.leftAnchor, bottom: adImages.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-//        [shareIcon , bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
-        
-//        shareBookmarkStackView.anchor(top: contentView.topAnchor, right: contentView.rightAnchor, paddingTop: 10, paddingRight: 24)
-        
         view.bringSubviewToFront(adImages)
         view.bringSubviewToFront(pageControl)
-//        view.bringSubviewToFront(shareBookmarkStackView)
         
         titleLabel.anchor(top: adImages.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -566,36 +561,4 @@ extension DetailsVievController : UICollectionViewDelegate, UICollectionViewData
         sender.view?.removeFromSuperview()
     }
     
-}
-
-
-extension UIApplication {
-    class var topViewController: UIViewController? { return getTopViewController() }
-    private class func getTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController { return getTopViewController(base: nav.visibleViewController) }
-        if let tab = base as? UITabBarController {
-            if let selected = tab.selectedViewController { return getTopViewController(base: selected) }
-        }
-        if let presented = base?.presentedViewController { return getTopViewController(base: presented) }
-        return base
-    }
-
-    private class func _share(_ data: [Any],
-                              applicationActivities: [UIActivity]?,
-                              setupViewControllerCompletion: ((UIActivityViewController) -> Void)?) {
-        let activityViewController = UIActivityViewController(activityItems: data, applicationActivities: nil)
-        setupViewControllerCompletion?(activityViewController)
-        UIApplication.topViewController?.present(activityViewController, animated: true, completion: nil)
-    }
-
-    class func share(_ data: Any...,
-                     applicationActivities: [UIActivity]? = nil,
-                     setupViewControllerCompletion: ((UIActivityViewController) -> Void)? = nil) {
-        _share(data, applicationActivities: applicationActivities, setupViewControllerCompletion: setupViewControllerCompletion)
-    }
-    class func share(_ data: [Any],
-                     applicationActivities: [UIActivity]? = nil,
-                     setupViewControllerCompletion: ((UIActivityViewController) -> Void)? = nil) {
-        _share(data, applicationActivities: applicationActivities, setupViewControllerCompletion: setupViewControllerCompletion)
-    }
 }
