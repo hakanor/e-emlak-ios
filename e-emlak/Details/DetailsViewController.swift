@@ -108,6 +108,7 @@ class DetailsVievController: UIViewController {
     private lazy var sellerNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         label.textColor = themeColors.primary
         label.numberOfLines = 1
         label.lineBreakMode = .byWordWrapping
@@ -119,6 +120,7 @@ class DetailsVievController: UIViewController {
     private lazy var sellerName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         label.textColor = themeColors.grey
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
@@ -196,7 +198,6 @@ class DetailsVievController: UIViewController {
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         label.text = "Açıklama"
-
         return label
     }()
     
@@ -262,8 +263,9 @@ class DetailsVievController: UIViewController {
         configureCollectionView()
         configurePageControl()
         configureStackView()
-        
         configureShareBookmarkStackView()
+        configureGestures()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -336,8 +338,11 @@ class DetailsVievController: UIViewController {
     
     
     
-    @objc func handleTapGestureBack(_ sender: UITapGestureRecognizer? = nil) {
-        self.navigationController?.popViewController(animated: true)
+    @objc func handleInspectProfileGesture(_ sender: UITapGestureRecognizer? = nil) {
+        let vc = InspectProfileViewController(uid: self.ad.uid)
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
     }
     
     @objc func handleLocationButton(){
@@ -437,6 +442,13 @@ class DetailsVievController: UIViewController {
     
     func configureShareBookmarkStackView(){
         [shareIcon,bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
+    }
+    
+    func configureGestures(){
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.handleInspectProfileGesture(_:)))
+        sellerName.addGestureRecognizer(gesture)
+        sellerNameLabel.addGestureRecognizer(gesture)
+        sellerProfilePhoto.addGestureRecognizer(gesture)
     }
     
     func configureCollectionView(){

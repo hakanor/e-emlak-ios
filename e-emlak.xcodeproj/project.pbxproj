@@ -56,6 +56,7 @@
 		A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */; };
 		A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */; };
 		A78758072947762200FE37A6 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78758062947762200FE37A6 /* ProfileTableViewCell.swift */; };
+		A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787580829479D6500FE37A6 /* InspectProfileViewController.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
@@ -114,6 +115,7 @@
 		A7875801293E745B00FE37A6 /* CoordinateDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateDetailsViewController.swift; sourceTree = "<group>"; };
 		A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + addBlurEffect.swift"; sourceTree = "<group>"; };
 		A78758062947762200FE37A6 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		A787580829479D6500FE37A6 /* InspectProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectProfileViewController.swift; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
 				A78758062947762200FE37A6 /* ProfileTableViewCell.swift */,
+				A787580829479D6500FE37A6 /* InspectProfileViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */,
 				A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */,
 				A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */,
+				A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,

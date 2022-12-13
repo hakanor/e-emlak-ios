@@ -208,8 +208,6 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
             print("Default - FeedViewController")
         }
         
-        let prime = ad.latitude
-        print (prime)
         let vc = DetailsVievController(
             title: ad.title,
             location: ad.location,
