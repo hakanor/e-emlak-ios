@@ -18,7 +18,7 @@ class ChangePasswordViewController: UIViewController {
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         let image = UIImage(systemName: "arrow.left")
-        button.tintColor = themeColors.dark
+        button.tintColor = themeColors.white
         button.backgroundColor = .clear
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +167,7 @@ class ChangePasswordViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("Kayıt Ol", for: .normal)
+        button.setTitle("Şifremi Değiştir", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary

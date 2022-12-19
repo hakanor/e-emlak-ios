@@ -233,8 +233,20 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func handleLogOutButton(){
-        logUserOut()
-        dismissPage()
+        
+        let dialogMessage = UIAlertController(title: "Çıkış Yap", message: "Hesabınızdan çıkış yapmak istediğinize emin misiniz?", preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "Çıkış Yap", style: .default) { (action) -> Void in
+            self.logUserOut()
+            self.dismissPage()
+        }
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { (action) -> Void in
+            print("DEBUG: Logout has been cancelled.")
+        }
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
+        
     }
     
     @objc func handleAboutApplicationButton(){
