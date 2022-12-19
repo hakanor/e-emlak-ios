@@ -287,7 +287,7 @@ class ChangePasswordViewController: UIViewController {
         let credential = EmailAuthProvider.credential(withEmail: self.email, password: self.oldPassword)
 
         user?.reauthenticate(with: credential, completion: { (result, error) in
-           if let err = error {
+           if let error = error {
               print(error)
            } else {
                
@@ -320,9 +320,9 @@ class ChangePasswordViewController: UIViewController {
     // MARK: - Selectors
     @objc func handleNextButton(){
         
-        guard let oldPassword = oldPasswordTextField.text else { return }
+        guard oldPasswordTextField.text != nil else { return }
         guard let password = passwordTextField.text else { return }
-        guard let newPassword = newPasswordTextField.text else { return }
+        guard newPasswordTextField.text != nil else { return }
 
         if checkRegisterFields() != "" {
             self.view.makeToast(checkRegisterFields(), duration: 3.0, position: .bottom)
