@@ -21,15 +21,9 @@ class ProfileViewController: UIViewController {
         }
     }
     var ads = [Ad]()
+    var uid = ""
 
     // MARK: - Subviews
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.cornerRadius = 16
-        tableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-        return tableView
-    }()
     
     private lazy var profilePhoto: UIImageView = {
         let imageView = UIImageView()
@@ -94,27 +88,52 @@ class ProfileViewController: UIViewController {
         return label
     }()
     
-    private lazy var settingsButton: UIButton = {
-        let button = UIButton(type: .custom)
-        let image = UIImage(systemName: "gearshape")
-        button.tintColor = .white
-        button.backgroundColor = .clear
-        button.setImage(image, for: .normal)
+    private lazy var buttonsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 15
+        return stackView
+    }()
+    
+    private lazy var editProfileButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "pencil", text: "Profilimi Düzenle", target: self, action: #selector(handleEditProfileButton))
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleSettingsButton), for: .touchUpInside)
-        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
+        return button
+    }()
+    
+    private lazy var changePasswordButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "lock.fill", text: "Şifremi Değiştir", target: self, action: #selector(handleChangePasswordButton))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var logoutButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "rectangle.portrait.and.arrow.forward", text: "Çıkış Yap", target: self, action: #selector(handleLogOutButton))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var aboutApplicationButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "book.fill", text: "Uygulama Hakkında", target: self, action: #selector(handleAddProfilePhoto))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var postAdButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "plus.circle.fill", text: "İlan Ekle", target: self, action: #selector(handlePostAdButton))
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         fetchUser()
         configureUI()
-        configureTableView()
+        configureStackView()
         
         let gestureProfilePhoto = UITapGestureRecognizer(target: self, action: #selector(self.handleAddProfilePhoto(_:)))
         profilePhoto.addGestureRecognizer(gestureProfilePhoto)
@@ -124,15 +143,6 @@ class ProfileViewController: UIViewController {
     func fetchUser(){
         UserService.shared.fetchUser { user in
             self.user = user
-            self.fetchAds(uid:user.uid)
-        }
-    }
-    
-    func fetchAds(uid:String) {
-        AdService.shared.fetchAds(uid:uid) { fetchedAds in
-            self.ads.removeAll()
-            self.ads = fetchedAds
-            self.tableView.reloadData()
         }
     }
     
@@ -141,8 +151,8 @@ class ProfileViewController: UIViewController {
         guard let user = user else { return }
         titleLabel.text = user.name
         self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
-        
     }
+    
     func uploadImage(imageData: Data){
         let uid = AuthService.shared.getCurrentUserId()
         Storage.storage().reference().child("profile_images").child(uid).putData(imageData, metadata: nil) {(meta,error) in
@@ -164,6 +174,22 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    func logUserOut(){
+        do {
+            try Auth.auth().signOut()
+        } catch let error {
+            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+        }
+    }
+    
+    func dismissPage(){
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
+        guard let tab = window.rootViewController as? MainTabViewController else { return }
+        
+        tab.authenticateUserAndConfigureUI()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func configureUI(){
         [backgroundImage, containerView, profilePhoto, ] .forEach(view.addSubview(_:))
         
@@ -175,9 +201,7 @@ class ProfileViewController: UIViewController {
         containerView.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
         containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65).isActive = true
         
-        [titleLabel , subtitleLabel, aboutMeLabel, settingsButton, tableView] .forEach(containerView.addSubview(_:))
-        
-        settingsButton.anchor(top: containerView.topAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 24, paddingRight: 24)
+        [titleLabel , subtitleLabel, aboutMeLabel, buttonsStackView] .forEach(containerView.addSubview(_:))
         
         titleLabel.anchor(top: containerView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 24, paddingRight: 24)
         
@@ -185,23 +209,12 @@ class ProfileViewController: UIViewController {
         
         aboutMeLabel.anchor(top: subtitleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
-        tableView.anchor(top: aboutMeLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
-                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
+        buttonsStackView.anchor(top: aboutMeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 40, paddingRight: 24)
         
     }
     
-    func configureTableView(){
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
-        tableView.showsVerticalScrollIndicator = false
-        tableView.showsHorizontalScrollIndicator = false
-        tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0  )
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
-        tableView.addSubview(refreshControl)
+    func configureStackView(){
+        [editProfileButton, changePasswordButton, logoutButton, aboutApplicationButton, postAdButton] .forEach(buttonsStackView.addArrangedSubview(_:))
     }
     
     // MARK: - Selectors
@@ -209,14 +222,29 @@ class ProfileViewController: UIViewController {
        present(imagePicker,animated: true, completion: nil)
     }
     
-    @objc func handleSettingsButton(){
-       print("nil")
+    @objc func handleEditProfileButton(){
+       print("editProfile")
     }
     
-    @objc func refreshFunc(refreshControl: UIRefreshControl) {
-        tableView.reloadData()
-        print("refresh")
-        refreshControl.endRefreshing()
+    @objc func handleChangePasswordButton(){
+        let nav = UINavigationController(rootViewController: ChangePasswordViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+    }
+    
+    @objc func handleLogOutButton(){
+        logUserOut()
+        dismissPage()
+    }
+    
+    @objc func handleAboutApplicationButton(){
+       print("aboutApplication")
+    }
+    
+    @objc func handlePostAdButton(){
+        let nav = UINavigationController(rootViewController: EstateTypeViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
     }
 }
 
@@ -227,91 +255,5 @@ extension ProfileViewController: UIImagePickerControllerDelegate, UINavigationCo
         guard let imageData = profileImage.jpegData(compressionQuality: 0.6) else { return }
         uploadImage(imageData: imageData)
         dismiss(animated: true, completion: nil)
-    }
-}
-
-extension ProfileViewController : UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.ads.count == 0 {
-            tableView.setEmptyView(title: "Hiç ilan bulunamadı.", message: "", messageImage: UIImage(systemName: "house")!)
-        }
-        else {
-            tableView.restore()
-        }
-        return self.ads.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as! ProfileTableViewCell
-        cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil")
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.deselectRow(at: indexPath, animated: true)
-        let ad = ads[indexPath.row]
-        
-        let propertyType = ad.estateType.split(separator: "/").first
-        
-        var dictionary = [CustomDictionaryObject]()
-        
-        switch propertyType {
-        case "Konut":
-            dictionary = [
-                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
-                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
-                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
-                CustomDictionaryObject(key: "Metrekare (Brüt)", value: String(ad.squareMeterNet)),
-                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
-                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
-                CustomDictionaryObject(key: "Daire Kat Sayısı", value: String(ad.floorNumber)),
-                CustomDictionaryObject(key: "Oda Sayısı", value: String(ad.numberOfRooms)),
-                CustomDictionaryObject(key: "Banyo Sayısı", value: String(ad.numberOfBathrooms)),
-                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
-            ]
-        case "İş Yeri":
-            dictionary = [
-                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
-                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
-                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
-                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
-                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
-                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
-            ]
-        case "Arsa":
-            dictionary = [
-                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
-                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
-                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
-                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
-                CustomDictionaryObject(key: "Metrekare / ₺", value: String(ad.pricePerSquareMeter)),
-                CustomDictionaryObject(key: "Ada Numarası", value: String(ad.blockNumber)),
-                CustomDictionaryObject(key: "Parsel Numarası", value: String(ad.parcelNumber))
-            ]
-        default:
-            print("Default - ProfileViewController")
-        }
-        
-        let prime = ad.latitude
-        print (prime)
-        let vc = DetailsVievController(
-            title: ad.title,
-            location: ad.location,
-            imageUrl: ad.images.first ?? "",
-            description: ad.description,
-            dictionary: dictionary,
-            urls: ad.images,
-            ad : ad
-        )
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
-
-        
-//        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
-
     }
 }

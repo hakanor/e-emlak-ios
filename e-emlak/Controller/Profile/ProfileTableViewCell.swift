@@ -44,6 +44,10 @@ class ProfileTableViewCellModel {
 class ProfileTableViewCell: UITableViewCell {
     
     var model = ProfileTableViewCellModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
+    
+    var adId = ""
+    var delegate: ClickDelegate?
+    var cellIndex: IndexPath?
     // MARK: - Properties
     private let cornerRadiusValue : CGFloat = 16
     
@@ -120,6 +124,7 @@ class ProfileTableViewCell: UITableViewCell {
         button.setImage(image, for: .normal)
         button.layer.cornerRadius = 10
         button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.addTarget(self, action: #selector(handleDeleteButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -132,6 +137,7 @@ class ProfileTableViewCell: UITableViewCell {
         button.setImage(image, for: .normal)
         button.layer.cornerRadius = 10
         button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.addTarget(self, action: #selector(handleActivateButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -144,6 +150,7 @@ class ProfileTableViewCell: UITableViewCell {
         button.setImage(image, for: .normal)
         button.layer.cornerRadius = 10
         button.contentEdgeInsets = UIEdgeInsets(top: 6,left: 6, bottom: 6, right: 6)
+        button.addTarget(self, action: #selector(handleEditButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -190,6 +197,22 @@ class ProfileTableViewCell: UITableViewCell {
         containerView.layer.borderColor = themeColors.grey.cgColor
         containerView.layer.borderWidth = 0.2
     }
+    
+    // MARK: - Selectors
+    
+    @objc func handleDeleteButton(){
+        self.delegate?.deleteClicked(cellIndex!.row)
+    }
+    
+    @objc func handleActivateButton(){
+        self.delegate?.activateClicked()
+    }
+    
+    @objc func handleEditButton(){
+        self.delegate?.editClicked()
+    }
+    
+    
     
     // MARK: - Configuration
     

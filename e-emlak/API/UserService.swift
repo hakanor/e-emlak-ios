@@ -36,6 +36,5 @@ struct UserService {
             let user = User.init(uid: uid, dictionary: data)
             completion(user)
         }
-        
     }
 }

@@ -365,4 +365,13 @@ struct AdService {
             
         }
     }
+    
+    func deleteAd(adId:String, completion: @escaping() -> Void){
+        Firestore.firestore().collection("ads").document(adId).delete { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            completion()
+        }
+    }
 }

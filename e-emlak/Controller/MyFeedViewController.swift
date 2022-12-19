@@ -8,90 +8,221 @@
 import UIKit
 import Firebase
 
+protocol ClickDelegate {
+    func deleteClicked(_ row:Int)
+    func editClicked()
+    func activateClicked()
+}
+
 class MyFeedViewController: UIViewController {
     
     // MARK: - Properties
+    var ads = [Ad]()
+    var uid = ""
+    
+    var user: User? {
+        didSet {
+            applyUserData()
+        }
+    }
     
     // MARK: - Subviews
-    
-    private lazy var uploadButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.setTitle("İlan Ekle", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(themeColors.dark, for: .normal)
-        button.backgroundColor = themeColors.white
-        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
-        button.layer.cornerRadius = 20
-        button.layer.borderWidth = 1
-        button.layer.borderColor = themeColors.grey.cgColor
-        button.addTarget(self, action: #selector(handleUploadButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.primary
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.text = "Size Ait İlanlar"
+        return label
     }()
     
-    private lazy var logOutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        button.setTitle("Çıkış Yap", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(themeColors.dark, for: .normal)
-        button.backgroundColor = themeColors.white
-        button.contentEdgeInsets = UIEdgeInsets(top: 14,left: 14, bottom: 14,right: 14)
-        button.layer.cornerRadius = 20
-        button.layer.borderWidth = 1
-        button.layer.borderColor = themeColors.grey.cgColor
-        button.addTarget(self, action: #selector(handleLogOutButton), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.layer.cornerRadius = 16
+        tableView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        return tableView
     }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUser()
         configureUI()
+        configureTableView()
     }
     
-    // MARK: - Selectors
-    @objc func handleUploadButton(){
-        let nav = UINavigationController(rootViewController: EstateTypeViewController())
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
+    // MARK: - Helpers
+    func applyUserData(){
+        guard let user = user else { return }
+        titleLabel.text = user.name + ", aktif ilanlarınız listelenmektedir."
     }
     
-    @objc func handleLogOutButton(){
-        logUserOut()
-        dismissPage()
+    func configureTableView(){
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0  )
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
     
     // MARK: - API
-    func logUserOut(){
-        do {
-            try Auth.auth().signOut()
-        } catch let error {
-            print("DEBUG: Failed to sign out with error \(error.localizedDescription)")
+    func fetchUser(){
+        UserService.shared.fetchUser { user in
+            self.user = user
+            self.fetchAds(uid:user.uid)
         }
     }
     
-    func dismissPage(){
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow}) else { return }
-        guard let tab = window.rootViewController as? MainTabViewController else { return }
-        
-        tab.authenticateUserAndConfigureUI()
-        self.dismiss(animated: true, completion: nil)
+    func fetchAds(uid:String) {
+        AdService.shared.fetchAds(uid:uid) { fetchedAds in
+            self.ads.removeAll()
+            self.ads = fetchedAds
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Helpers
     func configureUI(){
         view.backgroundColor = themeColors.white
         
-        [uploadButton, logOutButton] .forEach(view.addSubview(_:))
-        uploadButton.anchor(left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingLeft: 20, paddingRight: 20)
-        uploadButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        uploadButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        [titleLabel, tableView] .forEach(view.addSubview(_:))
         
-        logOutButton.anchor(top: uploadButton.bottomAnchor, left: uploadButton.leftAnchor, right: uploadButton.rightAnchor, paddingTop: 15)
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        tableView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
+                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
         
     }
     
+    // MARK: - Selectors
+    @objc func refreshFunc(refreshControl: UIRefreshControl) {
+        tableView.reloadData()
+        print("refresh")
+        refreshControl.endRefreshing()
+    }
+
+    
+}
+
+extension MyFeedViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.ads.count == 0 {
+            tableView.setEmptyView(title: "Hiç ilan bulunamadı.", message: "", messageImage: UIImage(systemName: "house")!)
+        }
+        else {
+            tableView.restore()
+        }
+        return self.ads.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as! ProfileTableViewCell
+        cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil")
+        cell.delegate = self
+        cell.cellIndex = indexPath
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+        let ad = ads[indexPath.row]
+        
+        let propertyType = ad.estateType.split(separator: "/").first
+        
+        var dictionary = [CustomDictionaryObject]()
+        
+        switch propertyType {
+        case "Konut":
+            dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Metrekare (Brüt)", value: String(ad.squareMeterNet)),
+                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                CustomDictionaryObject(key: "Daire Kat Sayısı", value: String(ad.floorNumber)),
+                CustomDictionaryObject(key: "Oda Sayısı", value: String(ad.numberOfRooms)),
+                CustomDictionaryObject(key: "Banyo Sayısı", value: String(ad.numberOfBathrooms)),
+                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+            ]
+        case "İş Yeri":
+            dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+            ]
+        case "Arsa":
+            dictionary = [
+                CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                CustomDictionaryObject(key: "Metrekare / ₺", value: String(ad.pricePerSquareMeter)),
+                CustomDictionaryObject(key: "Ada Numarası", value: String(ad.blockNumber)),
+                CustomDictionaryObject(key: "Parsel Numarası", value: String(ad.parcelNumber))
+            ]
+        default:
+            print("Default - ProfileViewController")
+        }
+        
+        let prime = ad.latitude
+        print (prime)
+        let vc = DetailsVievController(
+            title: ad.title,
+            location: ad.location,
+            imageUrl: ad.images.first ?? "",
+            description: ad.description,
+            dictionary: dictionary,
+            urls: ad.images,
+            ad : ad
+        )
+        
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+
+        
+//        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
+
+    }
+}
+
+extension MyFeedViewController: ClickDelegate {
+    func deleteClicked(_ row: Int) {
+        let dialogMessage = UIAlertController(title: "Uyarı", message: "İlanınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "Tamam", style: .default) { (action) -> Void in
+            print("OK")
+            print(row)
+            AdService.shared.deleteAd(adId: self.ads[row].adId) {
+                print("İlan Başarıyla silindi.")
+            }
+        }
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { (action) -> Void in
+            print("İptal")
+        }
+        dialogMessage.addAction(ok)
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+    
+    func editClicked() {
+        print("Edit")
+    }
+    
+    func activateClicked() {
+        print("Activate")
+    }
 }

@@ -266,6 +266,7 @@ class RegisterViewController: UIViewController {
         surnameTextField.tag = 4
         phoneTextField.tag = 5
     }
+    
     func isValidEmail(tf: UITextField){
         if tf.text!.isValidEmail() {
             tf.rightImage(UIImage(systemName: "checkmark.circle"), imageWidth: 40, padding: 0, tintColor: themeColors.success)

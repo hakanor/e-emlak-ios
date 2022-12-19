@@ -14,6 +14,7 @@ struct User {
     let phoneNumber: String
     var imageUrl: URL?
     let uid: String
+    let password: String
     
     init(uid:String, dictionary: [String: AnyObject]){
         self.uid = uid
@@ -21,6 +22,7 @@ struct User {
         self.surname = dictionary["surname"] as? String ?? ""
         self.email = dictionary["email"] as? String ?? ""
         self.phoneNumber = dictionary["phoneNumber"] as? String ?? ""
+        self.password = dictionary["password"] as? String ?? ""
         
         if let imageUrlString = dictionary["imageUrl"] as? String {
             let defaultUrl = URL(string: "https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/avatar.jpg?alt=media&token=0ee27972-fd95-4f7d-bd64-e019049e8ab5")

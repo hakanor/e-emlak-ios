@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */; };
+		A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */; };
+		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
 		A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginViewController.swift */; };
 		A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EF28F0888400D2F755 /* ThemeColors.swift */; };
 		A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F228F088F400D2F755 /* UIColor + Hex.swift */; };
@@ -73,6 +76,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomButton.swift; sourceTree = "<group>"; };
+		A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
 		A73474EA28F0878600D2F755 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A73474EF28F0888400D2F755 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A73474F228F088F400D2F755 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
@@ -151,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A72D06FB2950FE7600BC88A7 /* ButtonViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */,
+			);
+			path = ButtonViewControllers;
+			sourceTree = "<group>";
+		};
 		A73474EE28F087B800D2F755 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +189,7 @@
 				A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */,
 				A78757F3292C314E00FE37A6 /* Array + Row.swift */,
 				A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */,
+				A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -296,6 +311,8 @@
 				A734750F28F37D7200D2F755 /* ProfileViewController.swift */,
 				A78758062947762200FE37A6 /* ProfileTableViewCell.swift */,
 				A787580829479D6500FE37A6 /* InspectProfileViewController.swift */,
+				A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */,
+				A72D06FB2950FE7600BC88A7 /* ButtonViewControllers */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -459,6 +476,7 @@
 				A734752729019C4B00D2F755 /* UserService.swift in Sources */,
 				A78757F0292BE39C00FE37A6 /* LandFilterViewController.swift in Sources */,
 				A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */,
+				A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */,
 				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
 				A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
@@ -485,7 +503,9 @@
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
+				A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */,
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,
+				A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */,
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
 				A78757EE292BE38C00FE37A6 /* ResidentialFilterViewController.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
