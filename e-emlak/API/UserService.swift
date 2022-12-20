@@ -37,4 +37,8 @@ struct UserService {
             completion(user)
         }
     }
+    
+    func updateUser(uid: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
+        Firestore.firestore().collection("users").document(uid).updateData(dictionary)
+    }
 }

@@ -374,4 +374,8 @@ struct AdService {
             completion()
         }
     }
+    
+    func updateAd(adId: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
+        Firestore.firestore().collection("ads").document(adId).updateData(dictionary)
+    }
 }

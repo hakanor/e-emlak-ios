@@ -97,6 +97,7 @@ class ProfileTableViewCell: UITableViewCell {
         label.text = "153.000 ₺"
         label.contentMode = .scaleToFill
         label.numberOfLines = 2
+        label.textAlignment = .right
         return label
     }()
     
@@ -205,11 +206,11 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     @objc func handleActivateButton(){
-        self.delegate?.activateClicked()
+        self.delegate?.activateClicked(cellIndex!.row)
     }
     
     @objc func handleEditButton(){
-        self.delegate?.editClicked()
+        self.delegate?.editClicked(cellIndex!.row)
     }
     
     

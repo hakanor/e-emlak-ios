@@ -10,8 +10,8 @@ import Firebase
 
 protocol ClickDelegate {
     func deleteClicked(_ row:Int)
-    func editClicked()
-    func activateClicked()
+    func editClicked(_ row: Int)
+    func activateClicked(_ row: Int)
 }
 
 class MyFeedViewController: UIViewController {
@@ -218,11 +218,14 @@ extension MyFeedViewController: ClickDelegate {
         self.present(dialogMessage, animated: true, completion: nil)
     }
     
-    func editClicked() {
+    func editClicked(_ row: Int) {
         print("Edit")
     }
     
-    func activateClicked() {
+    func activateClicked(_ row: Int) {
         print("Activate")
+        AdService.shared.updateAd(adId: self.ads[row].adId, dictionary: ["status":true]) { error in
+            print(error?.localizedDescription)
+        }
     }
 }

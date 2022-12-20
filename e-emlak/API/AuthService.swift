@@ -55,10 +55,6 @@ struct AuthService {
         })
     }
     
-    func updateUser(uid: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
-        Firestore.firestore().collection("users").document(uid).updateData(dictionary)
-    }
-    
     func getCurrentUserId() -> String {
         let user = Auth.auth().currentUser
         var uid = ""

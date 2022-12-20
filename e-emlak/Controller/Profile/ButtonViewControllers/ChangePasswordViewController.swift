@@ -315,7 +315,7 @@ class ChangePasswordViewController: UIViewController {
     
     private func updatePasswordData(uid:String, password:String){
         let passwordDict = ["password":password]
-        AuthService.shared.updateUser(uid: uid, dictionary: passwordDict) { (error) in
+        UserService.shared.updateUser(uid: uid, dictionary: passwordDict) { (error) in
             print("DEBUG: Password changed.")
         }
     }

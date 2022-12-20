@@ -59,18 +59,23 @@ class MainTabViewController: UITabBarController {
     // MARK: - Helpers
     func configureViewControllers(){
         let feed = FeedViewController()
+        feed.title = "Ana Sayfa"
         feed.tabBarItem.image = UIImage(systemName: "house.circle")
         
         let myFeed = MyFeedViewController()
+        myFeed.title = "İlanlarım"
         myFeed.tabBarItem.image = UIImage(systemName: "pencil")
         
         let postAd = EstateTypeViewController()
+        postAd.title = "İlan Ekle"
         postAd.tabBarItem.image = UIImage(systemName: "plus.circle")
         
         let conversations = ConversationsViewController()
+        conversations.title = "Mesajlar"
         conversations.tabBarItem.image = UIImage(systemName: "message.circle")
         
         let profile = ProfileViewController()
+        profile.title = "Profilim"
         profile.tabBarItem.image = UIImage(systemName: "person.circle")
         
         viewControllers = [feed, myFeed, postAd,conversations, profile]

@@ -279,7 +279,7 @@ class EditProfileViewController: UIViewController{
     }
     
     private func updateUserData(uid:String, dictionary:[String:Any]){
-        AuthService.shared.updateUser(uid: uid, dictionary: dictionary) { (error) in
+        UserService.shared.updateUser(uid: uid, dictionary: dictionary) { (error) in
             
         }
     }
@@ -379,6 +379,7 @@ extension EditProfileViewController: UIPickerViewDelegate,UIPickerViewDataSource
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
+    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if cityTextField.isFirstResponder {
             return cityArray.count
