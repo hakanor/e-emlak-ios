@@ -82,7 +82,7 @@ class ProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.grey
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "Merhaba! Benim adım Hakan, Konya ilinde emlakçılık yapıyorum."
         return label
@@ -109,13 +109,13 @@ class ProfileViewController: UIViewController {
     }()
     
     private lazy var logoutButton: ProfileCustomButton = {
-        let button = ProfileCustomButton(leftIconName: "rectangle.portrait.and.arrow.forward", text: "Çıkış Yap", target: self, action: #selector(handleLogOutButton))
+        let button = ProfileCustomButton(leftIconName: "square.and.arrow.up", text: "Çıkış Yap", target: self, action: #selector(handleLogOutButton))
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var aboutApplicationButton: ProfileCustomButton = {
-        let button = ProfileCustomButton(leftIconName: "book.fill", text: "Uygulama Hakkında", target: self, action: #selector(handleAddProfilePhoto))
+        let button = ProfileCustomButton(leftIconName: "book.fill", text: "Uygulama Hakkında", target: self, action: #selector(handleAboutApplicationButton))
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -149,7 +149,9 @@ class ProfileViewController: UIViewController {
     // MARK: - Helpers
     func applyUserData(){
         guard let user = user else { return }
-        titleLabel.text = user.name
+        titleLabel.text = user.name + " " + user.surname
+        subtitleLabel.text = user.city
+        aboutMeLabel.text = user.aboutMe
         self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
     }
     
@@ -252,7 +254,13 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func handleAboutApplicationButton(){
-       print("aboutApplication")
+        let dialogMessage = UIAlertController(title: "Uygulama Hakkında", message: "Bu uygulama Hakan OR tarafından kodlanmıştır.\n\n v1.0.0 \n 2022", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+            print("DEBUG: handleAboutApplicationButton")
+        }
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
     }
     
     @objc func handlePostAdButton(){

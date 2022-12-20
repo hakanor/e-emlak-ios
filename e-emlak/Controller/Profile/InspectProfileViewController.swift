@@ -156,6 +156,16 @@ class InspectProfileViewController: UIViewController {
         return label
     }()
     
+    private lazy var aboutMeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.grey
+        label.numberOfLines = 3
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.text = "Merhaba!"
+        return label
+    }()
+    
     private lazy var activeAdsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -228,9 +238,9 @@ class InspectProfileViewController: UIViewController {
         backgroundImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35).isActive = true
         
         containerView.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
-        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.65).isActive = true
+        containerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.70).isActive = true
         
-        [titleLabel , subtitleLabel, activeAdsLabel, tableView,buttonStackView] .forEach(containerView.addSubview(_:))
+        [titleLabel , subtitleLabel, activeAdsLabel, tableView,buttonStackView,aboutMeLabel] .forEach(containerView.addSubview(_:))
         
         [callButton, messageButton, reportButton] .forEach(buttonStackView.addArrangedSubview(_:))
         
@@ -240,7 +250,9 @@ class InspectProfileViewController: UIViewController {
         
         subtitleLabel.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        activeAdsLabel.anchor(top: subtitleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        aboutMeLabel.anchor(top: subtitleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        activeAdsLabel.anchor(top: aboutMeLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         tableView.anchor(top: activeAdsLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
                          , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop:8, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
@@ -288,6 +300,8 @@ class InspectProfileViewController: UIViewController {
         
         UserService.shared.fetchUser(uid: uid) { user in
             self.titleLabel.text = user.name + " " + user.surname
+            self.subtitleLabel.text = user.city
+            self.aboutMeLabel.text = user.aboutMe
             self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
             self.phoneNumber = user.phoneNumber
             self.activeAdsLabel.text = user.name + " " + user.surname + " Satıcısının Aktif İlanları"

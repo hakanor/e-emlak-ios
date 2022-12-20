@@ -314,7 +314,10 @@ class ChangePasswordViewController: UIViewController {
     }
     
     private func updatePasswordData(uid:String, password:String){
-        Firestore.firestore().collection("users").document(self.uid).updateData(["password":password])
+        let passwordDict = ["password":password]
+        AuthService.shared.updateUser(uid: uid, dictionary: passwordDict) { (error) in
+            print("DEBUG: Password changed.")
+        }
     }
 
     // MARK: - Selectors

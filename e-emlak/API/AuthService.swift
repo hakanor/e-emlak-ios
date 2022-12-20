@@ -45,12 +45,18 @@ struct AuthService {
                 "surname":surname,
                 "phoneNumber":phoneNumber,
                 "uid":uid,
-                "imageUrl":"https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/avatar.jpg?alt=media&token=0ee27972-fd95-4f7d-bd64-e019049e8ab5"
+                "imageUrl":"https://firebasestorage.googleapis.com/v0/b/e-emlak-94aba.appspot.com/o/avatar.jpg?alt=media&token=0ee27972-fd95-4f7d-bd64-e019049e8ab5",
+                "city":"Şehir seçilmemiş.",
+                "aboutMe": "Merhaba, Benim adım " + name + ". e-Emlak uygulamasını kullandığım için çok mutluyum!."
             ] as [String : Any]
             Firestore.firestore().collection("users").document(uid).setData(values, completion: completion)
 
             print("DEBUG: SUCCESFULLY REGISTERED - AuthService")
         })
+    }
+    
+    func updateUser(uid: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
+        Firestore.firestore().collection("users").document(uid).updateData(dictionary)
     }
     
     func getCurrentUserId() -> String {

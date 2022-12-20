@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class EditProfileViewController: UIViewController{
     
     // MARK: - Properties
     var cityArray = [""]
+    var uid = ""
     
     var pickerView = UIPickerView()
     var cityRow = 0
@@ -147,7 +149,26 @@ class EditProfileViewController: UIViewController{
         return textField
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.dark
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        label.text = "Email"
+        return label
+    }()
+    
+    private lazy var emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        textField.setUnderLine()
+        textField.isUserInteractionEnabled = false
+        return textField
+    }()
+    
+    private lazy var aboutMeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.dark
@@ -157,15 +178,25 @@ class EditProfileViewController: UIViewController{
         return label
     }()
     
-    private lazy var descriptionTextField: UITextView = {
+    private lazy var aboutMeTextField: UITextView = {
         let textField = UITextView()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         textField.center = self.view.center
         textField.contentInsetAdjustmentBehavior = .automatic
-        textField.textAlignment = .justified
+        textField.textAlignment = .left
         textField.isScrollEnabled = false
         return textField
+    }()
+    
+    private lazy var characterLimitLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.grey
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.text = "0/0"
+        return label
     }()
   
     // MARK: - Lifecycle
@@ -180,14 +211,10 @@ class EditProfileViewController: UIViewController{
         cityTextField.inputView = pickerView
         
         cityTextField.delegate = self
-        descriptionTextField.delegate = self
+        aboutMeTextField.delegate = self
         
         loadCities()
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height + 200)
     }
     
     // MARK: - Selectors
@@ -203,19 +230,43 @@ class EditProfileViewController: UIViewController{
     @objc func handleNextButton(){
         
         guard nameTextField.text != nil else { return }
-        guard descriptionTextField.text != nil else { return }
         guard surnameTextField.text != nil else { return }
+        guard cityTextField.text != nil else { return }
+        guard aboutMeTextField.text != nil else { return }
         guard phoneNumberTextField.text != nil else { return }
+        
+        if checkRegisterFields() != "" {
+            self.view.makeToast(checkRegisterFields(), duration: 3.0, position: .bottom)
+        } else {
+            let myDict:[String:String] = [
+                "name":nameTextField.text ?? "",
+                "surname":surnameTextField.text ?? "",
+                "city":cityTextField.text ?? "",
+                "phoneNumber":phoneNumberTextField.text ?? "",
+                "aboutMe":aboutMeTextField.text ?? "",
+            ]
+            
+            updateUserData(uid: self.uid, dictionary: myDict)
+            let dialogMessage = UIAlertController(title: "Profil Düzeneleme", message: "Profil düzenleme işlemi başarıyla tamamlandı.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            dialogMessage.addAction(cancel)
+            self.present(dialogMessage, animated: true, completion: nil)
+        }
         
     }
     // MARK: - API
     func fetchUserData(){
         UserService.shared.fetchUser { user in
+            self.uid = user.uid
             self.nameTextField.text = user.name
             self.surnameTextField.text = user.surname
             self.phoneNumberTextField.text = user.phoneNumber
-            self.cityTextField.text = user.uid
-            self.descriptionTextField.text = user.email
+            self.cityTextField.text = user.city
+            self.aboutMeTextField.text = user.aboutMe
+            self.emailTextField.text = user.email
+            self.characterLimitLabel.text = String(user.aboutMe.count) + "/100"
         }
     }
     
@@ -224,6 +275,12 @@ class EditProfileViewController: UIViewController{
         cityArray.removeAll()
         for city in data {
             cityArray.append(city.name)
+        }
+    }
+    
+    private func updateUserData(uid:String, dictionary:[String:Any]){
+        AuthService.shared.updateUser(uid: uid, dictionary: dictionary) { (error) in
+            
         }
     }
     
@@ -237,7 +294,7 @@ class EditProfileViewController: UIViewController{
         [scrollView, nextButton] .forEach(view.addSubview(_:))
         scrollView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: nextButton.topAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 0)
         
-        [nameLabel, nameTextField, cityLabel, cityTextField, descriptionLabel, descriptionTextField, surnameLabel, surnameTextField, divider,  phoneNumberLabel,phoneNumberTextField] .forEach(scrollView.addSubview(_:))
+        [nameLabel, nameTextField, cityLabel, cityTextField, aboutMeLabel, aboutMeTextField, surnameLabel, surnameTextField, divider,  phoneNumberLabel,phoneNumberTextField, emailLabel, emailTextField, characterLimitLabel] .forEach(scrollView.addSubview(_:))
         
         nameLabel.anchor(top: scrollView.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
@@ -255,12 +312,19 @@ class EditProfileViewController: UIViewController{
 
         phoneNumberTextField.anchor(top: phoneNumberLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        descriptionLabel.anchor(top: phoneNumberTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        emailLabel.anchor(top: phoneNumberTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
 
-        descriptionTextField.anchor(top: descriptionLabel
+        emailTextField.anchor(top: emailLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        aboutMeLabel.anchor(top: emailTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+
+        aboutMeTextField.anchor(top: aboutMeLabel
             .bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        characterLimitLabel.anchor(top: aboutMeTextField
+            .bottomAnchor, right: view.rightAnchor, paddingTop: 4, paddingRight: 24)
 
-        divider.anchor(top: descriptionTextField.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingRight: 24, height: 1)
+        divider.anchor(top: aboutMeTextField.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 0, paddingLeft: 24, paddingRight: 24, height: 1)
         
         nextButton.anchor(top: scrollView.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 24, paddingBottom: 0, paddingRight: 24)
         
@@ -292,6 +356,21 @@ class EditProfileViewController: UIViewController{
             }
         }
         return result
+    }
+    
+    func checkRegisterFields() -> String {
+        guard nameTextField.text != "" else { return "İsim alanı boş olamaz."}
+        guard surnameTextField.text != "" else { return "Soyisim alanı boş olamaz."}
+        guard cityTextField.text != "" else { return "Şehir alanı boş olamaz."}
+        guard phoneNumberTextField.text != "" else { return "Telefon numarası alanı boş olamaz."}
+        guard aboutMeTextField.text != "" else { return "Profil açıklaması alanı boş olamaz."}
+        
+        if phoneNumberTextField.text?.count == 13 {
+        } else {
+            return "Telefon numarası doğru formatta değil"
+        }
+        
+        return ""
     }
         
 }
@@ -329,12 +408,20 @@ extension EditProfileViewController: UIPickerViewDelegate,UIPickerViewDataSource
 }
 
 extension EditProfileViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        textView.checkPlaceholder()
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        characterLimitLabel.text = String(textView.text.count) + "/100"
+          if(textView.text.count >= 100 && range.length == 0) {
+              characterLimitLabel.textColor = .red
+              return false
+          } else {
+              characterLimitLabel.textColor = themeColors.grey
+          }
+
+          return true
     }
 }
 
-extension EditProfileViewController: UITextFieldDelegate{
+extension EditProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == cityTextField {
             self.pickerView.selectRow(0, inComponent: 0, animated: true)
