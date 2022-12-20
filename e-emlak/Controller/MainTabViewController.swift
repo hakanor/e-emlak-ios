@@ -64,12 +64,15 @@ class MainTabViewController: UITabBarController {
         let myFeed = MyFeedViewController()
         myFeed.tabBarItem.image = UIImage(systemName: "pencil")
         
+        let postAd = EstateTypeViewController()
+        postAd.tabBarItem.image = UIImage(systemName: "plus.circle")
+        
         let conversations = ConversationsViewController()
         conversations.tabBarItem.image = UIImage(systemName: "message.circle")
         
         let profile = ProfileViewController()
         profile.tabBarItem.image = UIImage(systemName: "person.circle")
         
-        viewControllers = [feed, myFeed, conversations, profile]
+        viewControllers = [feed, myFeed, postAd,conversations, profile]
     }
 }

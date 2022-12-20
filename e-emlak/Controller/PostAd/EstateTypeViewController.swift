@@ -173,7 +173,13 @@ class EstateTypeViewController: UIViewController{
         vc.estateType = estateType
         vc.propertyType = propertyType
         
-        self.navigationController?.pushViewController(vc, animated: true)
+        if self.navigationController != nil {
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let navCon = UINavigationController(rootViewController: vc)
+            navCon.modalPresentationStyle = .fullScreen
+            present(navCon, animated: true)
+        }
         
     }
     // MARK: - API

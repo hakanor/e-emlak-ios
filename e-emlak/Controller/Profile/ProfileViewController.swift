@@ -223,7 +223,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func handleEditProfileButton(){
-       print("editProfile")
+        let nav = UINavigationController(rootViewController: EditProfileViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
     }
     
     @objc func handleChangePasswordButton(){

@@ -10,6 +10,7 @@
 		A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */; };
 		A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */; };
 		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
+		A72D0701295127E400BC88A7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D0700295127E400BC88A7 /* EditProfileViewController.swift */; };
 		A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginViewController.swift */; };
 		A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EF28F0888400D2F755 /* ThemeColors.swift */; };
 		A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F228F088F400D2F755 /* UIColor + Hex.swift */; };
@@ -79,6 +80,7 @@
 		A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomButton.swift; sourceTree = "<group>"; };
 		A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
+		A72D0700295127E400BC88A7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A73474EA28F0878600D2F755 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A73474EF28F0888400D2F755 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A73474F228F088F400D2F755 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */,
+				A72D0700295127E400BC88A7 /* EditProfileViewController.swift */,
 			);
 			path = ButtonViewControllers;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
 				A78757F4292C314E00FE37A6 /* Array + Row.swift in Sources */,
 				A7BBFD3229193F7900F696AF /* FeedTableViewCell.swift in Sources */,
+				A72D0701295127E400BC88A7 /* EditProfileViewController.swift in Sources */,
 				A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */,
 				A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */,
 				A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */,

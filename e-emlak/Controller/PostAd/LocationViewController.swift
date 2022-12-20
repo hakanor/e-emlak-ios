@@ -202,7 +202,7 @@ class LocationViewController: UIViewController{
     
     // MARK: - Selectors
     @objc func handleBack(){
-        self.navigationController?.popViewController(animated: true)
+        dismiss(animated: true,completion: nil)
     }
     @objc func handleCancel(){
         dismiss(animated: true,completion: nil)
