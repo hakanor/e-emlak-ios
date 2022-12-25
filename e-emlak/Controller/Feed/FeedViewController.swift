@@ -121,6 +121,7 @@ class FeedViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
+        fetchAds()
         tableView.reloadData()
         print("refresh")
         refreshControl.endRefreshing()
@@ -221,9 +222,5 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
-
-        
-//        self.view.makeToast("\(indexPath.row) seçildi.", duration: 3.0, position: .bottom)
-
     }
 }

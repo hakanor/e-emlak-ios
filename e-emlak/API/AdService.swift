@@ -226,8 +226,11 @@ struct AdService {
                             "status":document.get("status"),
                             
                         ]
-                        let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
-                        ads.append(ad)
+                        let status = document.get("status") as? Bool ?? true
+                        if status {
+                            let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                            ads.append(ad)
+                        }
                     }
                     completion(ads)
                 }
@@ -261,7 +264,8 @@ struct AdService {
                             "status":document.get("status"),
                         ]
                         let string = document.get("location") as! String
-                        if string.contains(Keyword){
+                        let status = document.get("status") as? Bool ?? true
+                        if string.contains(Keyword) && status == true{
                             let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
                             ads.append(ad)
                         }
@@ -303,14 +307,17 @@ struct AdService {
                             "timestamp": document.get("date"),
                             "status":document.get("status"),
                         ]
+                        
+                        let status = document.get("status") as? Bool ?? true
+                        
                         let string = document.get("location") as! String
-                        if string.contains("Keyword"){
+                        if string.contains("Keyword") && status == true {
                             let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
                             ads.append(ad)
                         }
                         
                         let price = document.get("price") as! Int
-                        if price>(priceMin as! Int) && price<(priceMax as! Int){
+                        if price>(priceMin as! Int) && price<(priceMax as! Int) && status == true {
                             let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
                             ads.append(ad)
                         }
@@ -323,6 +330,60 @@ struct AdService {
     }
     
     func fetchAds(uid:String, completion: @escaping([Ad]) -> Void){
+        var ads = [Ad]()
+        
+        Firestore.firestore().collection("ads").whereField("uid", isEqualTo: uid).order(by: "date",descending: true).getDocuments(completion: ) { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                if snapshot?.isEmpty != true && snapshot != nil {
+                    for document in snapshot!.documents {
+                        let documentID = document.documentID
+                        
+                        let timestamp = document.get("date") as? Timestamp
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "dd.MM.YYYY"
+                        let formattedDate = dateFormatter.string(from: timestamp?.dateValue() ?? Date())
+                        
+                        let dictionary = [
+                            "adId": documentID,
+                            "uid": document.get("uid"),
+                            "title": document.get("title"),
+                            "price": document.get("price"),
+                            "location": document.get("location"),
+                            "images": document.get("images"),
+                            "estateType": document.get("estateType"),
+                            "timestamp": formattedDate,
+                            "description": document.get("description"),
+                            "floorNumber": document.get("floorNumber"),
+                            "numberOfFloors": document.get("numberOfFloors"),
+                            "numberOfRooms": document.get("numberOfRooms"),
+                            "numberOfBathrooms": document.get("numberOfBathrooms"),
+                            "squareMeter": document.get("squareMeter"),
+                            "squareMeterNet": document.get("squareMeterNet"),
+                            "pricePerSquareMeter": document.get("pricePerSquareMeter"),
+                            "latitude": document.get("latitude"),
+                            "longitude": document.get("longitude"),
+                            "parcelNumber": document.get("parcelNumber"),
+                            "blockNumber": document.get("blockNumber"),
+                            "heating": document.get("heating"),
+                            "ageOfBuilding": document.get("ageOfBuilding"),
+                            "status":document.get("status"),
+                        ]
+                        let status = document.get("status") as? Bool ?? true
+                        if status {
+                            let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
+                            ads.append(ad)
+                        }
+                    }
+                    completion(ads)
+                }
+            }
+            
+        }
+    }
+    
+    func fetchAllAds(uid:String, completion: @escaping([Ad]) -> Void){
         var ads = [Ad]()
         
         Firestore.firestore().collection("ads").whereField("uid", isEqualTo: uid).order(by: "date",descending: true).getDocuments(completion: ) { (snapshot, error) in

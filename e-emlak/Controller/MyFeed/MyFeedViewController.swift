@@ -82,7 +82,7 @@ class MyFeedViewController: UIViewController {
     }
     
     func fetchAds(uid:String) {
-        AdService.shared.fetchAds(uid:uid) { fetchedAds in
+        AdService.shared.fetchAllAds(uid:uid) { fetchedAds in
             self.ads.removeAll()
             self.ads = fetchedAds
             self.tableView.reloadData()
