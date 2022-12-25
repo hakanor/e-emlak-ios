@@ -139,6 +139,12 @@ class ProfileViewController: UIViewController {
         profilePhoto.addGestureRecognizer(gestureProfilePhoto)
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        fetchUser()
+    }
+    
     // MARK: - API
     func fetchUser(){
         UserService.shared.fetchUser { user in
