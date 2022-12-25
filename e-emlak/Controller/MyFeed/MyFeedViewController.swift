@@ -56,7 +56,7 @@ class MyFeedViewController: UIViewController {
     // MARK: - Helpers
     func applyUserData(){
         guard let user = user else { return }
-        titleLabel.text = user.name + ", aktif ilanlarınız listelenmektedir."
+        titleLabel.text = user.name + ", tüm ilanlarınız listelenmektedir."
     }
     
     func configureTableView(){
@@ -220,7 +220,54 @@ extension MyFeedViewController: ClickDelegate {
     }
     
     func editClicked(_ row: Int) {
-        print(self.ads[row].estateType)
+        
+        let dialogMessage = UIAlertController(title: "İlan Güncelleme Seçenekleri", message: "", preferredStyle: .alert)
+        
+        let location = UIAlertAction(title: "Konum güncelleme.", style: .default) { (action) -> Void in
+            
+        }
+        
+        let coordinate = UIAlertAction(title: "Harita konumu güncelleme.", style: .default) { (action) -> Void in
+            let adId = self.ads[row].adId
+            let lat = self.ads[row].latitude
+            let lng = self.ads[row].longitude
+            
+            let vc = EditCoordinateViewController(adId: adId , lat: lat, lng: lng)
+            
+            if self.navigationController != nil {
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let navCon = UINavigationController(rootViewController: vc)
+                navCon.modalPresentationStyle = .fullScreen
+                self.present(navCon, animated: true)
+            }
+        }
+        
+        let details = UIAlertAction(title: "İlan detayı güncelleme.", style: .default) { (action) -> Void in
+            let propertyType = self.ads[row].estateType.split(separator: "/").first
+            
+            switch propertyType {
+            case "Konut":
+                print(propertyType)
+            case "Arsa":
+                print(propertyType)
+            case "İş Yeri":
+                print(propertyType)
+            default:
+                print("PropertyType error - MyFeedViewController")
+            }
+            
+        }
+        
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { (action) -> Void in
+            
+        }
+        
+        dialogMessage.addAction(location)
+        dialogMessage.addAction(coordinate)
+        dialogMessage.addAction(details)
+        dialogMessage.addAction(cancel)
+        self.present(dialogMessage, animated: true, completion: nil)
     }
     
     func activateClicked(_ row: Int) {

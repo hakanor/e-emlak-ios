@@ -69,6 +69,7 @@
 		A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD33291946E800F696AF /* UILabel + Image.swift */; };
 		A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD3529197D5A00F696AF /* AdModel.swift */; };
 		A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C83F22291571EC00CFA8C9 /* StorageService.swift */; };
+		A7C92D8D2958C25500268DA5 /* EditCoordinateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -131,6 +132,7 @@
 		A7BBFD33291946E800F696AF /* UILabel + Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Image.swift"; sourceTree = "<group>"; };
 		A7BBFD3529197D5A00F696AF /* AdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdModel.swift; sourceTree = "<group>"; };
 		A7C83F22291571EC00CFA8C9 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoordinateViewController.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
+				A7C92D8B2958C20400268DA5 /* EditAd */,
 			);
 			path = MyFeed;
 			sourceTree = "<group>";
@@ -337,6 +340,14 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		A7C92D8B2958C20400268DA5 /* EditAd */ = {
+			isa = PBXGroup;
+			children = (
+				A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */,
+			);
+			path = EditAd;
+			sourceTree = "<group>";
+		};
 		A7F4F3F92906E2F3001B5048 /* PostAd */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,6 +506,7 @@
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
+				A7C92D8D2958C25500268DA5 /* EditCoordinateViewController.swift in Sources */,
 				A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */,
 				A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */,
 				A734751028F37D7200D2F755 /* ProfileViewController.swift in Sources */,
