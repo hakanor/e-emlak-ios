@@ -168,6 +168,14 @@
 			path = ButtonViewControllers;
 			sourceTree = "<group>";
 		};
+		A72D0702295311CD00BC88A7 /* MyFeed */ = {
+			isa = PBXGroup;
+			children = (
+				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
+			);
+			path = MyFeed;
+			sourceTree = "<group>";
+		};
 		A73474EE28F087B800D2F755 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,7 +243,7 @@
 				A734750928F37CD100D2F755 /* MainTabViewController.swift */,
 				A7F4F3F92906E2F3001B5048 /* PostAd */,
 				A7BBFD3029193F6200F696AF /* Feed */,
-				A734751128F37D8300D2F755 /* MyFeedViewController.swift */,
+				A72D0702295311CD00BC88A7 /* MyFeed */,
 				A78757EB292BE33B00FE37A6 /* Filter */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
 				A78758052947760300FE37A6 /* Profile */,

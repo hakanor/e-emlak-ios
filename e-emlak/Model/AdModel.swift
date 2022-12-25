@@ -30,6 +30,7 @@ struct Ad {
     var blockNumber: Int
     var heating: String
     var ageOfBuilding: Int
+    var status: Bool
     
     init (adId: String, dictionary: [String:Any]) {
         self.adId = adId
@@ -54,5 +55,6 @@ struct Ad {
         self.heating = dictionary["heating"] as? String ?? ""
         self.ageOfBuilding = dictionary["ageOfBuilding"] as? Int ?? 0
         self.timestamp = dictionary["timestamp"] as? String ?? ""
+        self.status = dictionary["status"] as? Bool ?? true
     }
 }

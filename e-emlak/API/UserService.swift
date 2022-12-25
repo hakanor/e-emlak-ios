@@ -38,7 +38,12 @@ struct UserService {
         }
     }
     
-    func updateUser(uid: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
-        Firestore.firestore().collection("users").document(uid).updateData(dictionary)
+    func updateUser(uid: String, dictionary: [String:Any] , completion: @escaping() -> Void) {
+        Firestore.firestore().collection("users").document(uid).updateData(dictionary) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            completion()
+        }
     }
 }

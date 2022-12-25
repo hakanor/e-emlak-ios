@@ -104,6 +104,7 @@ class MyFeedViewController: UIViewController {
     
     // MARK: - Selectors
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
+        fetchAds(uid: self.uid)
         tableView.reloadData()
         print("refresh")
         refreshControl.endRefreshing()
@@ -125,7 +126,7 @@ extension MyFeedViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileTableViewCell") as! ProfileTableViewCell
-        cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil")
+        cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil", status: ads[indexPath.row].status)
         cell.delegate = self
         cell.cellIndex = indexPath
         return cell
@@ -219,13 +220,30 @@ extension MyFeedViewController: ClickDelegate {
     }
     
     func editClicked(_ row: Int) {
-        print("Edit")
+        print(self.ads[row].estateType)
     }
     
     func activateClicked(_ row: Int) {
         print("Activate")
-        AdService.shared.updateAd(adId: self.ads[row].adId, dictionary: ["status":true]) { error in
-            print(error?.localizedDescription)
+        let statusBool = self.ads[row].status
+        
+        if statusBool {
+            AdService.shared.updateAd(adId: self.ads[row].adId, dictionary: ["status":false]) {
+                DispatchQueue.main.async {
+                    self.ads[row].status = false
+                    self.tableView.reloadData()
+                    
+                }
+            }
+            
+        } else {
+            AdService.shared.updateAd(adId: self.ads[row].adId, dictionary: ["status":true]) {
+                DispatchQueue.main.async {
+                    self.ads[row].status = true
+                    self.tableView.reloadData()
+                }
+            }
         }
+        
     }
 }

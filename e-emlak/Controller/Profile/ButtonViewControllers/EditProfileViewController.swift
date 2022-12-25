@@ -279,8 +279,8 @@ class EditProfileViewController: UIViewController{
     }
     
     private func updateUserData(uid:String, dictionary:[String:Any]){
-        UserService.shared.updateUser(uid: uid, dictionary: dictionary) { (error) in
-            
+        UserService.shared.updateUser(uid: uid, dictionary: dictionary) {
+            print("DEBUG: updateUserData - EditProfileVC")
         }
     }
     

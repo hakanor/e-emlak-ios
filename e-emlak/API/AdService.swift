@@ -89,6 +89,7 @@ struct AdService {
             "heating":heating,
             "latitude":latitude,
             "longitude":longitude,
+            "status":true,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         
@@ -132,6 +133,7 @@ struct AdService {
             "heating":heating,
             "latitude":latitude,
             "longitude":longitude,
+            "status":true,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         
@@ -169,6 +171,7 @@ struct AdService {
             "parcelNumber":parcelNumber,
             "latitude":latitude,
             "longitude":longitude,
+            "status":true,
             "date": FieldValue.serverTimestamp()
         ] as [String : Any]
         
@@ -179,7 +182,7 @@ struct AdService {
     
     func fetchAds(completion: @escaping([Ad]) -> Void){
         var ads = [Ad]()
-        Firestore.firestore().collection("ads").order(by: "date",descending: true).addSnapshotListener { snapshot, error in
+        Firestore.firestore().collection("ads").order(by: "date",descending: true).getDocuments(completion: ) { (snapshot, error)   in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -220,6 +223,7 @@ struct AdService {
                             "blockNumber": document.get("blockNumber"),
                             "heating": document.get("heating"),
                             "ageOfBuilding": document.get("ageOfBuilding"),
+                            "status":document.get("status"),
                             
                         ]
                         let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
@@ -235,7 +239,7 @@ struct AdService {
     func fetchAds(with Keyword:String, completion: @escaping([Ad]) -> Void){
         var ads = [Ad]()
         
-        Firestore.firestore().collection("ads").addSnapshotListener { snapshot, error in
+        Firestore.firestore().collection("ads").getDocuments(completion: ) { (snapshot, error)  in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -254,6 +258,7 @@ struct AdService {
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
                             "timestamp": document.get("date"),
+                            "status":document.get("status"),
                         ]
                         let string = document.get("location") as! String
                         if string.contains(Keyword){
@@ -277,7 +282,7 @@ struct AdService {
         guard let priceMin = dictionary["priceMin"] else { return }
         guard let priceMax = dictionary["priceMin"] else{ return }
         
-        Firestore.firestore().collection("ads").addSnapshotListener { snapshot, error in
+        Firestore.firestore().collection("ads").getDocuments(completion: ) { (snapshot, error)  in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -296,6 +301,7 @@ struct AdService {
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
                             "timestamp": document.get("date"),
+                            "status":document.get("status"),
                         ]
                         let string = document.get("location") as! String
                         if string.contains("Keyword"){
@@ -318,7 +324,8 @@ struct AdService {
     
     func fetchAds(uid:String, completion: @escaping([Ad]) -> Void){
         var ads = [Ad]()
-        Firestore.firestore().collection("ads").whereField("uid", isEqualTo: uid).order(by: "date",descending: true).addSnapshotListener { snapshot, error in
+        
+        Firestore.firestore().collection("ads").whereField("uid", isEqualTo: uid).order(by: "date",descending: true).getDocuments(completion: ) { (snapshot, error) in
             if let error = error {
                 print(error.localizedDescription)
             } else {
@@ -354,7 +361,7 @@ struct AdService {
                             "blockNumber": document.get("blockNumber"),
                             "heating": document.get("heating"),
                             "ageOfBuilding": document.get("ageOfBuilding"),
-                            
+                            "status":document.get("status"),
                         ]
                         let ad = Ad(adId: documentID, dictionary: dictionary as [String : Any])
                         ads.append(ad)
@@ -375,7 +382,12 @@ struct AdService {
         }
     }
     
-    func updateAd(adId: String, dictionary: [String:Any] , completion: @escaping(Error?) -> Void) {
-        Firestore.firestore().collection("ads").document(adId).updateData(dictionary)
+    func updateAd(adId: String, dictionary: [String:Any] , completion: @escaping() -> Void) {
+        Firestore.firestore().collection("ads").document(adId).updateData(dictionary) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            completion()
+        }
     }
 }

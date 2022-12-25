@@ -46,6 +46,7 @@ class ProfileTableViewCell: UITableViewCell {
     var model = ProfileTableViewCellModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
     
     var adId = ""
+    var adStatus = true
     var delegate: ClickDelegate?
     var cellIndex: IndexPath?
     // MARK: - Properties
@@ -239,7 +240,7 @@ class ProfileTableViewCell: UITableViewCell {
         
     }
     
-    func configureCell(title:String, price:String, location:String, url:String){
+    func configureCell(title:String, price:String, location:String, url:String, status: Bool){
         titleLabel.text = title
         priceLabel.text = price + " ₺"
         let locationSplitted = location.split(separator: "/")
@@ -247,7 +248,16 @@ class ProfileTableViewCell: UITableViewCell {
         locationLabel.text = String(locationNew)
         let formattedURL = URL(string: url)
         self.adImage.sd_setImage(with: formattedURL,completed: nil)
-        
+        self.adStatus = status
+        if status == false {
+            activateButton.backgroundColor = themeColors.grey
+            let image = UIImage(systemName: "timer")
+            activateButton.setImage(image, for: .normal)
+        } else {
+            activateButton.backgroundColor = themeColors.success
+            let image = UIImage(systemName: "checkmark")
+            activateButton.setImage(image, for: .normal)
+        }
     }
     
 }
