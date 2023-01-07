@@ -130,9 +130,11 @@ class FeedTableViewCell: UITableViewCell {
         
         bookmarkIcon.anchor(top: titleLabel.topAnchor, right: priceLabel.rightAnchor, paddingTop: 1, width: 16, height: 16)
         
-        locationIcon.anchor(left: titleLabel.leftAnchor, bottom: containerView.bottomAnchor, paddingBottom: 16, width:13, height: 13)
+        locationIcon.anchor(top: titleLabel.bottomAnchor, left: titleLabel.leftAnchor, paddingTop: 12, width:13, height: 13)
         
-        locationLabel.anchor(left: locationIcon.rightAnchor, bottom: containerView.bottomAnchor, paddingLeft:3, paddingBottom: 16)
+//        locationLabel.anchor(left: locationIcon.rightAnchor, bottom: containerView.bottomAnchor, paddingLeft:3, paddingBottom: 16)
+        
+        locationLabel.anchor(top: locationIcon.topAnchor, left: locationIcon.rightAnchor, paddingTop:-2 ,paddingLeft:3)
         
         priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
         
@@ -187,7 +189,16 @@ class FeedTableViewCell: UITableViewCell {
     
     func configureCell(title:String, price:String, location:String, url:String){
         titleLabel.text = title
-        priceLabel.text = price + " ₺"
+        
+        let unformattedValue : Int = Int(price) ?? 0
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal // or .decimal if desired
+        formatter.maximumFractionDigits = 0; //change as desired
+        formatter.locale = Locale.current // or = Locale(identifier: "de_DE"), more locale identifier codes:
+        formatter.groupingSeparator = "."
+        let displayValue : String = formatter.string(from: NSNumber(value: unformattedValue))! // displayValue: "$3,534,235" ```
+        
+        priceLabel.text = displayValue + " ₺"
         let locationSplitted = location.split(separator: "/")
         let locationNew = (locationSplitted[safe: 0] ?? "") + "/" + (locationSplitted[safe: 1] ?? "")
         locationLabel.text = String(locationNew)

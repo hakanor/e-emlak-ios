@@ -76,6 +76,11 @@ class FeedViewController: UIViewController {
         tableView.reloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchAds()
+        tableView.reloadData()
+    }
+    
     // MARK: - API
     func fetchAds() {
         AdService.shared.fetchAds { fetchedAds in

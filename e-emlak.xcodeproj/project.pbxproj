@@ -70,6 +70,10 @@
 		A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD3529197D5A00F696AF /* AdModel.swift */; };
 		A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C83F22291571EC00CFA8C9 /* StorageService.swift */; };
 		A7C92D8D2958C25500268DA5 /* EditCoordinateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */; };
+		A7C92D8F2958CE3500268DA5 /* EditLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D8E2958CE3500268DA5 /* EditLocationViewController.swift */; };
+		A7C92D912959A7E900268DA5 /* EditResidentialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D902959A7E900268DA5 /* EditResidentialDetailsVC.swift */; };
+		A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */; };
+		A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -133,6 +137,10 @@
 		A7BBFD3529197D5A00F696AF /* AdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdModel.swift; sourceTree = "<group>"; };
 		A7C83F22291571EC00CFA8C9 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoordinateViewController.swift; sourceTree = "<group>"; };
+		A7C92D8E2958CE3500268DA5 /* EditLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocationViewController.swift; sourceTree = "<group>"; };
+		A7C92D902959A7E900268DA5 /* EditResidentialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditResidentialDetailsVC.swift; sourceTree = "<group>"; };
+		A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLandDetailsVC.swift; sourceTree = "<group>"; };
+		A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommercialDetailsVC.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -249,6 +257,7 @@
 				A72D0702295311CD00BC88A7 /* MyFeed */,
 				A78757EB292BE33B00FE37A6 /* Filter */,
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
+				A78757F5293D1F0E00FE37A6 /* Details */,
 				A78758052947760300FE37A6 /* Profile */,
 			);
 			path = Controller;
@@ -344,6 +353,10 @@
 			isa = PBXGroup;
 			children = (
 				A7C92D8C2958C25500268DA5 /* EditCoordinateViewController.swift */,
+				A7C92D8E2958CE3500268DA5 /* EditLocationViewController.swift */,
+				A7C92D902959A7E900268DA5 /* EditResidentialDetailsVC.swift */,
+				A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */,
+				A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */,
 			);
 			path = EditAd;
 			sourceTree = "<group>";
@@ -382,7 +395,6 @@
 				A734750728F37BD000D2F755 /* View */,
 				A734750628F37BCD00D2F755 /* ViewModel */,
 				A734750528F37BC900D2F755 /* Controller */,
-				A78757F5293D1F0E00FE37A6 /* Details */,
 				A734750428F37BC600D2F755 /* API */,
 				A734750328F37BC200D2F755 /* Utilities */,
 				A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */,
@@ -503,7 +515,9 @@
 				A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
 				A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */,
+				A7C92D912959A7E900268DA5 /* EditResidentialDetailsVC.swift in Sources */,
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
+				A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
 				A7C92D8D2958C25500268DA5 /* EditCoordinateViewController.swift in Sources */,
@@ -527,10 +541,12 @@
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
+				A7C92D8F2958CE3500268DA5 /* EditLocationViewController.swift in Sources */,
 				A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */,
 				A73474FB28F0BF8F00D2F755 /* AttributedColor + String.swift in Sources */,
 				A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */,
 				A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */,
+				A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */,
 				A78757EE292BE38C00FE37A6 /* ResidentialFilterViewController.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
 				A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */,

@@ -23,7 +23,7 @@ class CoordinateViewController: UIViewController{
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
         let image = UIImage(systemName: "arrow.left")
-        button.tintColor = .black
+        button.tintColor = .white
         button.backgroundColor = .clear
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false

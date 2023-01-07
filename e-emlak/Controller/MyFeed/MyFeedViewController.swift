@@ -53,6 +53,12 @@ class MyFeedViewController: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        fetchUser()
+        fetchAds(uid: self.uid)
+        tableView.reloadData()
+    }
+    
     // MARK: - Helpers
     func applyUserData(){
         guard let user = user else { return }
@@ -224,6 +230,17 @@ extension MyFeedViewController: ClickDelegate {
         let dialogMessage = UIAlertController(title: "İlan Güncelleme Seçenekleri", message: "", preferredStyle: .alert)
         
         let location = UIAlertAction(title: "Konum güncelleme.", style: .default) { (action) -> Void in
+            let adId = self.ads[row].adId
+            let location = self.ads[row].location
+            let vc = EditLocationViewController(adId: adId, location: location)
+            
+            if self.navigationController != nil {
+                self.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                let navCon = UINavigationController(rootViewController: vc)
+                navCon.modalPresentationStyle = .fullScreen
+                self.present(navCon, animated: true)
+            }
             
         }
         
@@ -248,11 +265,37 @@ extension MyFeedViewController: ClickDelegate {
             
             switch propertyType {
             case "Konut":
-                print(propertyType)
+                let vc = EditResidentialDetailsVC(ad: self.ads[row])
+                
+                if self.navigationController != nil {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let navCon = UINavigationController(rootViewController: vc)
+                    navCon.modalPresentationStyle = .fullScreen
+                    self.present(navCon, animated: true)
+                }
+                
             case "Arsa":
-                print(propertyType)
+                let vc = EditLandDetailsVC(ad: self.ads[row])
+                
+                if self.navigationController != nil {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let navCon = UINavigationController(rootViewController: vc)
+                    navCon.modalPresentationStyle = .fullScreen
+                    self.present(navCon, animated: true)
+                }
+               
             case "İş Yeri":
-                print(propertyType)
+                let vc = EditCommercialDetailsVC(ad: self.ads[row])
+                
+                if self.navigationController != nil {
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let navCon = UINavigationController(rootViewController: vc)
+                    navCon.modalPresentationStyle = .fullScreen
+                    self.present(navCon, animated: true)
+                }
             default:
                 print("PropertyType error - MyFeedViewController")
             }

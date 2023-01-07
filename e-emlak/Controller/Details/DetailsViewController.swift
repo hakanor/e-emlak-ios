@@ -432,10 +432,36 @@ class DetailsVievController: UIViewController {
         let countOfDictionary = self.dictionary.count - 1
         for i in 0...countOfDictionary {
             let cell = DetailsTableViewCell()
-            cell.config(
-                leftSide: Array(dictionary)[i].key,
-                rightSide: Array(dictionary)[i].value
-            )
+            
+            if Array(dictionary)[i].key == "Fiyat" {
+                let left = Array(dictionary)[i].key
+//                var rightString = Array(dictionary)[i].value
+//                rightString = rightString.substring(0, rightString.length() - 2)
+
+                let splitted = Array(dictionary)[i].value.split(separator: " ")
+                
+                print(Int(splitted[0]) ?? 0 )
+                let unformattedValue : Int = Int(splitted[0]) ?? 0
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .decimal // or .decimal if desired
+                formatter.maximumFractionDigits = 0; //change as desired
+                formatter.locale = Locale.current // or = Locale(identifier: "de_DE"), more locale identifier codes:
+                formatter.groupingSeparator = "."
+                let displayValue : String = formatter.string(from: NSNumber(value: unformattedValue))! // displayValue: "$3,534,235" ```
+                
+                let right = displayValue + " ₺"
+                
+                cell.config(
+                    leftSide: left,
+                    rightSide: right
+                )
+            } else {
+                cell.config(
+                    leftSide: Array(dictionary)[i].key,
+                    rightSide: Array(dictionary)[i].value
+                )
+            }
+            
             stackView.addArrangedSubview(cell)
         }
     }
@@ -446,8 +472,10 @@ class DetailsVievController: UIViewController {
     
     func configureGestures(){
         let gesture = UITapGestureRecognizer(target: self, action: #selector(self.handleInspectProfileGesture(_:)))
-        sellerName.addGestureRecognizer(gesture)
-        sellerNameLabel.addGestureRecognizer(gesture)
+        let gestureForSellerName = UITapGestureRecognizer(target: self, action: #selector(self.handleInspectProfileGesture(_:)))
+        let gestureForSellerNameLabel = UITapGestureRecognizer(target: self, action: #selector(self.handleInspectProfileGesture(_:)))
+        sellerName.addGestureRecognizer(gestureForSellerName)
+        sellerNameLabel.addGestureRecognizer(gestureForSellerNameLabel)
         sellerProfilePhoto.addGestureRecognizer(gesture)
     }
     
