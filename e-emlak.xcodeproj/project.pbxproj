@@ -63,6 +63,8 @@
 		A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787580829479D6500FE37A6 /* InspectProfileViewController.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
+		A7930E26296A1031002482C2 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E25296A1031002482C2 /* ImageSlideshow */; };
+		A7930E28296A1031002482C2 /* ImageSlideshow/SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */; };
 		A7B0A5022919939E0040C462 /* UITableView + EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */; };
 		A7B3FAF7292AEB7C0003F76D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = A7B3FAF6292AEB7C0003F76D /* Toast */; };
 		A7BBFD3229193F7900F696AF /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */; };
@@ -155,10 +157,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7930E26296A1031002482C2 /* ImageSlideshow in Frameworks */,
 				A7B3FAF7292AEB7C0003F76D /* Toast in Frameworks */,
 				A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */,
 				A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */,
 				A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */,
+				A7930E28296A1031002482C2 /* ImageSlideshow/SDWebImage in Frameworks */,
 				A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */,
 				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
 				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
@@ -434,6 +438,8 @@
 				A734751E28F8277F00D2F755 /* IQKeyboardManagerSwift */,
 				A734752C2901B2F700D2F755 /* SDWebImage */,
 				A7B3FAF6292AEB7C0003F76D /* Toast */,
+				A7930E25296A1031002482C2 /* ImageSlideshow */,
+				A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */,
 			);
 			productName = "e-emlak";
 			productReference = A7FD2AB628EAFC4800E48E4A /* e-emlak.app */;
@@ -468,6 +474,7 @@
 				A734751D28F8277F00D2F755 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				A734752B2901B2F700D2F755 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				A7B3FAF5292AEB7C0003F76D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
 			);
 			productRefGroup = A7FD2AB728EAFC4800E48E4A /* Products */;
 			projectDirPath = "";
@@ -792,6 +799,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zvonicek/ImageSlideshow";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		A7B3FAF5292AEB7C0003F76D /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift";
@@ -837,6 +852,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		A7930E25296A1031002482C2 /* ImageSlideshow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			productName = ImageSlideshow;
+		};
+		A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */;
+			productName = ImageSlideshow/SDWebImage;
 		};
 		A7B3FAF6292AEB7C0003F76D /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;

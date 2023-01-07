@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import CoreLocation
 import MapKit
+import ImageSlideshow
 
 class DetailsVievController: UIViewController {
     
@@ -51,6 +52,15 @@ class DetailsVievController: UIViewController {
         let control = UIPageControl()
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
+    }()
+    
+    private lazy var slideshow: ImageSlideshow = {
+        let slideshow = ImageSlideshow()
+        slideshow.translatesAutoresizingMaskIntoConstraints = false
+        slideshow.pageIndicator = pageControl
+        slideshow.contentScaleMode = .scaleAspectFill
+        slideshow.preload = .all
+        return slideshow
     }()
     
     private lazy var backButton: UIButton = {
@@ -256,7 +266,6 @@ class DetailsVievController: UIViewController {
     //  MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationItem.setHidesBackButton(true, animated: true
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: shareBookmarkStackView)
         configureUI()
@@ -265,7 +274,6 @@ class DetailsVievController: UIViewController {
         configureStackView()
         configureShareBookmarkStackView()
         configureGestures()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -336,13 +344,15 @@ class DetailsVievController: UIViewController {
             self.present(activityViewController, animated: true, completion: nil)
     }
     
-    
-    
     @objc func handleInspectProfileGesture(_ sender: UITapGestureRecognizer? = nil) {
         let vc = InspectProfileViewController(uid: self.ad.uid)
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
+    }
+    
+    @objc func handleSlideTap(_ sender: UITapGestureRecognizer? = nil) {
+        slideshow.presentFullScreenController(from: self)
     }
     
     @objc func handleLocationButton(){
@@ -394,18 +404,18 @@ class DetailsVievController: UIViewController {
         contentView.anchor(top: scrollView.topAnchor, bottom: scrollView.bottomAnchor, width: UIScreen.main.bounds.width)
         contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        [adImages, pageControl, titleLabel, locationLabel, sellerNameLabel, sellerName, sellerProfilePhoto ,locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
+        [slideshow, pageControl, titleLabel, locationLabel, sellerNameLabel, sellerName, sellerProfilePhoto ,locationIcon, detailsLabel ,stackView, descriptionLabel, descriptionContent] .forEach(contentView.addSubview(_:))
         
-        adImages.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        adImages.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
+        slideshow.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        slideshow.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.40).isActive = true
         
-        pageControl.anchor(left: contentView.leftAnchor, bottom: adImages.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
+        pageControl.anchor(left: contentView.leftAnchor, bottom: slideshow.bottomAnchor, right: contentView.rightAnchor, paddingLeft: 0, paddingBottom: 4, paddingRight: 0)
         pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
-        view.bringSubviewToFront(adImages)
+        view.bringSubviewToFront(slideshow)
         view.bringSubviewToFront(pageControl)
         
-        titleLabel.anchor(top: adImages.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        titleLabel.anchor(top: slideshow.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         
         locationIcon.anchor(left: contentView.leftAnchor, paddingTop: 10, paddingLeft: 24, width: 13, height: 13)
         locationIcon.centerYAnchor.constraint(equalTo: locationLabel.centerYAnchor).isActive = true
@@ -477,6 +487,9 @@ class DetailsVievController: UIViewController {
         sellerName.addGestureRecognizer(gestureForSellerName)
         sellerNameLabel.addGestureRecognizer(gestureForSellerNameLabel)
         sellerProfilePhoto.addGestureRecognizer(gesture)
+        
+        let gestureslideshow = UITapGestureRecognizer(target: self, action: #selector(handleSlideTap))
+        slideshow.addGestureRecognizer(gestureslideshow)
     }
     
     func configureCollectionView(){
@@ -539,6 +552,15 @@ class DetailsVievController: UIViewController {
             self.imageArray = images
             self.adImages.reloadData()
             self.pageControl.numberOfPages = self.imageArray.count
+            
+            var imageSource: [ImageSource] = []
+            
+            for image in self.imageArray {
+                imageSource.append(ImageSource(image:  image ?? UIImage()))
+            }
+            
+            self.slideshow.setImageInputs(imageSource)
+            
         }
         
         self.descriptionContent.text = description
