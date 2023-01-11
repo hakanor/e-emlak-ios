@@ -252,6 +252,13 @@ struct AdService {
 //                        if let title = document.get("title") as? String {
 //                            print(title)
 //                        }
+                        let timestamp = document.get("date") as? Timestamp
+                        // Create Date Formatter
+                        let dateFormatter = DateFormatter()
+                        // Set Date Format
+                        dateFormatter.dateFormat = "dd.MM.YYYY"
+                        let formattedDate = dateFormatter.string(from: timestamp?.dateValue() ?? Date())
+                        
                         let dictionary = [
                             "adId": documentID,
                             "uid": document.get("uid"),
@@ -260,8 +267,23 @@ struct AdService {
                             "location": document.get("location"),
                             "images": document.get("images"),
                             "estateType": document.get("estateType"),
-                            "timestamp": document.get("date"),
+                            "timestamp": formattedDate,
+                            "description": document.get("description"),
+                            "floorNumber": document.get("floorNumber"),
+                            "numberOfFloors": document.get("numberOfFloors"),
+                            "numberOfRooms": document.get("numberOfRooms"),
+                            "numberOfBathrooms": document.get("numberOfBathrooms"),
+                            "squareMeter": document.get("squareMeter"),
+                            "squareMeterNet": document.get("squareMeterNet"),
+                            "pricePerSquareMeter": document.get("pricePerSquareMeter"),
+                            "latitude": document.get("latitude"),
+                            "longitude": document.get("longitude"),
+                            "parcelNumber": document.get("parcelNumber"),
+                            "blockNumber": document.get("blockNumber"),
+                            "heating": document.get("heating"),
+                            "ageOfBuilding": document.get("ageOfBuilding"),
                             "status":document.get("status"),
+                            
                         ]
                         let string = document.get("location") as! String
                         let status = document.get("status") as? Bool ?? true
