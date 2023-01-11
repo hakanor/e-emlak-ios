@@ -241,8 +241,19 @@ class ProfileTableViewCell: UITableViewCell {
     }
     
     func configureCell(title:String, price:String, location:String, url:String, status: Bool){
+        
+        let unformattedValue : Int = Int(price) ?? 0
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal // or .decimal if desired
+        formatter.maximumFractionDigits = 0; //change as desired
+        formatter.locale = Locale.current // or = Locale(identifier: "de_DE"), more locale identifier codes:
+        formatter.groupingSeparator = "."
+        let displayValue : String = formatter.string(from: NSNumber(value: unformattedValue))! // displayValue: "$3,534,235"
+        
+        priceLabel.text = displayValue + " ₺"
+        
         titleLabel.text = title
-        priceLabel.text = price + " ₺"
+        
         let locationSplitted = location.split(separator: "/")
         let locationNew = (locationSplitted[safe: 0] ?? "") + "/" + (locationSplitted[safe: 1] ?? "")
         locationLabel.text = String(locationNew)

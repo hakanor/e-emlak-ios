@@ -138,6 +138,8 @@ class ProfileViewController: UIViewController {
         let gestureProfilePhoto = UITapGestureRecognizer(target: self, action: #selector(self.handleAddProfilePhoto(_:)))
         profilePhoto.addGestureRecognizer(gestureProfilePhoto)
         
+        SkeletonService.shared.showSkeletons(skeletons: [profilePhoto])
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +160,9 @@ class ProfileViewController: UIViewController {
         titleLabel.text = user.name + " " + user.surname
         subtitleLabel.text = user.city
         aboutMeLabel.text = user.aboutMe
-        self.profilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
+        self.profilePhoto.sd_setImage(with: user.imageUrl) { image, error, type, url in
+            SkeletonService.shared.hideSkeletons(skeletons: [self.profilePhoto])
+        }
     }
     
     func uploadImage(imageData: Data){

@@ -110,7 +110,7 @@ class EditProfileViewController: UIViewController{
         label.textColor = themeColors.dark
         label.numberOfLines = 2
         label.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        label.text = "Telefon Numarası (Brüt)"
+        label.text = "Telefon Numarası"
         return label
     }()
     

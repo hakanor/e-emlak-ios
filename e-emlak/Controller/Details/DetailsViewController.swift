@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import MapKit
 import ImageSlideshow
+import SkeletonView
 
 class DetailsVievController: UIViewController {
     
@@ -60,6 +61,7 @@ class DetailsVievController: UIViewController {
         slideshow.pageIndicator = pageControl
         slideshow.contentScaleMode = .scaleAspectFill
         slideshow.preload = .all
+        slideshow.isSkeletonable = true
         return slideshow
     }()
     
@@ -274,6 +276,7 @@ class DetailsVievController: UIViewController {
         configureStackView()
         configureShareBookmarkStackView()
         configureGestures()
+        SkeletonService.shared.showSkeletons(skeletons: [slideshow,sellerProfilePhoto])
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -537,6 +540,7 @@ class DetailsVievController: UIViewController {
         
         group.notify(queue: .main) {
             completion(images)
+            SkeletonService.shared.hideSkeletons(skeletons: [self.slideshow,self.sellerProfilePhoto])
         }
     }
     
