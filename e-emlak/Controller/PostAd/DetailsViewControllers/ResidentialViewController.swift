@@ -416,8 +416,13 @@ class ResidentialViewController: UIViewController{
         }
         
         AdService.shared.postAd(residentialCredentials: credentials, images: self.images) { (error)  in
-            print("DEBUG: Uploading residential AD successful")
-            self.dismiss(animated: true, completion: nil)
+            print("DEBUG: Posting of residential AD is successful")
+            let dialogMessage = UIAlertController(title: "İlan Ekleme", message: "İlanınız başarıyla oluşturuldu.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            dialogMessage.addAction(cancel)
+            self.present(dialogMessage, animated: true, completion: nil)
         }
         
     }

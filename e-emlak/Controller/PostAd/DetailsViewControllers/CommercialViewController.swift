@@ -316,8 +316,13 @@ class CommercialViewController: UIViewController{
         }
         
         AdService.shared.postAd(commercialCredentials: credentials, images: self.images) { (error) in
-            print("DEBUG: Uploading AD successful")
-            self.dismiss(animated: true, completion: nil)
+            print("DEBUG: Posting of commercial AD is successful")
+            let dialogMessage = UIAlertController(title: "İlan Ekleme", message: "İlanınız başarıyla oluşturuldu.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            dialogMessage.addAction(cancel)
+            self.present(dialogMessage, animated: true, completion: nil)
         }
         
     }

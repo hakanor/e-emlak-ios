@@ -115,6 +115,12 @@ class MyFeedViewController: UIViewController {
         print("refresh")
         refreshControl.endRefreshing()
     }
+    
+    func refreshData(){
+        fetchAds(uid: self.uid)
+        tableView.reloadData()
+        print("Refresh Data: Deleted Ad")
+    }
 
     
 }
@@ -214,7 +220,14 @@ extension MyFeedViewController: ClickDelegate {
             print("OK")
             print(row)
             AdService.shared.deleteAd(adId: self.ads[row].adId) {
-                print("İlan Başarıyla silindi.")
+                let dialogMessage = UIAlertController(title: "İlan başarıyla silindi.", message: "", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                    self.ads.remove(at: row)
+                    self.tableView.reloadData()
+                    self.dismiss(animated: true, completion: nil)
+                }
+                dialogMessage.addAction(cancel)
+                self.present(dialogMessage, animated: true, completion: nil)
             }
         }
         let cancel = UIAlertAction(title: "İptal", style: .cancel) { (action) -> Void in

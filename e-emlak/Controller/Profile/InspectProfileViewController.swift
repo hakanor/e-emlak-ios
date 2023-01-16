@@ -170,7 +170,7 @@ class InspectProfileViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = themeColors.primary
-        label.numberOfLines = 1
+        label.numberOfLines = 2
         label.lineBreakMode = .byWordWrapping
         label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         return label

@@ -226,7 +226,7 @@ class ProfileViewController: UIViewController {
     }
     
     func configureStackView(){
-        [editProfileButton, changePasswordButton, logoutButton, aboutApplicationButton, postAdButton] .forEach(buttonsStackView.addArrangedSubview(_:))
+        [editProfileButton, changePasswordButton, postAdButton, aboutApplicationButton, logoutButton] .forEach(buttonsStackView.addArrangedSubview(_:))
     }
     
     // MARK: - Selectors

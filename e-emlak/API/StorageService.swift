@@ -68,6 +68,7 @@ class FirFile: NSObject {
     }
     
     func startUploading(images: [Data], id: String) {
+        self.urlArray.removeAll()
         
         self.kFirFileStorageRef = Storage.storage().reference().child("AdImages").child(id)
         self.id = id

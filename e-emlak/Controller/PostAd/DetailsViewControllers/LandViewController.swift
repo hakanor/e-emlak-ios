@@ -295,8 +295,13 @@ class LandViewController: UIViewController{
         }
         
         AdService.shared.postAd(landCredentials: credentials, images:images) { (error) in
-            print("DEBUG: Uploading AD successful")
-            self.dismiss(animated: true, completion: nil)
+            print("DEBUG: Posting of land AD is successful")
+            let dialogMessage = UIAlertController(title: "İlan Ekleme", message: "İlanınız başarıyla oluşturuldu.", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                self.dismiss(animated: true, completion: nil)
+            }
+            dialogMessage.addAction(cancel)
+            self.present(dialogMessage, animated: true, completion: nil)
         }
         
     }

@@ -42,7 +42,7 @@ class EditCommercialDetailsVC: UIViewController{
     private lazy var nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.tintColor = .white
-        button.setTitle("İlanı Ekle", for: .normal)
+        button.setTitle("İlanı Güncelle", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(themeColors.white, for: .normal)
         button.backgroundColor = themeColors.primary
