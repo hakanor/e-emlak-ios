@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A704BA1829B37AD4009AADC6 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */; };
 		A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */; };
 		A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */; };
 		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
@@ -86,6 +87,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomButton.swift; sourceTree = "<group>"; };
 		A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 				A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */,
 				A7FD2AC728EAFC5300E48E4A /* Info.plist */,
 				A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */,
+				A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */,
 			);
 			path = "e-emlak";
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */,
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
 				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
+				A704BA1829B37AD4009AADC6 /* CoreDataModel.xcdatamodeld in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
@@ -890,6 +894,19 @@
 			productName = Toast;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A7FD2AAE28EAFC4700E48E4A /* Project object */;
 }
