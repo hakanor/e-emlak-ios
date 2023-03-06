@@ -456,6 +456,57 @@ struct AdService {
         }
     }
     
+    func fetchAd(adId: String, completion: @escaping (Ad?) -> Void) {
+        Firestore.firestore().collection("ads").document(adId).getDocument { (snapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil)
+            } else {
+                if let data = snapshot?.data() {
+                    let timestamp = data["date"] as? Timestamp
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd.MM.YYYY"
+                    let formattedDate = dateFormatter.string(from: timestamp?.dateValue() ?? Date())
+                    
+                    let dictionary = [
+                        "adId": snapshot!.documentID,
+                        "uid": data["uid"],
+                        "title": data["title"],
+                        "price": data["price"],
+                        "location": data["location"],
+                        "images": data["images"],
+                        "estateType": data["estateType"],
+                        "timestamp": formattedDate,
+                        "description": data["description"],
+                        "floorNumber": data["floorNumber"],
+                        "numberOfFloors": data["numberOfFloors"],
+                        "numberOfRooms": data["numberOfRooms"],
+                        "numberOfBathrooms": data["numberOfBathrooms"],
+                        "squareMeter": data["squareMeter"],
+                        "squareMeterNet": data["squareMeterNet"],
+                        "pricePerSquareMeter": data["pricePerSquareMeter"],
+                        "latitude": data["latitude"],
+                        "longitude": data["longitude"],
+                        "parcelNumber": data["parcelNumber"],
+                        "blockNumber": data["blockNumber"],
+                        "heating": data["heating"],
+                        "ageOfBuilding": data["ageOfBuilding"],
+                        "status": data["status"],
+                    ]
+                    let status = data["status"] as? Bool ?? true
+                    if status {
+                        let ad = Ad(adId: snapshot!.documentID, dictionary: dictionary as [String : Any])
+                        completion(ad)
+                    } else {
+                        completion(nil)
+                    }
+                } else {
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
     func deleteAd(adId:String, completion: @escaping() -> Void){
         Firestore.firestore().collection("ads").document(adId).delete { error in
             if let error = error {

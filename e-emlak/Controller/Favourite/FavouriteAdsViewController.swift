@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol historyButtonClickDelegate {
+    func priceHistoryButtonClicked(_ row:Int, adId: String)
+}
+
 class FavouriteAdsViewController: UIViewController {
 
     // MARK: - Properties
@@ -62,7 +66,7 @@ class FavouriteAdsViewController: UIViewController {
     func configureTableView(){
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FavouriteCell")
+        tableView.register(FavouriteTableViewCell.self, forCellReuseIdentifier: "FavouriteCell")
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -162,8 +166,10 @@ extension FavouriteAdsViewController : UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCell") as! FeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCell") as! FavouriteTableViewCell
         cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil", ad: ads[indexPath.row])
+        cell.delegate = self
+        cell.cellIndex = indexPath
         return cell
     }
     
@@ -211,7 +217,7 @@ extension FavouriteAdsViewController : UITableViewDelegate, UITableViewDataSourc
                 CustomDictionaryObject(key: "Parsel Numarası", value: String(ad.parcelNumber))
             ]
         default:
-            print("Default - FeedViewController")
+            print("Default - FavouriteAdsViewController")
         }
         
         let vc = DetailsVievController(
@@ -227,5 +233,62 @@ extension FavouriteAdsViewController : UITableViewDelegate, UITableViewDataSourc
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
+    }
+}
+extension FavouriteAdsViewController: historyButtonClickDelegate {
+    func priceHistoryButtonClicked(_ row: Int, adId: String) {
+        
+        let alertController = UIAlertController(title: "Fiyat Geçmişi", message: "", preferredStyle: .alert)
+        // Create a stackView view and populate it with your data
+        var priceHistory = [""]
+        let coreDataService = CoreDataService()
+        priceHistory = coreDataService.getPriceHistoryFromCoreData(adId: adId)
+        
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 3
+        
+        for i in 0...priceHistory.count - 1 {
+            let cell = PriceHistoryCell()
+            
+            let splitted = priceHistory[i].split(separator: " ")
+            
+            print(Int(splitted[0]) ?? 0 )
+            let unformattedValue : Int = Int(splitted[0]) ?? 0
+            let formatter = NumberFormatter()
+            formatter.numberStyle = .decimal // or .decimal if desired
+            formatter.maximumFractionDigits = 0; //change as desired
+            formatter.locale = Locale.current // or = Locale(identifier: "de_DE"), more locale identifier codes:
+            formatter.groupingSeparator = "."
+            let displayValue : String = formatter.string(from: NSNumber(value: unformattedValue))! // displayValue: "$3,534,235" ```
+            
+            let right = displayValue + " ₺"
+            
+            let left = String(splitted[1])
+            
+            cell.config(
+                leftSide: left,
+                rightSide: right
+            )
+           
+            stackView.addArrangedSubview(cell)
+
+        }
+        
+        // Add the table view to the alert controller
+        
+        alertController.view.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.anchor(top: alertController.view.topAnchor, left: alertController.view.leftAnchor, bottom: alertController.view.bottomAnchor, right: alertController.view.rightAnchor, paddingTop: 70, paddingLeft: 1, paddingBottom: 70, paddingRight: 1)
+        
+        // Add an "OK" action button to the alert controller
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            // Do something when the "OK" button is clicked
+        }
+        alertController.addAction(okAction)
+        
+        // Show the alert controller
+        self.present(alertController, animated: true, completion: nil)
     }
 }

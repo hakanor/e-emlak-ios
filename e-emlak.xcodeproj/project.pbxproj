@@ -81,11 +81,14 @@
 		A7C92D912959A7E900268DA5 /* EditResidentialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D902959A7E900268DA5 /* EditResidentialDetailsVC.swift */; };
 		A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */; };
 		A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */; };
+		A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
 		A7FD2AC328EAFC5300E48E4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */; };
 		A7FD2AC628EAFC5300E48E4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */; };
+		A7FFE62E29B6220C0045573A /* Date+toString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFE62D29B6220C0045573A /* Date+toString.swift */; };
+		A7FFE63029B642B20045573A /* PriceHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFE62F29B642B20045573A /* PriceHistoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -152,6 +155,7 @@
 		A7C92D902959A7E900268DA5 /* EditResidentialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditResidentialDetailsVC.swift; sourceTree = "<group>"; };
 		A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLandDetailsVC.swift; sourceTree = "<group>"; };
 		A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommercialDetailsVC.swift; sourceTree = "<group>"; };
+		A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 		A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A7FD2AC528EAFC5300E48E4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A7FD2AC728EAFC5300E48E4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7FFE62D29B6220C0045573A /* Date+toString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+toString.swift"; sourceTree = "<group>"; };
+		A7FFE62F29B642B20045573A /* PriceHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceHistoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +232,7 @@
 				A78757F3292C314E00FE37A6 /* Array + Row.swift */,
 				A7875803294651A600FE37A6 /* UIButton + addBlurEffect.swift */,
 				A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */,
+				A7FFE62D29B6220C0045573A /* Date+toString.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -264,6 +271,7 @@
 		A734750528F37BC900D2F755 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A7E8F34429B6091E008EC85C /* Favourite */,
 				A73474EE28F087B800D2F755 /* Login */,
 				A73474FC28F17BCA00D2F755 /* Register */,
 				A734751928F8185E00D2F755 /* ResetPassword */,
@@ -275,7 +283,6 @@
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
 				A78757F5293D1F0E00FE37A6 /* Details */,
 				A78758052947760300FE37A6 /* Profile */,
-				A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -376,6 +383,16 @@
 				A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */,
 			);
 			path = EditAd;
+			sourceTree = "<group>";
+		};
+		A7E8F34429B6091E008EC85C /* Favourite */ = {
+			isa = PBXGroup;
+			children = (
+				A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */,
+				A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */,
+				A7FFE62F29B642B20045573A /* PriceHistoryCell.swift */,
+			);
+			path = Favourite;
 			sourceTree = "<group>";
 		};
 		A7F4F3F92906E2F3001B5048 /* PostAd */ = {
@@ -543,6 +560,7 @@
 				A7C92D912959A7E900268DA5 /* EditResidentialDetailsVC.swift in Sources */,
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
 				A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */,
+				A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,
 				A734752328FAF27200D2F755 /* AuthService.swift in Sources */,
 				A7C92D8D2958C25500268DA5 /* EditCoordinateViewController.swift in Sources */,
@@ -564,6 +582,7 @@
 				A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */,
 				A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */,
 				A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */,
+				A7FFE62E29B6220C0045573A /* Date+toString.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,
@@ -579,6 +598,7 @@
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
 				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
 				A704BA1A29B37CFD009AADC6 /* FavouriteAdsViewController.swift in Sources */,
+				A7FFE63029B642B20045573A /* PriceHistoryCell.swift in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,

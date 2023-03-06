@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class CoreDataService{
     public var ads : [AdEntity]?
@@ -23,7 +24,7 @@ class CoreDataService{
             print("Error fetching ads: \(error)")
         }
     }
-    
+        
     public func checkObjectExistInCoreData(adId:String) -> Bool{
         fetchAdsFromCoreData()
         for ad in ads ?? [] {
@@ -32,6 +33,81 @@ class CoreDataService{
             }
         }
         return false
+    }
+    
+    public func getPriceHistoryFromCoreData(adId:String) -> [String]{
+        var priceHistoryArray = [""]
+        fetchAdsFromCoreData()
+        for ad in ads ?? [] {
+            if(ad.adId == adId){ 
+                priceHistoryArray = ad.priceHistory?.split(separator: ",").map({ String($0) }) ?? [""]
+                return priceHistoryArray
+            }
+        }
+        return priceHistoryArray
+    }
+    
+    public func updateAdInCoreData(ad: Ad) {
+        
+        for adEntity in ads ?? [] {
+            
+            if(adEntity.adId == ad.adId) {
+                
+                adEntity.title = ad.title
+                adEntity.location = ad.location
+                adEntity.estateType = ad.estateType
+                adEntity.adDescription = ad.description
+                adEntity.floorNumber = Int16(ad.floorNumber)
+                adEntity.numberOfFloors = Int16(ad.numberOfFloors)
+                adEntity.numberOfRooms = Int16(ad.numberOfRooms)
+                adEntity.numberOfBathrooms = Int16(ad.numberOfBathrooms)
+                adEntity.squareMeter = Int16(ad.squareMeter)
+                adEntity.squareMeterNet = Int16(ad.squareMeterNet)
+                adEntity.pricePerSquareMeter = ad.pricePerSquareMeter
+                adEntity.latitude = ad.latitude
+                adEntity.longitude = ad.longitude
+                adEntity.parcelNumber = Int16(ad.parcelNumber)
+                adEntity.blockNumber = Int16(ad.blockNumber)
+                adEntity.heating = ad.heating
+                adEntity.ageOfBuilding = Int16(ad.ageOfBuilding)
+
+                do {
+                    try self.context.save()
+                } catch {
+                    print("Error updating ad: \(error)")
+                }
+            }
+        }
+    }
+    
+    public func checkPriceChange(adId:String){
+        
+        fetchAdsFromCoreData()
+        for adEntity in ads ?? [] {
+            if(adEntity.adId == adId){
+                var adPrice = ""
+                
+                AdService.shared.fetchAd(adId: adId) { ad in
+                    adPrice = ad?.price ?? ""
+                    if adEntity.price == adPrice {
+                        print("\(adId) numaralı ilanda fiyat değişikliği yok")
+                    } else {
+                        print("\(adId) numaralı ilanda fiyat değişikliği tespit edildi.")
+                        // There is price Change, so update adEntity.priceHistory
+                        adEntity.priceHistory = (adEntity.priceHistory ?? "") + "," + (adPrice) + " " + Date().toString(dateFormat: "dd/MM/YYYY")
+                        adEntity.price = adPrice
+                        // Save changes to Core Data
+                        do {
+                            print("\(adId) numaralı ilandaki değişiklik kaydedildi.")
+                            
+                            try self.context.save()
+                        } catch {
+                            print("Error saving managed object context: \(error)")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public func saveToCoreData(ad: Ad){
@@ -60,6 +136,7 @@ class CoreDataService{
             newAd.heating = ad.heating
             newAd.ageOfBuilding = Int16(ad.ageOfBuilding)
             newAd.status = ad.status
+            newAd.priceHistory = ad.price + " " + Date().toString(dateFormat: "dd/MM/YYYY")
 
             do{
                 try self.context.save()
