@@ -1,24 +1,30 @@
 //
-//  FeedViewController.swift
+//  FavouriteAdsViewController.swift
 //  e-emlak
 //
-//  Created by Hakan Or on 10.10.2022.
+//  Created by Hakan Or on 4.03.2023.
 //
 
+import Foundation
 import UIKit
-import Firebase
-import Toast
 
-struct CustomDictionaryObject {
-    let key : String
-    let value : String
-}
+class FavouriteAdsViewController: UIViewController {
 
-class FeedViewController: UIViewController {
     // MARK: - Properties
     var ads = [Ad]()
+    var uid = ""
     
     // MARK: - Subviews
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = themeColors.primary
+        label.numberOfLines = 2
+        label.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        label.text = "Favori ilanlarınız"
+        return label
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,93 +33,36 @@ class FeedViewController: UIViewController {
         return tableView
     }()
     
-    private lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.attributedPlaceholder = NSAttributedString(
-            string: "İl İlçe Mahalle Veya Semt Ara",
-            attributes: [NSAttributedString.Key.foregroundColor: themeColors.dark.withAlphaComponent(0.6)]
-        )
-        textField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        textField.backgroundColor = themeColors.lightGrey
-        textField.leftImage(UIImage(systemName: "magnifyingglass")?.withTintColor(themeColors.dark), imageWidth: 10, padding: 15)
-
-        let clearImage = UIImage(systemName: "multiply")?.withTintColor(themeColors.dark)
-        let clearImageView = UIImageView(image: clearImage)
-        clearImageView.contentMode = .center
-        clearImageView.tintColor = .black
-        clearImageView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action:#selector(didTouchClearAllButton(_:)))
-        textField.rightView(clearImageView, width: 20, padding: 5 , tapGesture:tapGesture)
-        
-        textField.layer.cornerRadius = 13
-        textField.addTarget(self, action: #selector(searchFunc), for: .editingDidEndOnExit)
-        return textField
-    }()
-    
-    private lazy var filterButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.tintColor = .white
-        let image = UIImage(systemName: "line.3.horizontal.decrease")
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "arrow.left")
+        button.tintColor = themeColors.dark
+        button.backgroundColor = .clear
         button.setImage(image, for: .normal)
-        button.backgroundColor = themeColors.primary
-        button.layer.cornerRadius = 18
-        button.addTarget(self, action: #selector(handleFilterButton), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
         return button
     }()
     
-    // MARK: - Properties
-    
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        fetchAds()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         configureUI()
-        configurateTableView()
-        tableView.reloadData()
+        configureTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        fetchAds()
+        fetchAdsFromCoreData()
         tableView.reloadData()
     }
     
-    // MARK: - API
-    func fetchAds() {
-        AdService.shared.fetchAds { fetchedAds in
-            self.ads.removeAll()
-            self.ads = fetchedAds
-            self.tableView.reloadData()
-        }
-    }
-    
-    func fetchAds(with Keyword:String) {
-        AdService.shared.fetchAds(with: Keyword) { fetchedAds in
-            let vc = FilteredResultViewController()
-            vc.ads = fetchedAds
-            self.present(vc,animated: true,completion: nil)
-        }
-    }
-    
     // MARK: - Helpers
-    func configureUI(){
-        [tableView, textField, filterButton] .forEach(view.addSubview(_:))
-        
-        filterButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, paddingTop: 10, paddingLeft: 24, width: 35, height: 35)
-        
-        textField.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: filterButton.rightAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 10, paddingLeft: 16, paddingRight: 24, height: 35)
-        
-        tableView.anchor(top: filterButton.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
-                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
-    }
     
-    func configurateTableView(){
+    func configureTableView(){
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FeedTableViewCell")
+        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FavouriteCell")
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -124,33 +73,84 @@ class FeedViewController: UIViewController {
         tableView.addSubview(refreshControl)
     }
     
+    // MARK: - API
+    func fetchAdsFromCoreData() {
+        let coreDataService = CoreDataService()
+        coreDataService.fetchAdsFromCoreData()
+
+        guard let ads = coreDataService.ads else {
+            return
+        }
+
+        let adObjects = ads.map { ad -> Ad in
+            let adDictionary: [String: Any] = [
+                "uid": ad.uid ?? "",
+                "title": ad.title ?? "",
+                "price": ad.price ?? "",
+                "location": ad.location ?? "",
+                "images": ad.images?.components(separatedBy: ",") ?? [],
+                "estateType": ad.estateType ?? "",
+                "timestamp": ad.timestamp ?? "",
+                "description": ad.adDescription ?? "",
+                "floorNumber": Int(ad.floorNumber),
+                "numberOfFloors": Int(ad.numberOfFloors),
+                "numberOfRooms": Int(ad.numberOfRooms),
+                "numberOfBathrooms": Int(ad.numberOfBathrooms),
+                "squareMeter": Int(ad.squareMeter),
+                "squareMeterNet": Int(ad.squareMeterNet),
+                "pricePerSquareMeter": ad.pricePerSquareMeter,
+                "latitude": ad.latitude,
+                "longitude": ad.longitude,
+                "parcelNumber": Int(ad.parcelNumber),
+                "blockNumber": Int(ad.blockNumber),
+                "heating": ad.heating ?? "",
+                "ageOfBuilding": Int(ad.ageOfBuilding),
+                "status": ad.status
+            ]
+
+            return Ad(adId: ad.adId ?? "", dictionary: adDictionary)
+        }
+
+        self.ads = adObjects
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    // MARK: - Helpers
+    func configureUI(){
+        view.backgroundColor = themeColors.white
+        
+        [titleLabel, tableView] .forEach(view.addSubview(_:))
+        
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
+        
+        tableView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
+                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
+        
+    }
+    
     // MARK: - Selectors
+    @objc func handleBack(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @objc func refreshFunc(refreshControl: UIRefreshControl) {
-        fetchAds()
+        fetchAdsFromCoreData()
         tableView.reloadData()
         print("refresh")
         refreshControl.endRefreshing()
     }
     
-    @objc func searchFunc() {
-        fetchAds(with: textField.text ?? "")
+    func refreshData(){
+        fetchAdsFromCoreData()
+        tableView.reloadData()
     }
-    
-    @objc private func didTouchClearAllButton(_ sender: UITapGestureRecognizer? = nil) {
-        textField.text?.removeAll();
-    }
-    
-    @objc func handleFilterButton() {
-        let nav = UINavigationController(rootViewController: FilterViewController())
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
-    }
-    
-    
+
 }
 
-    // MARK: - UITableView Delegate & DataSource
-extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
+extension FavouriteAdsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.ads.count == 0 {
             tableView.setEmptyView(title: "Hiç ilan bulunamadı.", message: "", messageImage: UIImage(systemName: "house")!)
@@ -162,7 +162,7 @@ extension FeedViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell") as! FeedTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavouriteCell") as! FeedTableViewCell
         cell.configureCell(title: ads[indexPath.row].title, price: ads[indexPath.row].price, location: ads[indexPath.row].location, url: ads[indexPath.row].images.first ?? "nil", ad: ads[indexPath.row])
         return cell
     }

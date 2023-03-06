@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A704BA1829B37AD4009AADC6 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */; };
+		A704BA1A29B37CFD009AADC6 /* FavouriteAdsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */; };
+		A704BA1D29B38C97009AADC6 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A704BA1B29B38C97009AADC6 /* CoreDataModel.xcdatamodeld */; };
+		A704BA1F29B38F12009AADC6 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A704BA1E29B38F12009AADC6 /* CoreDataService.swift */; };
 		A72D06FA2950B78700BC88A7 /* ProfileCustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */; };
 		A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */; };
 		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
@@ -87,7 +89,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAdsViewController.swift; sourceTree = "<group>"; };
+		A704BA1C29B38C97009AADC6 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		A704BA1E29B38F12009AADC6 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		A72D06F92950B78700BC88A7 /* ProfileCustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCustomButton.swift; sourceTree = "<group>"; };
 		A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				A7848455290FE7350099C0F3 /* LocationManager.swift */,
 				A7C83F22291571EC00CFA8C9 /* StorageService.swift */,
 				A7930E2C296A35CF002482C2 /* SkeletonService.swift */,
+				A704BA1E29B38F12009AADC6 /* CoreDataService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -270,6 +275,7 @@
 				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
 				A78757F5293D1F0E00FE37A6 /* Details */,
 				A78758052947760300FE37A6 /* Profile */,
+				A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -416,7 +422,7 @@
 				A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */,
 				A7FD2AC728EAFC5300E48E4A /* Info.plist */,
 				A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */,
-				A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */,
+				A704BA1B29B38C97009AADC6 /* CoreDataModel.xcdatamodeld */,
 			);
 			path = "e-emlak";
 			sourceTree = "<group>";
@@ -518,7 +524,9 @@
 				A734753029040B1100D2F755 /* EstateTypeViewController.swift in Sources */,
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
+				A704BA1F29B38F12009AADC6 /* CoreDataService.swift in Sources */,
 				A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */,
+				A704BA1D29B38C97009AADC6 /* CoreDataModel.xcdatamodeld in Sources */,
 				A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */,
 				A734752528FEB2D300D2F755 /* UIImage + Url.swift in Sources */,
 				A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */,
@@ -570,7 +578,7 @@
 				A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */,
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
 				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
-				A704BA1829B37AD4009AADC6 /* CoreDataModel.xcdatamodeld in Sources */,
+				A704BA1A29B37CFD009AADC6 /* FavouriteAdsViewController.swift in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
@@ -896,12 +904,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		A704BA1629B37AD4009AADC6 /* CoreDataModel.xcdatamodeld */ = {
+		A704BA1B29B38C97009AADC6 /* CoreDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */,
+				A704BA1C29B38C97009AADC6 /* CoreDataModel.xcdatamodel */,
 			);
-			currentVersion = A704BA1729B37AD4009AADC6 /* CoreDataModel.xcdatamodel */;
+			currentVersion = A704BA1C29B38C97009AADC6 /* CoreDataModel.xcdatamodel */;
 			path = CoreDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

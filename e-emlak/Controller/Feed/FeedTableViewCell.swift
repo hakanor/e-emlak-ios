@@ -44,6 +44,8 @@ class FeedTableViewCellViewModel {
 class FeedTableViewCell: UITableViewCell {
     
     var model = FeedTableViewCellViewModel(title: "", imageURL: URL(string: ""), url: "", urlToImage: "", publishedAt: "", description: "", content: "", sourceName: "")
+    var ad = Ad(adId: "String", dictionary: ["String" : nil])
+    
     // MARK: - Properties
     private let cornerRadiusValue : CGFloat = 16
     var bookmarkBool : Bool = false
@@ -98,7 +100,7 @@ class FeedTableViewCell: UITableViewCell {
     
     private lazy var bookmarkIcon: UIImageView = {
         let bookmarkIcon = UIImageView()
-        let image = UIImage(systemName: "heart")?.withTintColor(themeColors.error)
+        let image = UIImage(systemName: "bookmark")?.withTintColor(themeColors.error)
         bookmarkIcon.image = image
         return bookmarkIcon
     }()
@@ -132,8 +134,6 @@ class FeedTableViewCell: UITableViewCell {
         
         locationIcon.anchor(top: titleLabel.bottomAnchor, left: titleLabel.leftAnchor, paddingTop: 12, width:13, height: 13)
         
-//        locationLabel.anchor(left: locationIcon.rightAnchor, bottom: containerView.bottomAnchor, paddingLeft:3, paddingBottom: 16)
-        
         locationLabel.anchor(top: locationIcon.topAnchor, left: locationIcon.rightAnchor, paddingTop:-2 ,paddingLeft:3)
         
         priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
@@ -156,39 +156,37 @@ class FeedTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        bookmarkIcon.image = UIImage(systemName: "heart")?.withTintColor(themeColors.grey)
+        bookmarkIcon.image = UIImage(systemName: "bookmark")?.withTintColor(themeColors.grey)
     }
     
     // MARK: - Configuration
     @objc func handleTapGestureBookmark(_ sender: UITapGestureRecognizer? = nil) {
         print("Bookmark icon")
-        self.bookmarkIcon.image = UIImage(systemName: "heart.fill")?.withTintColor(themeColors.error)
+        
+        let coreDataService = CoreDataService()
+        
+        if bookmarkBool == false {
+            bookmarkIcon.image = UIImage(systemName: "bookmark.fill")
+            bookmarkBool = true
+            coreDataService.saveToCoreData(ad: self.ad)
+        } else {
+            for ad in coreDataService.ads!{
+                if(ad.adId == self.ad.adId){
+                    coreDataService.deleteFromCoreData(ad: self.ad)
+                }
+            }
+            bookmarkIcon.image = UIImage(systemName: "bookmark")
+            bookmarkBool = false
+        }
     }
     
-    func configureCells(with viewModel: FeedTableViewCellViewModel){
-        titleLabel.text = viewModel.title
-        self.model = viewModel
-        
-        if let data = viewModel.imageData {
-            adImage.image = UIImage(data: data)
-        }
-        else if let url = viewModel.imageURL {
-            URLSession.shared.dataTask(with: url){ data , _, error in
-                guard let data = data, error == nil else {
-                    return
-                }
-                viewModel.imageData = data
-                DispatchQueue.main.async {
-                    self.adImage.image = UIImage(data:data)
-                }
-                
-            }.resume()
-        }
-        
-    }
-    
-    func configureCell(title:String, price:String, location:String, url:String){
+    func configureCell(title:String, price:String, location:String, url:String, ad:Ad){
+        self.ad = ad
         titleLabel.text = title
+        
+        let coreDataService = CoreDataService()
+        bookmarkBool = coreDataService.checkObjectExistInCoreData(adId: ad.adId)
+        checkBookmark()
         
         let unformattedValue : Int = Int(price) ?? 0
         let formatter = NumberFormatter()
@@ -207,4 +205,11 @@ class FeedTableViewCell: UITableViewCell {
         
     }
     
+    func checkBookmark (){
+        if (bookmarkBool == true){
+            bookmarkIcon.image = UIImage(systemName: "bookmark.fill")
+        } else {
+            bookmarkIcon.image = UIImage(systemName: "bookmark")
+        }
+    }
 }

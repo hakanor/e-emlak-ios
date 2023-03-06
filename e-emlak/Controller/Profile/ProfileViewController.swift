@@ -120,8 +120,8 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    private lazy var postAdButton: ProfileCustomButton = {
-        let button = ProfileCustomButton(leftIconName: "plus.circle.fill", text: "İlan Ekle", target: self, action: #selector(handlePostAdButton))
+    private lazy var favouriteAdsButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "heart.fill", text: "Favori İlanlarım", target: self, action: #selector(handleFavouriteButton))
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -226,7 +226,7 @@ class ProfileViewController: UIViewController {
     }
     
     func configureStackView(){
-        [editProfileButton, changePasswordButton, postAdButton, aboutApplicationButton, logoutButton] .forEach(buttonsStackView.addArrangedSubview(_:))
+        [editProfileButton, changePasswordButton, favouriteAdsButton, aboutApplicationButton, logoutButton] .forEach(buttonsStackView.addArrangedSubview(_:))
     }
     
     // MARK: - Selectors
@@ -273,8 +273,8 @@ class ProfileViewController: UIViewController {
         self.present(dialogMessage, animated: true, completion: nil)
     }
     
-    @objc func handlePostAdButton(){
-        let nav = UINavigationController(rootViewController: EstateTypeViewController())
+    @objc func handleFavouriteButton(){
+        let nav = UINavigationController(rootViewController: FavouriteAdsViewController())
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
     }
