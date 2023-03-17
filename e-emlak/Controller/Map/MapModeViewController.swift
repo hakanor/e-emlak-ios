@@ -9,14 +9,16 @@ import UIKit
 import MapKit
 import Foundation
 import CoreLocation
+import FloatingPanel
 
-class MapModeViewController: UIViewController {
+class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
     
     // MARK: - Properties
     var currentLocationPin = MKPointAnnotation()
     private let selectableValues: [Float] = [5, 10, 15, 20, 50, 100]
     var ads = [Ad]()
     var filteredAds = [Ad]()
+    var fpc: FloatingPanelController!
     
     // MARK: - Subviews
     private lazy var backButton: UIButton = {
@@ -75,6 +77,15 @@ class MapModeViewController: UIViewController {
         configureUI()
         getUserLocation()
         fetchAds()
+        
+        fpc = FloatingPanelController()
+        fpc.delegate = self
+        
+        let contentVC = FavouriteAdsViewController()
+        fpc.set(contentViewController: contentVC)
+        
+        
+        fpc.addPanel(toParent: self)
     }
     // MARK: - API
     private func getUserLocation(){

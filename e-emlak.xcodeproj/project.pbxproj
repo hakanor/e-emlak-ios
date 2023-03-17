@@ -48,6 +48,7 @@
 		A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */; };
 		A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5B28EB1DDD00772AE7 /* FirebaseFunctions */; };
 		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
+		A767A90229C50A39003CD62A /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = A767A90129C50A39003CD62A /* FloatingPanel */; };
 		A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A89290B06E300E7D510 /* AdService.swift */; };
 		A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */; };
 		A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8E290C242500E7D510 /* LandViewController.swift */; };
@@ -183,6 +184,7 @@
 				A7930E28296A1031002482C2 /* ImageSlideshow/SDWebImage in Frameworks */,
 				A734752D2901B2F700D2F755 /* SDWebImage in Frameworks */,
 				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
+				A767A90229C50A39003CD62A /* FloatingPanel in Frameworks */,
 				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
 				A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -483,6 +485,7 @@
 				A7930E25296A1031002482C2 /* ImageSlideshow */,
 				A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */,
 				A7930E2A296A2DEA002482C2 /* SkeletonView */,
+				A767A90129C50A39003CD62A /* FloatingPanel */,
 			);
 			productName = "e-emlak";
 			productReference = A7FD2AB628EAFC4800E48E4A /* e-emlak.app */;
@@ -519,6 +522,7 @@
 				A7B3FAF5292AEB7C0003F76D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
 				A7930E29296A2DEA002482C2 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				A767A90029C50A39003CD62A /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = A7FD2AB728EAFC4800E48E4A /* Products */;
 			projectDirPath = "";
@@ -851,6 +855,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		A767A90029C50A39003CD62A /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SCENEE/FloatingPanel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zvonicek/ImageSlideshow";
@@ -912,6 +924,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		A767A90129C50A39003CD62A /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A767A90029C50A39003CD62A /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
 		};
 		A7930E25296A1031002482C2 /* ImageSlideshow */ = {
 			isa = XCSwiftPackageProductDependency;
