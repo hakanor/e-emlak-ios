@@ -126,6 +126,12 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
+    private lazy var testButton: ProfileCustomButton = {
+        let button = ProfileCustomButton(leftIconName: "testtube.2", text: "Test", target: self, action: #selector(handleTestButton))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,7 +232,7 @@ class ProfileViewController: UIViewController {
     }
     
     func configureStackView(){
-        [editProfileButton, changePasswordButton, favouriteAdsButton, aboutApplicationButton, logoutButton] .forEach(buttonsStackView.addArrangedSubview(_:))
+        [editProfileButton, changePasswordButton, favouriteAdsButton, aboutApplicationButton, logoutButton, testButton] .forEach(buttonsStackView.addArrangedSubview(_:))
     }
     
     // MARK: - Selectors
@@ -275,6 +281,12 @@ class ProfileViewController: UIViewController {
     
     @objc func handleFavouriteButton(){
         let nav = UINavigationController(rootViewController: FavouriteAdsViewController())
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+    }
+    
+    @objc func handleTestButton(){
+        let nav = UINavigationController(rootViewController: MapModeViewController())
         nav.modalPresentationStyle = .fullScreen
         present(nav,animated: true,completion: nil)
     }
