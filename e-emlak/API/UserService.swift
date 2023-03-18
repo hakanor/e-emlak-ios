@@ -8,7 +8,11 @@
 import Foundation
 import Firebase
 
-struct UserService {
+protocol UserServicable {
+    func fetchUser(completion: @escaping(User) -> Void)
+}
+
+final class UserService: UserServicable {
     static let shared = UserService()
     
     func fetchUser(completion: @escaping(User) -> Void){

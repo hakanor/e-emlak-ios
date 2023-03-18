@@ -68,6 +68,12 @@
 		A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A787580829479D6500FE37A6 /* InspectProfileViewController.swift */; };
 		A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */; };
 		A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */; };
+		A792DEC629C51EB100B1F1E7 /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A792DEC529C51EB100B1F1E7 /* ChangePasswordViewModel.swift */; };
+		A792DEDA29C5212800B1F1E7 /* ChangePasswordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A792DED929C5212800B1F1E7 /* ChangePasswordViewModelTests.swift */; };
+		A792DF1429C5242C00B1F1E7 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1329C5242C00B1F1E7 /* FirebaseAppCheck */; };
+		A792DF1629C5242C00B1F1E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1529C5242C00B1F1E7 /* FirebaseAuth */; };
+		A792DF1829C5242C00B1F1E7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1729C5242C00B1F1E7 /* FirebaseStorage */; };
+		A792DF1A29C5248000B1F1E7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1929C5248000B1F1E7 /* SDWebImage */; };
 		A7930E26296A1031002482C2 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E25296A1031002482C2 /* ImageSlideshow */; };
 		A7930E28296A1031002482C2 /* ImageSlideshow/SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */; };
 		A7930E2B296A2DEA002482C2 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E2A296A2DEA002482C2 /* SkeletonView */; };
@@ -92,6 +98,16 @@
 		A7FFE62E29B6220C0045573A /* Date+toString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFE62D29B6220C0045573A /* Date+toString.swift */; };
 		A7FFE63029B642B20045573A /* PriceHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FFE62F29B642B20045573A /* PriceHistoryCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A792DECF29C520D800B1F1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7FD2AAE28EAFC4700E48E4A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7FD2AB528EAFC4700E48E4A;
+			remoteInfo = "e-emlak";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		A704BA1929B37CFD009AADC6 /* FavouriteAdsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteAdsViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +163,9 @@
 		A787580829479D6500FE37A6 /* InspectProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InspectProfileViewController.swift; sourceTree = "<group>"; };
 		A78CFF2A292B7FAE003EAC78 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		A78CFF2C292B8150003EAC78 /* FilteredResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredResultViewController.swift; sourceTree = "<group>"; };
+		A792DEC529C51EB100B1F1E7 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		A792DECB29C520D800B1F1E7 /* e-emlakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "e-emlakTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A792DED929C5212800B1F1E7 /* ChangePasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModelTests.swift; sourceTree = "<group>"; };
 		A7930E2C296A35CF002482C2 /* SkeletonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonService.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
 		A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +190,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A792DEC829C520D800B1F1E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A792DF1429C5242C00B1F1E7 /* FirebaseAppCheck in Frameworks */,
+				A792DF1629C5242C00B1F1E7 /* FirebaseAuth in Frameworks */,
+				A792DF1A29C5248000B1F1E7 /* SDWebImage in Frameworks */,
+				A792DF1829C5242C00B1F1E7 /* FirebaseStorage in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7FD2AB328EAFC4700E48E4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,7 +226,6 @@
 		A72D06FB2950FE7600BC88A7 /* ButtonViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */,
 				A72D0700295127E400BC88A7 /* EditProfileViewController.swift */,
 			);
 			path = ButtonViewControllers;
@@ -272,9 +301,10 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		A734750528F37BC900D2F755 /* Controller */ = {
+		A734750528F37BC900D2F755 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A792DEC429C51E1300B1F1E7 /* ChangePassword */,
 				A753DE8229BF6049000ACF75 /* Map */,
 				A7E8F34429B6091E008EC85C /* Favourite */,
 				A73474EE28F087B800D2F755 /* Login */,
@@ -289,7 +319,7 @@
 				A78757F5293D1F0E00FE37A6 /* Details */,
 				A78758052947760300FE37A6 /* Profile */,
 			);
-			path = Controller;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		A734750628F37BCD00D2F755 /* ViewModel */ = {
@@ -377,6 +407,54 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		A792DEC429C51E1300B1F1E7 /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */,
+				A792DEC529C51EB100B1F1E7 /* ChangePasswordViewModel.swift */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		A792DECC29C520D800B1F1E7 /* e-emlakTests */ = {
+			isa = PBXGroup;
+			children = (
+				A792DED429C520EB00B1F1E7 /* Scenes */,
+			);
+			path = "e-emlakTests";
+			sourceTree = "<group>";
+		};
+		A792DED429C520EB00B1F1E7 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				A792DED729C5210600B1F1E7 /* Mocks */,
+				A792DED629C520FF00B1F1E7 /* Tests */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		A792DED629C520FF00B1F1E7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A792DED929C5212800B1F1E7 /* ChangePasswordViewModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		A792DED729C5210600B1F1E7 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A792DEDC29C523ED00B1F1E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A7BBFD3029193F6200F696AF /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,7 +501,9 @@
 			isa = PBXGroup;
 			children = (
 				A7FD2AB828EAFC4800E48E4A /* e-emlak */,
+				A792DECC29C520D800B1F1E7 /* e-emlakTests */,
 				A7FD2AB728EAFC4800E48E4A /* Products */,
+				A792DEDC29C523ED00B1F1E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -431,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				A7FD2AB628EAFC4800E48E4A /* e-emlak.app */,
+				A792DECB29C520D800B1F1E7 /* e-emlakTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -441,7 +522,7 @@
 				A734750828F37BD700D2F755 /* Model */,
 				A734750728F37BD000D2F755 /* View */,
 				A734750628F37BCD00D2F755 /* ViewModel */,
-				A734750528F37BC900D2F755 /* Controller */,
+				A734750528F37BC900D2F755 /* Scenes */,
 				A734750428F37BC600D2F755 /* API */,
 				A734750328F37BC200D2F755 /* Utilities */,
 				A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */,
@@ -460,6 +541,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A792DECA29C520D800B1F1E7 /* e-emlakTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A792DED129C520D800B1F1E7 /* Build configuration list for PBXNativeTarget "e-emlakTests" */;
+			buildPhases = (
+				A792DEC729C520D800B1F1E7 /* Sources */,
+				A792DEC829C520D800B1F1E7 /* Frameworks */,
+				A792DEC929C520D800B1F1E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A792DED029C520D800B1F1E7 /* PBXTargetDependency */,
+			);
+			name = "e-emlakTests";
+			packageProductDependencies = (
+				A792DF1329C5242C00B1F1E7 /* FirebaseAppCheck */,
+				A792DF1529C5242C00B1F1E7 /* FirebaseAuth */,
+				A792DF1729C5242C00B1F1E7 /* FirebaseStorage */,
+				A792DF1929C5248000B1F1E7 /* SDWebImage */,
+			);
+			productName = "e-emlakTests";
+			productReference = A792DECB29C520D800B1F1E7 /* e-emlakTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A7FD2AB528EAFC4700E48E4A /* e-emlak */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A7FD2ACA28EAFC5300E48E4A /* Build configuration list for PBXNativeTarget "e-emlak" */;
@@ -498,9 +603,14 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					A792DECA29C520D800B1F1E7 = {
+						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
+						TestTargetID = A7FD2AB528EAFC4700E48E4A;
+					};
 					A7FD2AB528EAFC4700E48E4A = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -529,11 +639,19 @@
 			projectRoot = "";
 			targets = (
 				A7FD2AB528EAFC4700E48E4A /* e-emlak */,
+				A792DECA29C520D800B1F1E7 /* e-emlakTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A792DEC929C520D800B1F1E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7FD2AB428EAFC4700E48E4A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -548,6 +666,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A792DEC729C520D800B1F1E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A792DEDA29C5212800B1F1E7 /* ChangePasswordViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A7FD2AB228EAFC4700E48E4A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -568,6 +694,7 @@
 				A78757F0292BE39C00FE37A6 /* LandFilterViewController.swift in Sources */,
 				A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */,
 				A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */,
+				A792DEC629C51EB100B1F1E7 /* ChangePasswordViewModel.swift in Sources */,
 				A73475362905ECD200D2F755 /* UITextView + setPlaceHolder.swift in Sources */,
 				A7875802293E745C00FE37A6 /* CoordinateDetailsViewController.swift in Sources */,
 				A734751B28F8194E00D2F755 /* ResetPasswordViewController.swift in Sources */,
@@ -625,6 +752,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A792DED029C520D800B1F1E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7FD2AB528EAFC4700E48E4A /* e-emlak */;
+			targetProxy = A792DECF29C520D800B1F1E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -637,6 +772,61 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A792DED229C520D800B1F1E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RZB5WTQ7UH;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hakanor.e-emlakTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/e-emlak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/e-emlak";
+			};
+			name = Debug;
+		};
+		A792DED329C520D800B1F1E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RZB5WTQ7UH;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hakanor.e-emlakTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/e-emlak.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/e-emlak";
+			};
+			name = Release;
+		};
 		A7FD2AC828EAFC5300E48E4A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -810,6 +1000,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A792DED129C520D800B1F1E7 /* Build configuration list for PBXNativeTarget "e-emlakTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A792DED229C520D800B1F1E7 /* Debug */,
+				A792DED329C520D800B1F1E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A7FD2AB128EAFC4700E48E4A /* Build configuration list for PBXProject "e-emlak" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -929,6 +1128,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A767A90029C50A39003CD62A /* XCRemoteSwiftPackageReference "FloatingPanel" */;
 			productName = FloatingPanel;
+		};
+		A792DF1329C5242C00B1F1E7 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+		A792DF1529C5242C00B1F1E7 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A792DF1729C5242C00B1F1E7 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A764CA5428EB1DDD00772AE7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		A792DF1929C5248000B1F1E7 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A734752B2901B2F700D2F755 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		A7930E25296A1031002482C2 /* ImageSlideshow */ = {
 			isa = XCSwiftPackageProductDependency;

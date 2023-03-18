@@ -178,12 +178,18 @@ class ChangePasswordViewController: UIViewController {
         return button
     }()
     
+    // MARK: - Properties
+    
+    let viewModel: ChangePasswordViewModel = ChangePasswordViewModel()
+    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
+
         hideKeyboardWhenTappedAround()
         setKeyboardDelegates()
-        fetchUserCredential()
+        viewModel.fetchUserCredentials()
         
         view.backgroundColor = themeColors.white
         self.navigationItem.setHidesBackButton(true, animated: true)
@@ -221,14 +227,6 @@ class ChangePasswordViewController: UIViewController {
     }
     
     // MARK: - Helpers
-    
-    func fetchUserCredential(){
-        UserService.shared.fetchUser { user in
-            self.oldPassword = user.password
-            self.email = user.email
-            self.uid = user.uid
-        }
-    }
     
     func setKeyboardDelegates(){
         oldPasswordTextField.delegate = self
@@ -361,5 +359,15 @@ extension ChangePasswordViewController: UITextFieldDelegate {
             textField.resignFirstResponder()
         }
         return false
+    }
+}
+
+// MARK: - ChangePasswordViewModelDelegate
+
+extension ChangePasswordViewController: ChangePasswordViewModelDelegate {
+    func didFetchUser(password: String, email: String, uid: String) {
+        self.oldPassword = password
+        self.email = email
+        self.uid = uid
     }
 }
