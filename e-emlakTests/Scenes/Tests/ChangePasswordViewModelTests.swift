@@ -30,12 +30,17 @@ final class ChangePasswordViewModelTests: XCTestCase {
     
     func test_did_fetch_user_should_be_called_when_fetchUserCredentials_called() {
         // Given
+        let user = UserTestData.validUser
+        userService.userToBeReturned = user
         
         // When
         sut.fetchUserCredentials()
         
         // Then
         XCTAssertTrue(delegate.fetchUserCalled)
+        XCTAssertEqual(user.email, delegate.passedEmail)
+        XCTAssertEqual(user.password, delegate.passedPassword)
+        XCTAssertEqual(user.uid, delegate.passedUID)
     }
     
 }
@@ -43,15 +48,28 @@ final class ChangePasswordViewModelTests: XCTestCase {
 final class MockChangePasswordViewModelDelegate: ChangePasswordViewModelDelegate{
     
     var fetchUserCalled = false
+    var passedPassword: String?
+    var passedEmail: String?
+    var passedUID: String?
     
     func didFetchUser(password: String, email: String, uid: String) {
         fetchUserCalled = true
+        passedPassword = password
+        passedEmail = email
+        passedUID = uid
     }
 }
 
 final class MockUserService: UserServicable {
+    var userToBeReturned: User = UserTestData.validUser
     
-    let mockUser = User(uid: "il8EDi5fBWOrVpYQAAobna5NJAW2", dictionary: [
+    func fetchUser(completion: @escaping(User) -> Void) {
+        completion(userToBeReturned)
+    }
+}
+
+enum UserTestData {
+    static let validUser = User(uid: "il8EDi5fBWOrVpYQAAobna5NJAW2", dictionary: [
         "name": "Hakan",
         "surname": "Or",
         "email": "hakanor99@gmail.com",
@@ -61,8 +79,4 @@ final class MockUserService: UserServicable {
         "aboutMe": "aboutMe",
         "city": "Konya"
     ] as [String : AnyObject])
-    
-    func fetchUser(completion: @escaping(User) -> Void) {
-        completion(mockUser)
-    }
 }

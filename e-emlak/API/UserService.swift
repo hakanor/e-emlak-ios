@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 
 protocol UserServicable {
-    func fetchUser(completion: @escaping(User) -> Void)
+    func fetchUser(completion: @escaping (User) -> Void)
 }
 
 final class UserService: UserServicable {

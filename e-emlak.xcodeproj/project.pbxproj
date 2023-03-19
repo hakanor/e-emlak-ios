@@ -14,6 +14,7 @@
 		A72D06FD2950FEC500BC88A7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */; };
 		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
 		A72D0701295127E400BC88A7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D0700295127E400BC88A7 /* EditProfileViewController.swift */; };
+		A731ECFE29C752FF00916ACE /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */; };
 		A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginViewController.swift */; };
 		A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EF28F0888400D2F755 /* ThemeColors.swift */; };
 		A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F228F088F400D2F755 /* UIColor + Hex.swift */; };
@@ -74,6 +75,8 @@
 		A792DF1629C5242C00B1F1E7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1529C5242C00B1F1E7 /* FirebaseAuth */; };
 		A792DF1829C5242C00B1F1E7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1729C5242C00B1F1E7 /* FirebaseStorage */; };
 		A792DF1A29C5248000B1F1E7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A792DF1929C5248000B1F1E7 /* SDWebImage */; };
+		A792DF1C29C5CCC200B1F1E7 /* MapListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A792DF1B29C5CCC100B1F1E7 /* MapListViewController.swift */; };
+		A792DF1E29C60A8F00B1F1E7 /* MapListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A792DF1D29C60A8F00B1F1E7 /* MapListTableViewCell.swift */; };
 		A7930E26296A1031002482C2 /* ImageSlideshow in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E25296A1031002482C2 /* ImageSlideshow */; };
 		A7930E28296A1031002482C2 /* ImageSlideshow/SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */; };
 		A7930E2B296A2DEA002482C2 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = A7930E2A296A2DEA002482C2 /* SkeletonView */; };
@@ -117,6 +120,7 @@
 		A72D06FC2950FEC400BC88A7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
 		A72D0700295127E400BC88A7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		A73474EA28F0878600D2F755 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A73474EF28F0888400D2F755 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A73474F228F088F400D2F755 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		A792DEC529C51EB100B1F1E7 /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		A792DECB29C520D800B1F1E7 /* e-emlakTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "e-emlakTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A792DED929C5212800B1F1E7 /* ChangePasswordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModelTests.swift; sourceTree = "<group>"; };
+		A792DF1B29C5CCC100B1F1E7 /* MapListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListViewController.swift; sourceTree = "<group>"; };
+		A792DF1D29C60A8F00B1F1E7 /* MapListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapListTableViewCell.swift; sourceTree = "<group>"; };
 		A7930E2C296A35CF002482C2 /* SkeletonService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonService.swift; sourceTree = "<group>"; };
 		A7B0A5012919939E0040C462 /* UITableView + EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView + EmptyView.swift"; sourceTree = "<group>"; };
 		A7BBFD3129193F7900F696AF /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
@@ -358,6 +364,9 @@
 			isa = PBXGroup;
 			children = (
 				A753DE8529BF60DE000ACF75 /* MapModeViewController.swift */,
+				A792DF1B29C5CCC100B1F1E7 /* MapListViewController.swift */,
+				A792DF1D29C60A8F00B1F1E7 /* MapListTableViewCell.swift */,
+				A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -725,6 +734,7 @@
 				A7BBFD3629197D5A00F696AF /* AdModel.swift in Sources */,
 				A7848454290FDB870099C0F3 /* CoordinateViewController.swift in Sources */,
 				A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */,
+				A731ECFE29C752FF00916ACE /* CustomFloatingPanelLayout.swift in Sources */,
 				A7FFE62E29B6220C0045573A /* Date+toString.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
@@ -737,12 +747,14 @@
 				A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */,
 				A78757EE292BE38C00FE37A6 /* ResidentialFilterViewController.swift in Sources */,
 				A7848456290FE7350099C0F3 /* LocationManager.swift in Sources */,
+				A792DF1E29C60A8F00B1F1E7 /* MapListTableViewCell.swift in Sources */,
 				A7875800293E39A900FE37A6 /* DetailsCollectionViewCell.swift in Sources */,
 				A78CFF2B292B7FAE003EAC78 /* FilterViewController.swift in Sources */,
 				A78757F9293DEB4B00FE37A6 /* DetailsTableViewCell.swift in Sources */,
 				A704BA1A29B37CFD009AADC6 /* FavouriteAdsViewController.swift in Sources */,
 				A7FFE63029B642B20045573A /* PriceHistoryCell.swift in Sources */,
 				A7C83F23291571EC00CFA8C9 /* StorageService.swift in Sources */,
+				A792DF1C29C5CCC200B1F1E7 /* MapListViewController.swift in Sources */,
 				A73474F928F097F100D2F755 /* Textfield + Underline.swift in Sources */,
 				A734751228F37D8300D2F755 /* MyFeedViewController.swift in Sources */,
 				A73475382906D7B300D2F755 /* CityModel.swift in Sources */,
