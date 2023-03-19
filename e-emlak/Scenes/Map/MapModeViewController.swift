@@ -92,6 +92,8 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         delegate = contentVC
         fpc.set(contentViewController: contentVC)
         
+        contentVC.delegate = self
+        
         fpc.track(scrollView: contentVC.tableView)
         
         fpc.addPanel(toParent: self)
@@ -213,5 +215,11 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         let selectedIndex = Int(sender.value)
         sender.setValue(Float(selectedIndex), animated: true)
         filterAds()
+    }
+}
+
+extension MapModeViewController: MapListDelegate {
+    func adClicked(index: Int) {
+        print(self.filteredAds[index].adId)
     }
 }

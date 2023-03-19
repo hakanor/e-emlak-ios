@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol MapListDelegate: AnyObject {
+    func adClicked(index: Int)
+}
+
 class MapListViewController: UIViewController {
     // MARK: - Properties
     var ads = [Ad]()
+    weak var delegate: MapListDelegate?
 
     // MARK: - Subviews
     lazy var tableView: UITableView = {
@@ -53,6 +58,11 @@ extension MapListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MapListTableViewCell
         cell.configureCell(ad: ads[indexPath.row])
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.delegate?.adClicked(index: indexPath.row)
+        print(indexPath.row)
     }
 }
 
