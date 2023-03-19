@@ -13,6 +13,8 @@ class MapListTableViewCell: UITableViewCell {
     // MARK: - Properties
     var ad = Ad(adId: "String", dictionary: ["String" : nil])
     private let cornerRadiusValue : CGFloat = 16
+    var delegate: MapListTableClickDelegate?
+    var cellIndex: IndexPath?
     
     // MARK: - Subviews
     private lazy var containerView: UIView = {
@@ -20,6 +22,15 @@ class MapListTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = themeColors.white
         return view
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     private lazy var adImage: UIImageView = {
@@ -35,10 +46,10 @@ class MapListTableViewCell: UITableViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = themeColors.dark
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "Browse"
         label.contentMode = .scaleToFill
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         return label
     }()
     
@@ -48,8 +59,19 @@ class MapListTableViewCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "153.000 ₺"
         label.contentMode = .scaleToFill
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         return label
+    }()
+    
+    private lazy var navigateButton: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "chevron.forward")?.withTintColor(themeColors.dark).withInset(UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4))
+        button.contentMode = .scaleAspectFit
+        button.setImage(image, for: .normal)
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(handleNavigateButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     // MARK: - Lifecycle
@@ -61,14 +83,16 @@ class MapListTableViewCell: UITableViewCell {
 
         containerView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 0)
         
-        [adImage, titleLabel, priceLabel] .forEach(containerView.addSubview(_:))
+        [adImage, stackView, navigateButton] .forEach(containerView.addSubview(_:))
         
-        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 46, height: 46)
+        [titleLabel, priceLabel] .forEach(stackView.addArrangedSubview(_:))
+        
+        adImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, paddingTop: 3, paddingLeft: 3, paddingBottom: 3, paddingRight: 0, width: 50, height: 50)
         adImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         
-        titleLabel.anchor(top: containerView.topAnchor, left: adImage.rightAnchor,  paddingTop: 12, paddingLeft: 12)
+        stackView.anchor(top: containerView.topAnchor, left: adImage.rightAnchor, bottom: containerView.bottomAnchor, right: navigateButton.leftAnchor, paddingLeft: 12)
         
-        priceLabel.anchor(bottom: containerView.bottomAnchor,right: containerView.rightAnchor, paddingBottom: 14, paddingRight: 20)
+        navigateButton.anchor(top: containerView.topAnchor,bottom: containerView.bottomAnchor,right: containerView.rightAnchor,paddingTop: 8, paddingBottom: 8, paddingRight: 8)
     }
     
     required init?(coder: NSCoder) {
@@ -79,6 +103,14 @@ class MapListTableViewCell: UITableViewCell {
         super.layoutSubviews()
         containerView.layer.borderColor = themeColors.grey.cgColor
         containerView.layer.borderWidth = 0.2
+        
+        adImage.layer.borderColor = themeColors.grey.cgColor
+        adImage.layer.borderWidth = 1
+    }
+    
+    // MARK: - Selectors
+    @objc func handleNavigateButton(){
+        delegate?.navigateClicked(index: cellIndex!.row)
     }
     
     // MARK: - Configuration

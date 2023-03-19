@@ -191,8 +191,6 @@ extension MyFeedViewController : UITableViewDelegate, UITableViewDataSource {
             print("Default - ProfileViewController")
         }
         
-        let prime = ad.latitude
-        print (prime)
         let vc = DetailsVievController(
             title: ad.title,
             location: ad.location,
