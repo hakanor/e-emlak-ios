@@ -11,7 +11,11 @@ import Foundation
 import CoreLocation
 import FloatingPanel
 
-class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
+protocol MapModeDelegate: AnyObject {
+    func adsFiltered(ads: [Ad])
+}
+
+class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
     
     // MARK: - Properties
     var currentLocationPin = MKPointAnnotation()
@@ -19,6 +23,7 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
     var ads = [Ad]()
     var filteredAds = [Ad]()
     var fpc: FloatingPanelController!
+    weak var delegate: MapModeDelegate?
     
     // MARK: - Subviews
     private lazy var backButton: UIButton = {
@@ -81,12 +86,17 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
         fpc = FloatingPanelController()
         fpc.delegate = self
         
-        let contentVC = FavouriteAdsViewController()
+        fpc.layout = CustomFloatingPanelLayout()
+    
+        let contentVC = MapListViewController()
+        delegate = contentVC
         fpc.set(contentViewController: contentVC)
         
+        fpc.track(scrollView: contentVC.tableView)
         
         fpc.addPanel(toParent: self)
     }
+
     // MARK: - API
     private func getUserLocation(){
     
@@ -109,6 +119,24 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
             }
         }
         
+    }
+    
+    private func createAnnotations(ads: [Ad]) -> [MKPointAnnotation] {
+        let annotations = ads.map { ad in
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = ad.latitude
+            annotation.coordinate.longitude = ad.longitude
+            return annotation
+        }
+        return annotations
+    }
+    
+    private func addAnnotations(annotations: [MKPointAnnotation]) {
+        let allAnnotations = self.map.annotations
+        map.removeAnnotations(allAnnotations)
+        
+        // Add the annotations to your map view
+        map.addAnnotations(annotations)
     }
     
     private func fetchAds() {
@@ -144,12 +172,16 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
                 filteredAds.append(ad)
             }
         }
+        // Create annotations from filteredAds and add to Map
+        let annotations = createAnnotations(ads: filteredAds)
+        addAnnotations(annotations: annotations)
+        
+        self.delegate?.adsFiltered(ads: filteredAds)
     }
     
     // MARK: - Helpers
     private func configureUI() {
         view.backgroundColor = themeColors.white
-        navigationController?.navigationBar.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         self.title = "Haritadan Tüm İlanları Gör"
         
@@ -177,8 +209,7 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate{
         self.dismiss(animated: true)
     }
     
-    @objc func sliderValueDidChange(_ sender:UISlider!)
-    {
+    @objc func sliderValueDidChange(_ sender:UISlider!){
         let selectedIndex = Int(sender.value)
         sender.setValue(Float(selectedIndex), animated: true)
         filterAds()
