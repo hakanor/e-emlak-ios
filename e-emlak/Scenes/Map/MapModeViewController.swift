@@ -80,8 +80,11 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        getUserLocation()
-        fetchAds()
+        getUserLocation { coordinate in
+            print("Location Succesfully Coordinated - \(coordinate)")
+            self.filterAds()
+        }
+        
         map.delegate = self
         
         fpc = FloatingPanelController()
@@ -104,8 +107,8 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
     }
 
     // MARK: - API
-    private func getUserLocation(){
-    
+    private func getUserLocation(completion: @escaping (CLLocationCoordinate2D) -> Void) {
+        
         LocationManager.shared.getUserLocation { [weak self] location in
             DispatchQueue.main.async {
                 guard let strongSelf = self else {
@@ -123,6 +126,8 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
                 strongSelf.map.addAnnotation(pin)
                 self?.currentLocationPin = pin
                 print("LocationManager - \(pin.coordinate)")
+                
+                completion(pin.coordinate) // Call the completion handler with the user's location coordinate
             }
         }
         
@@ -148,14 +153,6 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         var annotationList = annotations
         annotationList.append(currentLocationPin)
         map.addAnnotations(annotationList)
-    }
-    
-    private func fetchAds() {
-        AdService.shared.fetchAds { fetchedAds in
-            self.ads.removeAll()
-            self.ads = fetchedAds
-            self.filterAds()
-        }
     }
     
     func calculateDistance(currentLocation: MKPointAnnotation, ad: Ad) -> Double {
@@ -326,13 +323,13 @@ extension MapModeViewController: MKMapViewDelegate {
         }
         
         if (annotation.title) != "Mevcut Konum" {
-            annotationView?.image = UIImage(named: "location-sign")?.withTintColor(.red).sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
+            annotationView?.image = UIImage(named: "location-sign-map")?.sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
             let button = AnnotationButton(type: .detailDisclosure)
             button.annotation = annotation
             button.addTarget(self, action: #selector(handleInfoButton), for: .touchUpInside)
             annotationView?.rightCalloutAccessoryView = button
         } else {
-            annotationView?.image = UIImage(named: "location-sign")?.withTintColor(.cyan).sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
+            annotationView?.image = UIImage(named: "location-user")?.sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
         }
         
         annotationView?.isUserInteractionEnabled = true

@@ -31,6 +31,18 @@ class FilteredResultViewController: UIViewController{
         label.textAlignment = .center
         return label
     }()
+    
+    private lazy var mapModeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .white
+        let image = UIImage(systemName: "globe.americas.fill")
+        button.setImage(image, for: .normal)
+        button.backgroundColor = themeColors.primary
+        button.layer.cornerRadius = 18
+        button.addTarget(self, action: #selector(handleMapModeButton), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -39,15 +51,25 @@ class FilteredResultViewController: UIViewController{
     }
 
     // MARK: - Selectors
+    @objc func handleMapModeButton() {
+        let vc = MapModeViewController()
+        vc.ads = self.ads
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
+    }
 
     // MARK: - API
 
     // MARK: - Helpers
     func configureUI(){
         view.backgroundColor = themeColors.white
-        [tableView, titleLabel] .forEach(view.addSubview(_:))
+        [tableView, titleLabel, mapModeButton] .forEach(view.addSubview(_:))
+
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right:mapModeButton.leftAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 10)
         
-        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 20, paddingLeft: 24, paddingRight: 24)
+        mapModeButton.anchor(right:view.safeAreaLayoutGuide.rightAnchor, paddingRight: 24, width: 35, height: 35)
+        mapModeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
         
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         

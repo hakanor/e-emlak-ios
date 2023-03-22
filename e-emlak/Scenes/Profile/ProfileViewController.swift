@@ -286,9 +286,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc func handleTestButton(){
-        let nav = UINavigationController(rootViewController: MapModeViewController())
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
+//        let nav = UINavigationController(rootViewController: MapModeViewController())
+//        nav.modalPresentationStyle = .fullScreen
+//        present(nav,animated: true,completion: nil)
     }
 }
 
