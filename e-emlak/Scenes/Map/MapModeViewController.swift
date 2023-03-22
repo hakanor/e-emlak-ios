@@ -82,6 +82,7 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         configureUI()
         getUserLocation()
         fetchAds()
+        map.delegate = self
         
         fpc = FloatingPanelController()
         fpc.delegate = self
@@ -97,6 +98,9 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         fpc.track(scrollView: contentVC.tableView)
         
         fpc.addPanel(toParent: self)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleMapTap))
+        map.addGestureRecognizer(tapGesture)
     }
 
     // MARK: - API
@@ -114,6 +118,7 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
                 // Add new annotation
                 let pin = MKPointAnnotation()
                 pin.coordinate = location.coordinate
+                pin.title = "Mevcut Konum"
                 strongSelf.map.setRegion(MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)), animated: true)
                 strongSelf.map.addAnnotation(pin)
                 self?.currentLocationPin = pin
@@ -128,6 +133,8 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = ad.latitude
             annotation.coordinate.longitude = ad.longitude
+            annotation.title = ad.title
+            annotation.subtitle = ad.description
             return annotation
         }
         return annotations
@@ -138,7 +145,9 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         map.removeAnnotations(allAnnotations)
         
         // Add the annotations to your map view
-        map.addAnnotations(annotations)
+        var annotationList = annotations
+        annotationList.append(currentLocationPin)
+        map.addAnnotations(annotationList)
     }
     
     private func fetchAds() {
@@ -216,10 +225,121 @@ class MapModeViewController: UIViewController, FloatingPanelControllerDelegate {
         sender.setValue(Float(selectedIndex), animated: true)
         filterAds()
     }
+    
+    @objc func handleMapTap(sender: UITapGestureRecognizer) {
+        fpc.move(to: .tip, animated: true)
+    }
+    
+    @objc func handleInfoButton(sender: AnnotationButton) {
+        if let annotation = sender.annotation {
+            let title = annotation.title
+            let subtitle = annotation.subtitle
+            
+            for ad in filteredAds {
+                if (ad.title == title)  && (ad.description == subtitle) {
+                    
+                    let propertyType = ad.estateType.split(separator: "/").first
+                    
+                    var dictionary = [CustomDictionaryObject]()
+                    
+                    switch propertyType {
+                    case "Konut":
+                        dictionary = [
+                            CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                            CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                            CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                            CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                            CustomDictionaryObject(key: "Metrekare (Brüt)", value: String(ad.squareMeterNet)),
+                            CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                            CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                            CustomDictionaryObject(key: "Daire Kat Sayısı", value: String(ad.floorNumber)),
+                            CustomDictionaryObject(key: "Oda Sayısı", value: String(ad.numberOfRooms)),
+                            CustomDictionaryObject(key: "Banyo Sayısı", value: String(ad.numberOfBathrooms)),
+                            CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+                        ]
+                    case "İş Yeri":
+                        dictionary = [
+                            CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                            CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                            CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                            CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                            CustomDictionaryObject(key: "Bina Yaşı", value: String(ad.ageOfBuilding)),
+                            CustomDictionaryObject(key: "Bina Kat Sayısı", value: String(ad.numberOfFloors)),
+                            CustomDictionaryObject(key: "Isıtma", value: String(ad.heating))
+                        ]
+                    case "Arsa":
+                        dictionary = [
+                            CustomDictionaryObject(key: "Fiyat", value: String(ad.price) + " ₺"),
+                            CustomDictionaryObject(key: "İlan Tarihi", value: String(ad.timestamp)),
+                            CustomDictionaryObject(key: "Emlak Türü", value: String(ad.estateType)),
+                            CustomDictionaryObject(key: "Metrekare (Net)", value: String(ad.squareMeter)),
+                            CustomDictionaryObject(key: "Metrekare / ₺", value: String(ad.pricePerSquareMeter)),
+                            CustomDictionaryObject(key: "Ada Numarası", value: String(ad.blockNumber)),
+                            CustomDictionaryObject(key: "Parsel Numarası", value: String(ad.parcelNumber))
+                        ]
+                    default:
+                        print("Default - ProfileViewController")
+                    }
+
+                    let vc = DetailsVievController(
+                        title: ad.title,
+                        location: ad.location,
+                        imageUrl: ad.images.first ?? "",
+                        description: ad.description,
+                        dictionary: dictionary,
+                        urls: ad.images,
+                        ad : ad
+                    )
+                    
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.modalPresentationStyle = .fullScreen
+                    present(nav,animated: true,completion: nil)
+                    
+                }
+            }
+        }
+    }
 }
 
 extension MapModeViewController: MapListDelegate {
     func adClicked(index: Int) {
         print(self.filteredAds[index].adId)
+        let ad = self.filteredAds[index]
+        let location = CLLocationCoordinate2D(latitude: ad.latitude, longitude: ad.longitude)
+        let region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008))
+        
+        // Set the map's camera to the desired location and zoom level
+        map.setRegion(region, animated: true)
+        self.fpc.move(to: .tip, animated: true)
     }
+}
+
+extension MapModeViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let identifier = "pin"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        if (annotation.title) != "Mevcut Konum" {
+            annotationView?.image = UIImage(named: "location-sign")?.withTintColor(.red).sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
+            let button = AnnotationButton(type: .detailDisclosure)
+            button.annotation = annotation
+            button.addTarget(self, action: #selector(handleInfoButton), for: .touchUpInside)
+            annotationView?.rightCalloutAccessoryView = button
+        } else {
+            annotationView?.image = UIImage(named: "location-sign")?.withTintColor(.cyan).sd_resizedImage(with: CGSize(width: 35, height: 35), scaleMode: .aspectFit)
+        }
+        
+        annotationView?.isUserInteractionEnabled = true
+        return annotationView
+    }
+}
+
+class AnnotationButton: UIButton {
+    var annotation: MKAnnotation?
 }
