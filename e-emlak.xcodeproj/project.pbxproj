@@ -15,6 +15,8 @@
 		A72D06FF295110EC00BC88A7 /* UIImage + withInset.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */; };
 		A72D0701295127E400BC88A7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A72D0700295127E400BC88A7 /* EditProfileViewController.swift */; };
 		A731ECFE29C752FF00916ACE /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */; };
+		A731ED0129D1E67200916ACE /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ED0029D1E67200916ACE /* ChatService.swift */; };
+		A731ED0329D1FB8C00916ACE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A731ED0229D1FB8C00916ACE /* GoogleService-Info.plist */; };
 		A73474EB28F0878600D2F755 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EA28F0878600D2F755 /* LoginViewController.swift */; };
 		A73474F028F0888400D2F755 /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474EF28F0888400D2F755 /* ThemeColors.swift */; };
 		A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73474F228F088F400D2F755 /* UIColor + Hex.swift */; };
@@ -43,7 +45,6 @@
 		A734753A2906D8E000D2F755 /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = A73475392906D8E000D2F755 /* data.json */; };
 		A734753C2906DE4D00D2F755 /* DataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A734753B2906DE4D00D2F755 /* DataLoader.swift */; };
 		A753DE8629BF60DE000ACF75 /* MapModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A753DE8529BF60DE000ACF75 /* MapModeViewController.swift */; };
-		A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */; };
 		A764CA5628EB1DDD00772AE7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5528EB1DDD00772AE7 /* FirebaseAuth */; };
 		A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5728EB1DDD00772AE7 /* FirebaseDatabase */; };
 		A764CA5A28EB1DDD00772AE7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5928EB1DDD00772AE7 /* FirebaseFirestore */; };
@@ -121,6 +122,8 @@
 		A72D06FE295110EC00BC88A7 /* UIImage + withInset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + withInset.swift"; sourceTree = "<group>"; };
 		A72D0700295127E400BC88A7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFloatingPanelLayout.swift; sourceTree = "<group>"; };
+		A731ED0029D1E67200916ACE /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		A731ED0229D1FB8C00916ACE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A73474EA28F0878600D2F755 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A73474EF28F0888400D2F755 /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
 		A73474F228F088F400D2F755 /* UIColor + Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex.swift"; sourceTree = "<group>"; };
@@ -147,7 +150,6 @@
 		A73475392906D8E000D2F755 /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		A734753B2906DE4D00D2F755 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		A753DE8529BF60DE000ACF75 /* MapModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModeViewController.swift; sourceTree = "<group>"; };
-		A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A77D1A89290B06E300E7D510 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialViewController.swift; sourceTree = "<group>"; };
 		A77D1A8E290C242500E7D510 /* LandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,14 @@
 			path = MyFeed;
 			sourceTree = "<group>";
 		};
+		A731ECFF29D1E1C200916ACE /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		A73474EE28F087B800D2F755 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +313,7 @@
 				A7C83F22291571EC00CFA8C9 /* StorageService.swift */,
 				A7930E2C296A35CF002482C2 /* SkeletonService.swift */,
 				A704BA1E29B38F12009AADC6 /* CoreDataService.swift */,
+				A731ED0029D1E67200916ACE /* ChatService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -321,7 +332,7 @@
 				A7BBFD3029193F6200F696AF /* Feed */,
 				A72D0702295311CD00BC88A7 /* MyFeed */,
 				A78757EB292BE33B00FE37A6 /* Filter */,
-				A734750D28F37D5C00D2F755 /* ConversationsViewController.swift */,
+				A731ECFF29D1E1C200916ACE /* Message */,
 				A78757F5293D1F0E00FE37A6 /* Details */,
 				A78758052947760300FE37A6 /* Profile */,
 			);
@@ -541,7 +552,7 @@
 				A7FD2AC228EAFC5300E48E4A /* Assets.xcassets */,
 				A7FD2AC428EAFC5300E48E4A /* LaunchScreen.storyboard */,
 				A7FD2AC728EAFC5300E48E4A /* Info.plist */,
-				A764CA5028EB1C3600772AE7 /* GoogleService-Info.plist */,
+				A731ED0229D1FB8C00916ACE /* GoogleService-Info.plist */,
 				A704BA1B29B38C97009AADC6 /* CoreDataModel.xcdatamodeld */,
 			);
 			path = "e-emlak";
@@ -666,8 +677,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7FD2AC628EAFC5300E48E4A /* LaunchScreen.storyboard in Resources */,
+				A731ED0329D1FB8C00916ACE /* GoogleService-Info.plist in Resources */,
 				A7FD2AC328EAFC5300E48E4A /* Assets.xcassets in Resources */,
-				A764CA5128EB1C3600772AE7 /* GoogleService-Info.plist in Resources */,
 				A734753A2906D8E000D2F755 /* data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -723,6 +734,7 @@
 				A734750E28F37D5C00D2F755 /* ConversationsViewController.swift in Sources */,
 				A734750C28F37D1E00D2F755 /* FeedViewController.swift in Sources */,
 				A7930E2D296A35CF002482C2 /* SkeletonService.swift in Sources */,
+				A731ED0129D1E67200916ACE /* ChatService.swift in Sources */,
 				A78757F7293D1F3500FE37A6 /* DetailsViewController.swift in Sources */,
 				A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */,
 				A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */,
