@@ -10,6 +10,7 @@ import Firebase
 
 protocol UserServicable {
     func fetchUser(completion: @escaping (User) -> Void)
+    func fetchAllUsers(completion: @escaping ([User]) -> Void)
 }
 
 final class UserService: UserServicable {
@@ -50,4 +51,22 @@ final class UserService: UserServicable {
             completion()
         }
     }
+    
+    func fetchAllUsers(completion: @escaping ([User]) -> Void) {
+        Firestore.firestore().collection("users").getDocuments { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                print("Error fetching users: \(error?.localizedDescription ?? "unknown error")")
+                completion([])
+                return
+            }
+            
+            let users = snapshot.documents.compactMap { (document) -> User? in
+                let data = document.data()
+                let dictionary = data as [String: AnyObject]
+                return User(uid: document.documentID, dictionary: dictionary)
+            }
+            completion(users)
+        }
+    }
+
 }

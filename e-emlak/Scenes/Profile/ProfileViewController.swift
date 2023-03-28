@@ -289,6 +289,11 @@ class ProfileViewController: UIViewController {
 //        let nav = UINavigationController(rootViewController: MapModeViewController())
 //        nav.modalPresentationStyle = .fullScreen
 //        present(nav,animated: true,completion: nil)
+
+        
+        let vc = NewConversationViewController()
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
     }
 }
 

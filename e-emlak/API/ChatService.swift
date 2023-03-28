@@ -8,6 +8,12 @@
 import Foundation
 import FirebaseDatabase
 
+struct ChatUser {
+    let firstName: String
+    let lastName: String
+    let uid: String
+}
+
 final class ChatService {
     static let shared = ChatService()
     
