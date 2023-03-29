@@ -8,6 +8,7 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import IQKeyboardManagerSwift
 
 struct Message: MessageType {
     var sender: MessageKit.SenderType
@@ -93,6 +94,7 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         
         messageInputBar.sendButton.setTitle("Gönder", for: .normal)
+        messageInputBar.sendButton.setImage(UIImage(systemName: "pencil"), for: .normal)
 //        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World message")))
 //        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World WorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorld")))
 //
@@ -109,6 +111,11 @@ class ChatViewController: MessagesViewController {
         messageInputBar.delegate = self
         
         print(messages.count)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IQKeyboardManager.shared.enable = false
     }
     
     // MARK: - Helpers
@@ -199,6 +206,7 @@ class ChatViewController: MessagesViewController {
 }
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
+    
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty,
             let messageId = createMessageId() else {

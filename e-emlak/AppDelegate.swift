@@ -40,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Tamam"
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 50
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
     // MARK: - Core Data stack
