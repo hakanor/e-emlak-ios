@@ -23,6 +23,13 @@ struct Sender: SenderType {
 }
 
 class ChatViewController: MessagesViewController {
+    
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }
+    
     // MARK: - Properties
     private var currentUser : User?
     private var otherUser :  User?
@@ -85,14 +92,16 @@ class ChatViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        messageInputBar.sendButton.setTitle("Gönder", for: .normal)
 //        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World message")))
 //        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World WorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorld")))
 //
 //        messages.append(Message(sender: sender, messageId: "1", sentDate: Date(), kind: .text("Hello World asdfgh")))
-        
+
         view.backgroundColor = .red
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-
+        
+        checkConversationIsExist()
         loadFirstMessages()
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -102,16 +111,11 @@ class ChatViewController: MessagesViewController {
         print(messages.count)
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        listenForMessages()
-//        messagesCollectionView.reloadDataAndKeepOffset()
-//    }
-    
     // MARK: - Helpers
     private func loadFirstMessages() {
         DispatchQueue.main.async {
             self.listenForMessages()
-            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.reloadDataAndKeepOffset()
         }
     }
     
@@ -133,6 +137,33 @@ class ChatViewController: MessagesViewController {
         return newIdentifier
     }
     
+    private func checkConversationIsExist() {
+//        ChatService.shared.isConversationExist(currentUserId: self.currentUser?.uid ?? "" , sellerId: self.otherUser?.uid ?? "") { result in
+//            switch result {
+//            case .success(let exists):
+//                if exists {
+//                    print("Conversation exists!")
+//                } else {
+//                    print("No conversation found")
+//                }
+//            case .failure(let error):
+//                print("Error checking conversation existence: \(error.localizedDescription)")
+//            }
+//        }
+        ChatService.shared.getConversationId(currentUserId: self.currentUser?.uid ?? "" , sellerId: self.otherUser?.uid ?? "") { result in
+            switch result {
+            case .success(let conversationId):
+                self.conversationId = conversationId
+                self.isNewConversation = false
+                self.observeMessages()
+                print("Conversation ID is: \(conversationId)")
+            case .failure(let error):
+                self.isNewConversation = true
+                print("Error fetching conversation ID: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     private func listenForMessages() {
         ChatService.shared.fetchMessages(currentUserId: self.currentUser?.uid ?? "" , sellerId: self.otherUser?.uid ?? "") { result in
             switch result {
@@ -143,6 +174,20 @@ class ChatViewController: MessagesViewController {
                 }
             case .failure(_):
                 print("error while getting messages")
+            }
+        }
+    }
+    
+    private func observeMessages() {
+        let conversationId = self.conversationId ?? ""
+        ChatService.shared.observeConversation(conversationId: conversationId) { result in
+            switch result {
+            case .success(let message):
+            // handle the new message
+                self.messages = message
+                self.messagesCollectionView.reloadDataAndKeepOffset()
+            case .failure(let error):
+                print("Error observing conversation: \(error.localizedDescription)")
             }
         }
     }
@@ -167,12 +212,16 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         // Send message
         if isNewConversation {
             // create convo in database
-        } else {
             ChatService.shared.sendMessage(currentUserId: self.currentUser?.uid ?? "", sellerId: self.otherUser?.uid ?? "", text: text) { error in
-                print(error)
+                self.observeMessages()
             }
-            print("Append to existing conversation data")
+        } else {
+            // Append to existing conversation data
+            let conversationId = self.conversationId ?? ""
+            ChatService.shared.sendMessage(with: conversationId, currentUserId: self.currentUser?.uid ?? "", sellerId: self.otherUser?.uid ?? "", text: text) { error in
+            }
         }
+        inputBar.inputTextView.text = ""
     }
 }
 
@@ -212,5 +261,13 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
             }
         }
     }
-
+    
+    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        let dateString = formatter.string(from: message.sentDate)
+        return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
+    }
+    
+    func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        return 16
+    }
 }
