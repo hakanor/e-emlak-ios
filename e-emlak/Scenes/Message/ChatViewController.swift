@@ -41,13 +41,13 @@ class ChatViewController: MessagesViewController {
     
     private var selfSender = Sender(
         photoURL: URL(string: ""),
-        senderId: "1",
-        displayName: "Joe Smith")
+        senderId: "selfsender",
+        displayName: "selfSender")
     
     private var sender = Sender(
         photoURL: URL(string: ""),
-        senderId: "2",
-        displayName: "Joe sddasdsa")
+        senderId: "sender",
+        displayName: "Sender")
     
     public static let dateFormatter: DateFormatter = {
         let formattre = DateFormatter()
@@ -95,10 +95,6 @@ class ChatViewController: MessagesViewController {
         
         messageInputBar.sendButton.setTitle("Gönder", for: .normal)
         messageInputBar.sendButton.setImage(UIImage(systemName: "pencil"), for: .normal)
-//        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World message")))
-//        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World WorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorldWorld")))
-//
-//        messages.append(Message(sender: sender, messageId: "1", sentDate: Date(), kind: .text("Hello World asdfgh")))
 
         view.backgroundColor = .red
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
@@ -145,18 +141,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func checkConversationIsExist() {
-//        ChatService.shared.isConversationExist(currentUserId: self.currentUser?.uid ?? "" , sellerId: self.otherUser?.uid ?? "") { result in
-//            switch result {
-//            case .success(let exists):
-//                if exists {
-//                    print("Conversation exists!")
-//                } else {
-//                    print("No conversation found")
-//                }
-//            case .failure(let error):
-//                print("Error checking conversation existence: \(error.localizedDescription)")
-//            }
-//        }
+
         ChatService.shared.getConversationId(currentUserId: self.currentUser?.uid ?? "" , sellerId: self.otherUser?.uid ?? "") { result in
             switch result {
             case .success(let conversationId):
