@@ -26,7 +26,6 @@ class ConversationsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        ChatService.shared.test()
         configureUI()
         configureTableView()
         fetchConversations()
@@ -70,14 +69,14 @@ extension ConversationsViewController: UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("row selected")
-        let vc = ChatViewController()
-        vc.title = "Janny Smith"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
+//        print("row selected")
+//        let vc = ChatViewController(conversationId: "", currentUser: self.currentUser, otherUser: self.seller)
+//        vc.title = sellerName.text
+//        vc.navigationItem.largeTitleDisplayMode = .never
+//
+//        let nav = UINavigationController(rootViewController: vc)
+//        nav.modalPresentationStyle = .fullScreen
+//        present(nav,animated: true,completion: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 import ImageSlideshow
 import SkeletonView
+import FirebaseAuth
 
 class DetailsVievController: UIViewController {
     
@@ -18,6 +19,9 @@ class DetailsVievController: UIViewController {
     private var items : [Ad]?
     private var ad = Ad(adId: "", dictionary: ["s":""])
     private var phoneNumber = ""
+    private var seller : User?
+    private var currentUser : User?
+    
     
     var imageArray = [UIImage?]()
     var dictionary = [CustomDictionaryObject]()
@@ -384,7 +388,13 @@ class DetailsVievController: UIViewController {
     }
     
     @objc func handleMessageButton(){
+        let vc = ChatViewController(conversationId: "", currentUser: self.currentUser, otherUser: self.seller)
+        vc.title = sellerName.text
+        vc.navigationItem.largeTitleDisplayMode = .never
         
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav,animated: true,completion: nil)
     }
     
     
@@ -574,9 +584,18 @@ class DetailsVievController: UIViewController {
         self.ad = ad
         
         UserService.shared.fetchUser(uid: ad.uid) { user in
+            self.seller = user
             self.sellerName.text = user.name + " " + user.surname
             self.sellerProfilePhoto.sd_setImage(with: user.imageUrl,completed: nil)
             self.phoneNumber = user.phoneNumber
+        }
+        
+        let currentUser = Auth.auth().currentUser
+        if let currentUser = currentUser {
+            let uid = currentUser.uid
+            UserService.shared.fetchUser(uid: uid) { user in
+                self.currentUser = user
+            }
         }
         
         bookmarkBool = isArticleBookmarked(title: title)
