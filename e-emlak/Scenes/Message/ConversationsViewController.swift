@@ -55,7 +55,7 @@ class ConversationsViewController: UIViewController {
                     }
                 }
             }
-        }  
+        }
     }
     
     // MARK: - Selectors
