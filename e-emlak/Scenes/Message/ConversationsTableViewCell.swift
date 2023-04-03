@@ -20,15 +20,6 @@ class ConversationsTableViewCell: UITableViewCell {
         return view
     }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fillProportionally
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
-    
     private lazy var textStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -75,6 +66,7 @@ class ConversationsTableViewCell: UITableViewCell {
         label.text = "10:53"
         label.contentMode = .scaleToFill
         label.numberOfLines = 1
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -87,16 +79,19 @@ class ConversationsTableViewCell: UITableViewCell {
 
         containerView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 8, paddingLeft: 0, paddingBottom: 8, paddingRight: 0)
         
-        [stackView, userImage] .forEach(containerView.addSubview(_:))
-        
-        [textStackView, timeLabel] .forEach(stackView.addArrangedSubview(_:))
+        [userImage, textStackView, timeLabel] .forEach(containerView.addSubview(_:))
         
         [nameLabel, contentLabel] .forEach(textStackView.addArrangedSubview(_:))
         
         userImage.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, width: 48, height: 48)
         userImage.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         
-        stackView.anchor(top: containerView.topAnchor, left: userImage.rightAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 5, paddingLeft: 15, paddingBottom: 5, paddingRight: 3)
+        textStackView.anchor(top: containerView.topAnchor, left: userImage.rightAnchor, bottom: containerView.bottomAnchor, right: timeLabel.leftAnchor, paddingTop: 5, paddingLeft: 15, paddingBottom: 5, paddingRight: 3)
+        
+        timeLabel.anchor(top: containerView.topAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor)
+        
+        timeLabel.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+
     }
     
     required init?(coder: NSCoder) {

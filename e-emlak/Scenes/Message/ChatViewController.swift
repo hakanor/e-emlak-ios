@@ -105,8 +105,7 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        
-        print(messages.count)
+        print("Messages count = \(messages.count)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -206,7 +205,6 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         if isNewConversation {
             // create convo in database
             ChatService.shared.sendMessage(currentUserId: self.currentUser?.uid ?? "", sellerId: self.otherUser?.uid ?? "", text: text) { error in
-                self.observeMessages()
             }
         } else {
             // Append to existing conversation data

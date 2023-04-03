@@ -51,6 +51,38 @@ final class ChatService {
         }
     }
     
+    func newConversationSendMessage(currentUserId: String, sellerId: String, text: String, completion: @escaping (_ conversationId: String?, _ error: Error?) -> Void) {
+        let conversationId = "\(currentUserId)_\(sellerId)"
+        let conversationRef = database.child("conversations").child(conversationId)
+        let messageRef = conversationRef.child("messages").childByAutoId()
+        let message = [
+            "senderId": currentUserId,
+            "receiverId": sellerId,
+            "text": text,
+            "timestamp":
+            [".sv": "timestamp"] // this will use Firebase server time as the timestamp
+        ] as [String : Any]
+        let conversation = [
+            "users": [
+                currentUserId: true,
+                sellerId: true
+            ]
+        ] as [String : Any]
+        conversationRef.setValue(conversation) { error, _ in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                messageRef.setValue(message) { error, _ in
+                    if let error = error {
+                        completion(nil, error)
+                    } else {
+                        completion(conversationId, nil)
+                    }
+                }
+            }
+        }
+    }
+    
     func sendMessage(with conversationId:String, currentUserId: String, sellerId: String, text: String, completion: @escaping SendMessageCompletion) {
         let conversationId = "\(conversationId)"
         let messageRef = database.child("conversations").child(conversationId).child("messages").childByAutoId()

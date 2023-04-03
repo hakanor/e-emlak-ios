@@ -57,6 +57,7 @@
 		A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = A764CA5D28EB1DDD00772AE7 /* FirebaseStorage */; };
 		A767A90229C50A39003CD62A /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = A767A90129C50A39003CD62A /* FloatingPanel */; };
 		A76CBADA29DB0DC3001737E5 /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CBAD929DB0DC2001737E5 /* ConversationsTableViewCell.swift */; };
+		A76CBADC29DB25DD001737E5 /* AlertDisplayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A76CBADB29DB25DD001737E5 /* AlertDisplayable.swift */; };
 		A77D1A8A290B06E400E7D510 /* AdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A89290B06E300E7D510 /* AdService.swift */; };
 		A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */; };
 		A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77D1A8E290C242500E7D510 /* LandViewController.swift */; };
@@ -159,6 +160,7 @@
 		A734753B2906DE4D00D2F755 /* DataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoader.swift; sourceTree = "<group>"; };
 		A753DE8529BF60DE000ACF75 /* MapModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModeViewController.swift; sourceTree = "<group>"; };
 		A76CBAD929DB0DC2001737E5 /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
+		A76CBADB29DB25DD001737E5 /* AlertDisplayable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDisplayable.swift; sourceTree = "<group>"; };
 		A77D1A89290B06E300E7D510 /* AdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdService.swift; sourceTree = "<group>"; };
 		A77D1A8B290C209100E7D510 /* ResidentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialViewController.swift; sourceTree = "<group>"; };
 		A77D1A8E290C242500E7D510 /* LandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				A73474F128F088DE00D2F755 /* Extensions */,
+				A76CBADB29DB25DD001737E5 /* AlertDisplayable.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -773,6 +776,7 @@
 				A787580929479D6600FE37A6 /* InspectProfileViewController.swift in Sources */,
 				A731ECFE29C752FF00916ACE /* CustomFloatingPanelLayout.swift in Sources */,
 				A7FFE62E29B6220C0045573A /* Date+toString.swift in Sources */,
+				A76CBADC29DB25DD001737E5 /* AlertDisplayable.swift in Sources */,
 				A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */,
 				A734751628F4260500D2F755 /* String + isValidEmail.swift in Sources */,
 				A73474FE28F17BF100D2F755 /* RegisterViewController.swift in Sources */,

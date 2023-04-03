@@ -13,7 +13,7 @@ import ImageSlideshow
 import SkeletonView
 import FirebaseAuth
 
-class DetailsVievController: UIViewController {
+class DetailsVievController: UIViewController, AlertDisplayable{
     
     private var bookmarkBool = false
     private var items : [Ad]?
@@ -388,15 +388,18 @@ class DetailsVievController: UIViewController {
     }
     
     @objc func handleMessageButton(){
-        let vc = ChatViewController(conversationId: "", currentUser: self.currentUser, otherUser: self.seller)
-        vc.title = sellerName.text
-        vc.navigationItem.largeTitleDisplayMode = .never
-        
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav,animated: true,completion: nil)
+        if self.currentUser?.uid != self.seller?.uid {
+            let vc = ChatViewController(conversationId: "", currentUser: self.currentUser, otherUser: self.seller)
+            vc.title = sellerName.text
+            vc.navigationItem.largeTitleDisplayMode = .never
+            
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav,animated: true,completion: nil)
+        } else {
+            self.showAlert(title: "Uyarı", message: "Kendi kendinize mesaj gönderemezsiniz.")
+        }
     }
-    
     
     func configureUI(){
         view.backgroundColor = themeColors.white
@@ -462,8 +465,6 @@ class DetailsVievController: UIViewController {
 //                rightString = rightString.substring(0, rightString.length() - 2)
 
                 let splitted = Array(dictionary)[i].value.split(separator: " ")
-                
-                print(Int(splitted[0]) ?? 0 )
                 let unformattedValue : Int = Int(splitted[0]) ?? 0
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .decimal // or .decimal if desired

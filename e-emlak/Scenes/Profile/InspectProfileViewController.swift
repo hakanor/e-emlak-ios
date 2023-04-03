@@ -11,7 +11,7 @@ import Firebase
 import FirebaseStorage
 import SDWebImage
 
-class InspectProfileViewController: UIViewController {
+class InspectProfileViewController: UIViewController, AlertDisplayable {
     
     let imagePicker = UIImagePickerController()
     
@@ -21,6 +21,8 @@ class InspectProfileViewController: UIViewController {
             applyUserData()
         }
     }
+    private var currentUser : User?
+    
     var ads = [Ad]()
     var phoneNumber = ""
 
@@ -185,19 +187,30 @@ class InspectProfileViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: cancelButton)
         configureUI()
         configureTableView()
+        fetchCurrentUser()
     }
     // MARK: - API
-    func fetchUser(uid:String){
+    private func fetchUser(uid:String){
         UserService.shared.fetchUser(uid:uid ) { user in
             self.user = user
         }
     }
     
-    func fetchAds(uid:String) {
+    private func fetchAds(uid:String) {
         AdService.shared.fetchAds(uid:uid) { fetchedAds in
             self.ads.removeAll()
             self.ads = fetchedAds
             self.tableView.reloadData()
+        }
+    }
+    
+    private func fetchCurrentUser() {
+        let currentUser = Auth.auth().currentUser
+        if let currentUser = currentUser {
+            let uid = currentUser.uid
+            UserService.shared.fetchUser(uid: uid) { user in
+                self.currentUser = user
+            }
         }
     }
     
@@ -288,6 +301,17 @@ class InspectProfileViewController: UIViewController {
     
     @objc func handleMessageButton(){
         
+        if self.user?.uid != self.currentUser?.uid {
+            let vc = ChatViewController(conversationId: "", currentUser: self.currentUser, otherUser: self.user)
+            vc.title = (user?.name ?? "") + " " + (user?.surname ?? "")
+            vc.navigationItem.largeTitleDisplayMode = .never
+            
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            present(nav,animated: true,completion: nil)
+        } else {
+            self.showAlert(title: "Uyarı", message: "Kendi kendinize mesaj gönderemezsiniz.")
+        }
     }
     
     @objc func handleReportButton(){
@@ -299,6 +323,7 @@ class InspectProfileViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         UserService.shared.fetchUser(uid: uid) { user in
+            self.user = user
             self.titleLabel.text = user.name + " " + user.surname
             self.subtitleLabel.text = user.city
             self.aboutMeLabel.text = user.aboutMe

@@ -79,6 +79,13 @@ class ConversationsViewController: UIViewController {
         present(navVC, animated: true)
     }
     
+    @objc func refreshFunc(refreshControl: UIRefreshControl) {
+        fetchConversations()
+        tableView.reloadData()
+        print("refresh")
+        refreshControl.endRefreshing()
+    }
+    
     // MARK: - Helpers
     private func configureUI(){
         view.backgroundColor = themeColors.white
@@ -98,6 +105,11 @@ class ConversationsViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
+        
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
+        tableView.addSubview(refreshControl)
     }
 }
 
