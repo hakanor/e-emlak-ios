@@ -9,8 +9,6 @@ import UIKit
 import JGProgressHUD
 import FirebaseAuth
 
-
-
 class ConversationsViewController: UIViewController {
     // MARK: - Properties
     private var conversations = [Conversation]()
@@ -18,13 +16,28 @@ class ConversationsViewController: UIViewController {
     private var otherUser :  User?
     
     // MARK: - SubViews
+    private lazy var hud: JGProgressHUD = {
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Yükleniyor"
+        return hud
+    }()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = themeColors.white
         return tableView
     }()
     
-    private let spinner = JGProgressHUD(style: .dark)
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = themeColors.primary
+        label.font = UIFont.systemFont(ofSize: 28, weight: .medium)
+        label.text = "Mesajlar"
+        label.contentMode = .scaleToFill
+        label.numberOfLines = 1
+        return label
+    }()
     
     // MARK: - Lifecycle
     
@@ -34,6 +47,7 @@ class ConversationsViewController: UIViewController {
         configureUI()
         configureTableView()
         fetchConversations()
+        hud.show(in: self.view, animated: true)
         // Do any additional setup after loading the view.
     }
     
@@ -69,14 +83,18 @@ class ConversationsViewController: UIViewController {
     private func configureUI(){
         view.backgroundColor = themeColors.white
         
-        [tableView] .forEach(view.addSubview(_:))
-        tableView.anchor(top: view.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
-                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
+        [tableView, titleLabel] .forEach(view.addSubview(_:))
+        
+        titleLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, right: view.safeAreaLayoutGuide.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        
+        tableView.anchor(top: titleLabel.bottomAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor
+                         , right:view.safeAreaLayoutGuide.rightAnchor, paddingTop: 4, paddingLeft: 24, paddingBottom: 10, paddingRight: 24)
     }
     
     private func configureTableView(){
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(ConversationsTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -112,10 +130,25 @@ extension ConversationsViewController: UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.conversations[indexPath.row].conversationId
-        cell.accessoryType = .disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! ConversationsTableViewCell
+        let message = self.conversations[indexPath.row].lastMessageText
+        let timeStamp = self.conversations[indexPath.row].timestamp
+        
+        var uidOtherUser = ""
+        if self.currentUser?.uid == self.conversations[indexPath.row].userId1 {
+            uidOtherUser = self.conversations[indexPath.row].userId2
+        } else {
+            uidOtherUser = self.conversations[indexPath.row].userId1
+        }
+        
+        cell.configureCell(uid: uidOtherUser, lastMessageText: message, timeStamp: timeStamp)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastElement = self.conversations.count - 1
+        if indexPath.row == lastElement {
+            hud.dismiss()
+        }
+    }
 }
- 

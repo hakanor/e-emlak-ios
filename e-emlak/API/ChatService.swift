@@ -176,6 +176,7 @@ final class ChatService {
                         date = Date(timeIntervalSince1970: timestamp/1000)
                     }
                     
+                    
                     let content = messageData["text"] as? String ?? ""
                     let senderId = messageData["senderId"] as? String ?? ""
                     let sender = Sender(photoURL: URL(string: ""),
@@ -206,11 +207,19 @@ final class ChatService {
                                 if messagesSnapshot.exists(), let lastMessage = messagesSnapshot.children.allObjects.last as? DataSnapshot {
                                     let messageData = lastMessage.value as? [String: Any] ?? [:]
                                     let lastMessageText = messageData["text"] as? String ?? ""
-                                    let timestamp = messageData["timestamp"] as? String ?? ""
+                                    var date = Date()
+                                    if let timestamp = messageData["timestamp"] as? Double {
+                                        date = Date(timeIntervalSince1970: timestamp/1000)
+                                    }
+                                    let dateFormatter = DateFormatter()
+                                    dateFormatter.dateFormat = "HH:mm"
+                                    let dateString = dateFormatter.string(from: date)
+                                    
+                                    
                                     let userIds = conversationId.components(separatedBy: "_")
                                     let userId1 = userIds[0]
                                     let userId2 = userIds[1]
-                                    let conversation = Conversation(conversationId: conversationId, lastMessageText: lastMessageText, timestamp: timestamp, userId1: userId1, userId2: userId2)
+                                    let conversation = Conversation(conversationId: conversationId, lastMessageText: lastMessageText, timestamp: dateString, userId1: userId1, userId2: userId2)
                                     conversations.append(conversation)
                                 }
                                 if conversations.count == snapshot.childrenCount {
