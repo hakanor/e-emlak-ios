@@ -14,6 +14,15 @@ struct ChatUser {
     let uid: String
 }
 
+struct Conversation {
+    let conversationId: String
+    let lastMessageText: String
+    let timestamp: String
+    let userId1: String
+    let userId2: String
+}
+
+
 var formatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm"
@@ -71,7 +80,6 @@ final class ChatService {
                     if let snapshot = child as? DataSnapshot,
                        let messageData = snapshot.value as? [String: Any] {
                         let messageId = snapshot.key
-                        var dateString = ""
                         var date = Date()
                         if let timestamp = messageData["timestamp"] as? Double {
                             date = Date(timeIntervalSince1970: timestamp/1000)
@@ -184,4 +192,40 @@ final class ChatService {
         }
     }
     
+    func fetchConversations(uid: String, completion: @escaping (Result<[Conversation], Error>) -> Void) {
+        let conversationsRef = self.database.child("conversations")
+        conversationsRef.observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                var conversations = [Conversation]()
+                for conversation in snapshot.children {
+                    if let conversationSnapshot = conversation as? DataSnapshot {
+                        let conversationId = conversationSnapshot.key
+                        if conversationId.contains(uid) {
+                            let messagesRef = conversationsRef.child(conversationId).child("messages")
+                            messagesRef.queryLimited(toLast: 1).observeSingleEvent(of: .value) { messagesSnapshot in
+                                if messagesSnapshot.exists(), let lastMessage = messagesSnapshot.children.allObjects.last as? DataSnapshot {
+                                    let messageData = lastMessage.value as? [String: Any] ?? [:]
+                                    let lastMessageText = messageData["text"] as? String ?? ""
+                                    let timestamp = messageData["timestamp"] as? String ?? ""
+                                    let userIds = conversationId.components(separatedBy: "_")
+                                    let userId1 = userIds[0]
+                                    let userId2 = userIds[1]
+                                    let conversation = Conversation(conversationId: conversationId, lastMessageText: lastMessageText, timestamp: timestamp, userId1: userId1, userId2: userId2)
+                                    conversations.append(conversation)
+                                }
+                                if conversations.count == snapshot.childrenCount {
+                                    completion(.success(conversations))
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Conversations do not exist"])
+                completion(.failure(error))
+            }
+        }
+    }
+
+
 }
