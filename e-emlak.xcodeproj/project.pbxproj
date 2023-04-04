@@ -17,8 +17,6 @@
 		A731ECFE29C752FF00916ACE /* CustomFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ECFD29C752FF00916ACE /* CustomFloatingPanelLayout.swift */; };
 		A731ED0129D1E67200916ACE /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ED0029D1E67200916ACE /* ChatService.swift */; };
 		A731ED0329D1FB8C00916ACE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A731ED0229D1FB8C00916ACE /* GoogleService-Info.plist */; };
-		A731ED0629D2099900916ACE /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = A731ED0529D2099900916ACE /* Realm */; };
-		A731ED0829D2099900916ACE /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A731ED0729D2099900916ACE /* RealmSwift */; };
 		A731ED0B29D20B8F00916ACE /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = A731ED0A29D20B8F00916ACE /* JGProgressHUD */; };
 		A731ED0E29D20D3800916ACE /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = A731ED0D29D20D3800916ACE /* MessageKit */; };
 		A731ED1029D2208400916ACE /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731ED0F29D2208300916ACE /* ChatViewController.swift */; };
@@ -227,7 +225,6 @@
 			files = (
 				A7930E2B296A2DEA002482C2 /* SkeletonView in Frameworks */,
 				A7930E26296A1031002482C2 /* ImageSlideshow in Frameworks */,
-				A731ED0829D2099900916ACE /* RealmSwift in Frameworks */,
 				A7B3FAF7292AEB7C0003F76D /* Toast in Frameworks */,
 				A731ED0B29D20B8F00916ACE /* JGProgressHUD in Frameworks */,
 				A764CA5828EB1DDD00772AE7 /* FirebaseDatabase in Frameworks */,
@@ -239,7 +236,6 @@
 				A764CA5E28EB1DDD00772AE7 /* FirebaseStorage in Frameworks */,
 				A767A90229C50A39003CD62A /* FloatingPanel in Frameworks */,
 				A764CA5C28EB1DDD00772AE7 /* FirebaseFunctions in Frameworks */,
-				A731ED0629D2099900916ACE /* Realm in Frameworks */,
 				A734751F28F8277F00D2F755 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -631,8 +627,6 @@
 				A7930E27296A1031002482C2 /* ImageSlideshow/SDWebImage */,
 				A7930E2A296A2DEA002482C2 /* SkeletonView */,
 				A767A90129C50A39003CD62A /* FloatingPanel */,
-				A731ED0529D2099900916ACE /* Realm */,
-				A731ED0729D2099900916ACE /* RealmSwift */,
 				A731ED0A29D20B8F00916ACE /* JGProgressHUD */,
 				A731ED0D29D20D3800916ACE /* MessageKit */,
 			);
@@ -677,7 +671,6 @@
 				A7930E24296A1031002482C2 /* XCRemoteSwiftPackageReference "ImageSlideshow" */,
 				A7930E29296A2DEA002482C2 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 				A767A90029C50A39003CD62A /* XCRemoteSwiftPackageReference "FloatingPanel" */,
-				A731ED0429D2099900916ACE /* XCRemoteSwiftPackageReference "realm-swift" */,
 				A731ED0929D20B8F00916ACE /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				A731ED0C29D20D3800916ACE /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
@@ -1085,14 +1078,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A731ED0429D2099900916ACE /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		A731ED0929D20B8F00916ACE /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
@@ -1168,16 +1153,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A731ED0529D2099900916ACE /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A731ED0429D2099900916ACE /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		A731ED0729D2099900916ACE /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A731ED0429D2099900916ACE /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
-		};
 		A731ED0A29D20B8F00916ACE /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A731ED0929D20B8F00916ACE /* XCRemoteSwiftPackageReference "JGProgressHUD" */;

@@ -254,7 +254,7 @@ final class ChatService {
                                     let conversation = Conversation(conversationId: conversationId, lastMessageText: lastMessageText, timestamp: dateString, userId1: userId1, userId2: userId2)
                                     conversations.append(conversation)
                                 }
-                                if conversations.count == snapshot.childrenCount {
+                                if conversations.count != 0 {
                                     completion(.success(conversations))
                                 }
                             }

@@ -57,7 +57,6 @@ class ChatViewController: MessagesViewController {
         return formattre
     }()
 
-    
     // MARK: - Subviews
     private lazy var backButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -105,7 +104,6 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        print("Messages count = \(messages.count)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

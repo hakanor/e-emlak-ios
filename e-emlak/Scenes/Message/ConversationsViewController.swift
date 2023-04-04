@@ -47,7 +47,7 @@ class ConversationsViewController: UIViewController {
         configureUI()
         configureTableView()
         fetchConversations()
-        hud.show(in: self.view, animated: true)
+//        hud.show(in: self.view, animated: true)
         // Do any additional setup after loading the view.
     }
     
@@ -59,14 +59,14 @@ class ConversationsViewController: UIViewController {
             let uid = currentUser.uid
             UserService.shared.fetchUser(uid: uid) { user in
                 self.currentUser = user
-                ChatService.shared.fetchConversations(uid: uid) { result in
-                    switch result {
-                    case .success(let conversations):
-                        self.conversations = conversations
-                        self.tableView.reloadData()
-                    case .failure(let error):
-                        print("Error fetching conversations: \(error.localizedDescription)")
-                    }
+            }
+            ChatService.shared.fetchConversations(uid: uid) { result in
+                switch result {
+                case .success(let conversations):
+                    self.conversations = conversations
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error fetching conversations: \(error.localizedDescription)")
                 }
             }
         }
@@ -105,7 +105,6 @@ class ConversationsViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .none
-        
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshFunc), for: .valueChanged)
@@ -160,7 +159,7 @@ extension ConversationsViewController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = self.conversations.count - 1
         if indexPath.row == lastElement {
-            hud.dismiss()
+//            hud.dismiss()
         }
     }
 }
