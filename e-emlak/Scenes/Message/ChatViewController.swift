@@ -70,7 +70,6 @@ class ChatViewController: MessagesViewController {
     }()
     
     // MARK: - Lifecycle
-    
     init(conversationId: String, currentUser: User?, otherUser: User?) {
         self.conversationId = conversationId
         self.currentUser = currentUser
@@ -91,9 +90,8 @@ class ChatViewController: MessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        messageInputBar.sendButton.setTitle("Gönder", for: .normal)
-        messageInputBar.sendButton.setImage(UIImage(systemName: "pencil"), for: .normal)
+        messageInputBar.sendButton.setTitle("", for: .normal)
+        messageInputBar.sendButton.setImage(UIImage(systemName: "paperplane.fill")?.withTintColor(themeColors.primary), for: .normal)
 
         view.backgroundColor = .red
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)

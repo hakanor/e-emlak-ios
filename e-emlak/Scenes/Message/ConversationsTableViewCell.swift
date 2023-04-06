@@ -64,6 +64,7 @@ class ConversationsTableViewCell: UITableViewCell {
         label.textColor = themeColors.grey
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "10:53"
+        label.textAlignment = .right
         label.contentMode = .scaleToFill
         label.numberOfLines = 1
         label.translatesAutoresizingMaskIntoConstraints = false

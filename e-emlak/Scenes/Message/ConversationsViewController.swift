@@ -40,15 +40,20 @@ class ConversationsViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
         configureTableView()
         fetchConversations()
-//        hud.show(in: self.view, animated: true)
+        hud.show(in: self.view, animated: true)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchConversations()
+        hud.show(in: self.view, animated: true)
     }
     
     // MARK: - API
@@ -159,7 +164,7 @@ extension ConversationsViewController: UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = self.conversations.count - 1
         if indexPath.row == lastElement {
-//            hud.dismiss()
+            hud.dismiss()
         }
     }
 }

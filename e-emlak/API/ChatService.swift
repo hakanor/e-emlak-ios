@@ -22,7 +22,6 @@ struct Conversation {
     let userId2: String
 }
 
-
 var formatter: DateFormatter {
     let formatter = DateFormatter()
     formatter.dateFormat = "HH:mm"
@@ -208,7 +207,6 @@ final class ChatService {
                         date = Date(timeIntervalSince1970: timestamp/1000)
                     }
                     
-                    
                     let content = messageData["text"] as? String ?? ""
                     let senderId = messageData["senderId"] as? String ?? ""
                     let sender = Sender(photoURL: URL(string: ""),
@@ -246,8 +244,6 @@ final class ChatService {
                                     let dateFormatter = DateFormatter()
                                     dateFormatter.dateFormat = "HH:mm"
                                     let dateString = dateFormatter.string(from: date)
-                                    
-                                    
                                     let userIds = conversationId.components(separatedBy: "_")
                                     let userId1 = userIds[0]
                                     let userId2 = userIds[1]
@@ -267,6 +263,5 @@ final class ChatService {
             }
         }
     }
-
-
+    
 }
