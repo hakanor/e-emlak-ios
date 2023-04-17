@@ -101,6 +101,7 @@
 		A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */; };
 		A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */; };
 		A7F481CF29ED69A500D57121 /* UserReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481CE29ED69A500D57121 /* UserReportViewController.swift */; };
+		A7F481D529ED8FCA00D57121 /* AdReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481D429ED8FCA00D57121 /* AdReportViewController.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -198,6 +199,7 @@
 		A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommercialDetailsVC.swift; sourceTree = "<group>"; };
 		A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		A7F481CE29ED69A500D57121 /* UserReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportViewController.swift; sourceTree = "<group>"; };
+		A7F481D429ED8FCA00D57121 /* AdReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdReportViewController.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				A7F481CE29ED69A500D57121 /* UserReportViewController.swift */,
+				A7F481D429ED8FCA00D57121 /* AdReportViewController.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				A734753029040B1100D2F755 /* EstateTypeViewController.swift in Sources */,
 				A73474F328F088F400D2F755 /* UIColor + Hex.swift in Sources */,
 				A73474F528F0916B00D2F755 /* Textfield + Image.swift in Sources */,
+				A7F481D529ED8FCA00D57121 /* AdReportViewController.swift in Sources */,
 				A704BA1F29B38F12009AADC6 /* CoreDataService.swift in Sources */,
 				A7875804294651A600FE37A6 /* UIButton + addBlurEffect.swift in Sources */,
 				A704BA1D29B38C97009AADC6 /* CoreDataModel.xcdatamodeld in Sources */,
