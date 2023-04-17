@@ -100,6 +100,7 @@
 		A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */; };
 		A7C92D952959BA8B00268DA5 /* EditCommercialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */; };
 		A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */; };
+		A7F481CF29ED69A500D57121 /* UserReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481CE29ED69A500D57121 /* UserReportViewController.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -196,6 +197,7 @@
 		A7C92D922959B6D600268DA5 /* EditLandDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLandDetailsVC.swift; sourceTree = "<group>"; };
 		A7C92D942959BA8B00268DA5 /* EditCommercialDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommercialDetailsVC.swift; sourceTree = "<group>"; };
 		A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
+		A7F481CE29ED69A500D57121 /* UserReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportViewController.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 		A734750528F37BC900D2F755 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A7F481CB29ED692C00D57121 /* Report */,
 				A792DEC429C51E1300B1F1E7 /* ChangePassword */,
 				A753DE8229BF6049000ACF75 /* Map */,
 				A7E8F34429B6091E008EC85C /* Favourite */,
@@ -520,6 +523,14 @@
 				A7FFE62F29B642B20045573A /* PriceHistoryCell.swift */,
 			);
 			path = Favourite;
+			sourceTree = "<group>";
+		};
+		A7F481CB29ED692C00D57121 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				A7F481CE29ED69A500D57121 /* UserReportViewController.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		A7F4F3F92906E2F3001B5048 /* PostAd */ = {
@@ -741,6 +752,7 @@
 				A7BBFD34291946E800F696AF /* UILabel + Image.swift in Sources */,
 				A7C92D912959A7E900268DA5 /* EditResidentialDetailsVC.swift in Sources */,
 				A77D1A8C290C209100E7D510 /* ResidentialViewController.swift in Sources */,
+				A7F481CF29ED69A500D57121 /* UserReportViewController.swift in Sources */,
 				A7C92D932959B6D600268DA5 /* EditLandDetailsVC.swift in Sources */,
 				A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */,
 				A734751428F3803D00D2F755 /* UIView + Anchor.swift in Sources */,

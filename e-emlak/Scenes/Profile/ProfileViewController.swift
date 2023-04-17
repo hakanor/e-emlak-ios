@@ -291,7 +291,7 @@ class ProfileViewController: UIViewController {
 //        present(nav,animated: true,completion: nil)
 
         
-        let vc = NewConversationViewController()
+        let vc = UserReportViewController()
         let navVC = UINavigationController(rootViewController: vc)
         present(navVC, animated: true)
     }
