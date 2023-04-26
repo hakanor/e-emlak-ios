@@ -22,6 +22,7 @@ class InspectProfileViewController: UIViewController, AlertDisplayable {
         }
     }
     private var currentUser : User?
+    private var inspectedUid: String = ""
     
     var ads = [Ad]()
     var phoneNumber = ""
@@ -315,12 +316,18 @@ class InspectProfileViewController: UIViewController, AlertDisplayable {
     }
     
     @objc func handleReportButton(){
-        
+        let reporterId = self.currentUser?.uid ?? ""
+        let inspectedId = self.inspectedUid
+        let vc = UserReportViewController(reporterId: reporterId, userId: inspectedId)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
     }
     
     // MARK: - init
     init(uid: String) {
         super.init(nibName: nil, bundle: nil)
+        
+        self.inspectedUid = uid
         
         UserService.shared.fetchUser(uid: uid) { user in
             self.user = user

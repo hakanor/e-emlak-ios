@@ -206,6 +206,18 @@ class DetailsVievController: UIViewController, AlertDisplayable{
         return button
     }()
     
+    private lazy var reportIcon: UIButton = {
+        let button = UIButton(type: .custom)
+        let image = UIImage(systemName: "exclamationmark.triangle")
+        button.tintColor = .white
+        button.backgroundColor = .clear
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleReportButton), for: .touchUpInside)
+        button.addBlurEffect(style: .dark, cornerRadius: 13, padding: 5)
+        return button
+    }()
+    
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -351,6 +363,15 @@ class DetailsVievController: UIViewController, AlertDisplayable{
             self.present(activityViewController, animated: true, completion: nil)
     }
     
+    @objc func handleReportButton(sender:UIView){
+        let adId = self.ad.adId
+        let reporterId = self.currentUser?.uid ?? ""
+        let userId = self.seller?.uid ?? ""
+        let vc = AdReportViewController(adId: adId, reporterId: reporterId, userId: userId)
+        let navVC = UINavigationController(rootViewController: vc)
+        present(navVC, animated: true)
+    }
+    
     @objc func handleInspectProfileGesture(_ sender: UITapGestureRecognizer? = nil) {
         let vc = InspectProfileViewController(uid: self.ad.uid)
         let nav = UINavigationController(rootViewController: vc)
@@ -491,7 +512,7 @@ class DetailsVievController: UIViewController, AlertDisplayable{
     }
     
     func configureShareBookmarkStackView(){
-        [shareIcon,bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
+        [reportIcon, shareIcon, bookmarkIcon] .forEach(shareBookmarkStackView.addArrangedSubview(_:))
     }
     
     func configureGestures(){

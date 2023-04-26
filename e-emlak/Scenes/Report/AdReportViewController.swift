@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum AdReportOptions: String, CaseIterable {
+private enum AdReportOptions: String, CaseIterable {
     case soldOrRentedService = "Hizmet satılmış ya da kiralanmış."
     case incorrectCategory = "İlan kategorisi hatalı."
     case incorrectInformation = "İlan bilgileri hatalı veya yanlış."
@@ -19,6 +19,9 @@ enum AdReportOptions: String, CaseIterable {
 class AdReportViewController: UIViewController, AlertDisplayable {
     
     // MARK: - Properties
+    var reporterId = ""
+    var adId = ""
+    var userId = ""
     
     // MARK: - Subviews
     private lazy var backButton: UIButton = {
@@ -75,6 +78,18 @@ class AdReportViewController: UIViewController, AlertDisplayable {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - Initialization
+    init(adId: String, reporterId: String, userId:String) {
+        self.reporterId = reporterId
+        self.userId = userId
+        self.adId = adId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -141,9 +156,18 @@ class AdReportViewController: UIViewController, AlertDisplayable {
         }
         
         if let selectedOption = selectedOption {
-            // selectedOption ile ilgili işlemler yapabilirsiniz
-            // Firebase ile rapor oluşturulması olayı.
-            print(selectedOption.titleLabel?.text)
+            
+            let credentials = AdReportCredentials(reportCategory: selectedOption.titleLabel?.text ?? "", adId: self.adId, description: self.descriptionTextField.text, reporterId: self.reporterId, userId: self.userId)
+            
+            ReportService.shared.postAdReport(adReportCredentials: credentials) { (error)  in
+                print("DEBUG: Report is succesfull")
+                let dialogMessage = UIAlertController(title: "Teşekkürler", message: "Raporunuz başarıyla gönderildi.", preferredStyle: .alert)
+                let cancel = UIAlertAction(title: "Tamam", style: .cancel) { (action) -> Void in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                dialogMessage.addAction(cancel)
+                self.present(dialogMessage, animated: true, completion: nil)
+            }
         }
         else {
             self.showAlert(title: "Uyarı", message: "Şikayet etmek için bir kategori seçmeniz gerekmektedir.")

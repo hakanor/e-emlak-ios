@@ -102,6 +102,7 @@
 		A7E8F34629B60957008EC85C /* FavouriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */; };
 		A7F481CF29ED69A500D57121 /* UserReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481CE29ED69A500D57121 /* UserReportViewController.swift */; };
 		A7F481D529ED8FCA00D57121 /* AdReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481D429ED8FCA00D57121 /* AdReportViewController.swift */; };
+		A7F481D729ED970100D57121 /* ReportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F481D629ED970100D57121 /* ReportService.swift */; };
 		A7F4F3FB2906E318001B5048 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F4F3FA2906E318001B5048 /* LocationViewController.swift */; };
 		A7FD2ABA28EAFC4800E48E4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */; };
 		A7FD2ABC28EAFC4800E48E4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7FD2ABB28EAFC4800E48E4A /* SceneDelegate.swift */; };
@@ -200,6 +201,7 @@
 		A7E8F34529B60957008EC85C /* FavouriteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewCell.swift; sourceTree = "<group>"; };
 		A7F481CE29ED69A500D57121 /* UserReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserReportViewController.swift; sourceTree = "<group>"; };
 		A7F481D429ED8FCA00D57121 /* AdReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdReportViewController.swift; sourceTree = "<group>"; };
+		A7F481D629ED970100D57121 /* ReportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportService.swift; sourceTree = "<group>"; };
 		A7F4F3FA2906E318001B5048 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		A7FD2AB628EAFC4800E48E4A /* e-emlak.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "e-emlak.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7FD2AB928EAFC4800E48E4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				A7930E2C296A35CF002482C2 /* SkeletonService.swift */,
 				A704BA1E29B38F12009AADC6 /* CoreDataService.swift */,
 				A731ED0029D1E67200916ACE /* ChatService.swift */,
+				A7F481D629ED970100D57121 /* ReportService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				A77D1A8F290C242500E7D510 /* LandViewController.swift in Sources */,
 				A78CFF2D292B8150003EAC78 /* FilteredResultViewController.swift in Sources */,
 				A76CBADA29DB0DC3001737E5 /* ConversationsTableViewCell.swift in Sources */,
+				A7F481D729ED970100D57121 /* ReportService.swift in Sources */,
 				A734750A28F37CD100D2F755 /* MainTabViewController.swift in Sources */,
 				A78757F4292C314E00FE37A6 /* Array + Row.swift in Sources */,
 				A7BBFD3229193F7900F696AF /* FeedTableViewCell.swift in Sources */,

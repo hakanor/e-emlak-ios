@@ -290,10 +290,10 @@ class ProfileViewController: UIViewController {
 //        nav.modalPresentationStyle = .fullScreen
 //        present(nav,animated: true,completion: nil)
 
-        
-        let vc = AdReportViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        present(navVC, animated: true)
+//
+//        let vc = AdReportViewController()
+//        let navVC = UINavigationController(rootViewController: vc)
+//        present(navVC, animated: true)
     }
 }
 
